@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -7,7 +7,6 @@ html {
     font-size: 16px;
   }
 }
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -20,3 +19,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.navbar .container .navbar-brand {
+  max-width: 220px;
+}
+.navbar .container .navbar-brand img {
+  max-width: 100%;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/site.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;EACI;;;AAGJ;EACI;IACI;;;AAIR;EACI;;;AAGJ;EACI;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;AACA;EACI%22%7D */

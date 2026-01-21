@@ -250,6 +250,16 @@ namespace RailTix.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult Manage()
+        {
+            if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                return RedirectToAction(nameof(Login));
+            }
+            return View();
+        }
+
         public class LoginViewModel
         {
             [Required, EmailAddress]

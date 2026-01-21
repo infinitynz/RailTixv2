@@ -1,0 +1,19 @@
+﻿body {
+  background-color: #000;
+  color: #e9ecef;
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+}
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link:focus {
+  color: #ffffff;
+}
+
+footer {
+  background: transparent;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/theme.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAGA;EACE;EACA;;;AAKA;AAAA;EAEE;;AAEF;AAAA;EAEE;;;AAKJ;EACE%22%7D */
