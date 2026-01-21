@@ -1,0 +1,114 @@
+RailTix — New hi.events (High‑Level Specifications)
+
+Scope and Goals
+- Build a new, maintainable version of hi.events within RailTix (ASP.NET Core MVC, .NET 8).
+- Not a 1:1 migration: use domain‑appropriate naming and modern conventions.
+- Lightweight, efficient, modular front end with concerns separated.
+- EF Core Code‑First for database; explicit migrations.
+
+Architecture Overview
+- Layers
+  - Web (MVC): Controllers, Razor Views/Layouts/Partials, ViewModels.
+  - Application/Services: business logic orchestration and policies.
+  - Domain: entities and domain logic.
+  - Data: EF Core DbContext, configurations, repositories (optional).
+- Cross‑cutting
+  - Dependency Injection via built‑in container.
+  - Logging with ILogger.
+  - Validation via Data Annotations and/or FluentValidation.
+  - Authentication/Authorization via ASP.NET Core Identity or external providers (future decision).
+
+Entity Framework Core (Code‑First)
+- Define domain entities with clear relationships and invariants.
+- Central DbContext with per‑entity configuration classes.
+- Use migrations for schema changes; version and review changes.
+- Performance: project to DTOs, `AsNoTracking()` where appropriate, indexes via Fluent API.
+
+UI Framework Selection
+- Observed in reference (hi.events.full): Mantine UI + Tabler Icons (React/TypeScript).
+- Target stack (MVC/Razor, no React) requires framework‑agnostic components.
+- Decision: Bootstrap 5.x + Tabler CSS (free, Bootstrap‑based) as the primary UI framework, complemented by focused, free JS libraries only when needed:
+  - Modals/Offcanvas/Collapse/Tooltips/Toasts: Bootstrap JS.
+  - Forms/Inputs/Layout: Bootstrap + Tabler CSS.
+  - Icons: Tabler Icons (MIT).
+  - Date/Time picker: Flatpickr (Bootstrap theme).
+  - File upload (dropzone): Dropzone.js.
+  - Carousel: Swiper (or Bootstrap Carousel if sufficient).
+  - Charts: Chart.js.
+  - Rich Text Editor (if required): Quill.
+  - Advanced tables (when needed): DataTables (Bootstrap 5).
+- Rationale: free, MVC‑friendly, no build step required, excellent docs, and feature parity with Mantine’s key UX needs via small, well‑scoped libraries.
+
+Front‑End Strategy (Modular JS, No Bundlers)
+- Place feature modules under `wwwroot/js/modules/<feature>/...`.
+- Each view includes only the scripts it needs with `<script type="module" defer src="..."></script>`.
+- Keep a small set of shared utilities in `wwwroot/js/common/` (e.g., fetch wrappers, DOM helpers).
+- Avoid global variables; export minimal entry points from modules.
+- Vendor scripts live in `wwwroot/lib/<library>/<version>/` (downloaded files or CDN fallback).
+
+Views and ViewModels
+- Strongly‑typed ViewModels per page; no business logic in views.
+- Use `_Layout.cshtml` for global CSS, header/footer, and minimal global JS.
+- Use partials for reusable UI fragments (e.g., forms, list items, nav).
+
+Routing and Controllers
+- REST‑like routes where appropriate (`/events`, `/tickets`, `/orders`).
+- Controllers delegate to services; handle validation results and return views or JSON.
+- Keep actions small, async, and explicit about inputs/outputs.
+
+Security, Accessibility, and Performance
+- CSRF protection (`[ValidateAntiForgeryToken]`) for form posts.
+- Input validation/sanitization; never trust client data.
+- Accessibility: WCAG 2.1 AA; semantic HTML; ARIA where needed; focus management in modals.
+- Performance: defer scripts; minimize CSS/JS per page; cache static assets; responsive images.
+
+Testing and Quality
+- Unit tests for Services and critical Data logic.
+- Integration tests for key flows (e.g., purchase, ticket issuance).
+- Linting and analyzers via `.editorconfig` and Roslyn analyzers.
+
+Initial Folder Structure (target)
+```
+RailTix/
+  Controllers/
+  Data/
+    Configurations/
+    Migrations/
+    RailTixDbContext.cs
+  Models/
+    Domain/
+    Dto/
+    ViewModels/
+  Services/
+  Views/
+    Shared/
+  wwwroot/
+    css/
+    js/
+      common/
+      modules/
+    lib/
+  .cursor/
+    rules/
+  docs/
+```
+
+Authentication & Identity
+- ASP.NET Core Identity with roles: `SiteUser`, `EventManager`, `Admin` (inheritance by inclusion).
+- MVC controllers & views ONLY (no Razor Pages anywhere).
+- Email verification required for sign‑in.
+- Features: Register, Login (Remember Me), Logout, Forgot/Reset Password, lockout after failures.
+- Dev mail: smtp4dev on localhost; emails for confirmation/reset.
+- reCAPTCHA enforced on Register/Login/Forgot Password (dev keys in config).
+
+Currency, Locale & Timezone
+- Multi‑currency: user profile stores preferred currency (ISO 4217). Events have their own currency.
+- Locale: user profile stores locale (e.g., `en-NZ`). 
+- Timezone: user profile stores IANA TZ (`Pacific/Auckland`). Event has explicit timezone; defaults to the creator’s preference.
+- If browser detection unavailable at signup, default to NZD and Pacific/Auckland in dev.
+
+Location & “Near Me”
+- Events store latitude/longitude plus city/region metadata.
+- v1: use browser Geolocation API for user location; search by radius (Haversine) with server‑side filtering.
+- Google Maps API key in config for optional geocoding/places (enable as needed).
+

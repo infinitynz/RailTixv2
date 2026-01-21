@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Confirm your email";
+    var email = (string)ViewBag.Email;
+}
+
+<div class="container py-5" style="max-width: 560px;">
+    <h1 class="h4">Check your inbox</h1>
+    <p>We sent a confirmation link to <strong>@email</strong>. Please click the link to activate your account.</p>
+    <p class="text-muted">If you don't see the email, check your spam folder.</p>
+</div>
+
+
