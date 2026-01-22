@@ -11,6 +11,10 @@ using RailTix.Models.Domain;
 using RailTix.Models.Options;
 using RailTix.Services.Recaptcha;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
+using System.Collections.Generic;
+using RailTix.Services.Location;
 
 namespace RailTix.Controllers
 {
@@ -22,19 +26,25 @@ namespace RailTix.Controllers
         private readonly IEmailSender _emailSender;
         private readonly IGoogleRecaptchaService _recaptchaService;
         private readonly GoogleRecaptchaOptions _recaptchaOptions;
+        private readonly ILocationService _locationService;
+        private readonly ILocationProvider _locationProvider;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             IGoogleRecaptchaService recaptchaService,
-            IOptions<GoogleRecaptchaOptions> recaptchaOptions)
+            IOptions<GoogleRecaptchaOptions> recaptchaOptions,
+            ILocationService locationService,
+            ILocationProvider locationProvider)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _recaptchaService = recaptchaService;
             _recaptchaOptions = recaptchaOptions.Value;
+            _locationService = locationService;
+            _locationProvider = locationProvider;
         }
 
         [HttpGet]
@@ -57,7 +67,7 @@ namespace RailTix.Controllers
             }
 
             var token = Request.Form["g-recaptcha-response"].ToString();
-            var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString());
+            var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString(), "login");
             if (!ok)
             {
                 ModelState.AddModelError(string.Empty, "reCAPTCHA validation failed.");
@@ -67,6 +77,11 @@ namespace RailTix.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
             if (result.Succeeded)
             {
+                var u = await _userManager.FindByEmailAsync(model.Email);
+                if (u != null && !string.IsNullOrEmpty(u.Country) && !string.IsNullOrEmpty(u.City))
+                {
+                    await _locationProvider.SetFromCountryCityAsync(u.Country!, u.City!, "login_profile");
+                }
                 return RedirectToLocal(returnUrl);
             }
             if (result.RequiresTwoFactor)
@@ -89,7 +104,16 @@ namespace RailTix.Controllers
         {
             ViewBag.SiteKey = _recaptchaOptions.SiteKey;
             ViewBag.ReturnUrl = returnUrl;
-            return View(new RegisterViewModel());
+            var defaultCountry = "New Zealand";
+            var defaultCity = "Auckland";
+            var vm = new RegisterViewModel
+            {
+                CountryOptions = _locationService.GetCountries().Select(c => new SelectListItem { Text = c, Value = c, Selected = c == defaultCountry }).ToList(),
+                CityOptions = _locationService.GetCities(defaultCountry).Select(c => new SelectListItem { Text = c, Value = c, Selected = c == defaultCity }).ToList(),
+                Country = defaultCountry,
+                City = defaultCity
+            };
+            return View(vm);
         }
 
         [HttpPost]
@@ -100,28 +124,40 @@ namespace RailTix.Controllers
             ViewBag.ReturnUrl = returnUrl;
             if (!ModelState.IsValid)
             {
+                model.CountryOptions = _locationService.GetCountries().Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.Country }).ToList();
+                model.CityOptions = _locationService.GetCities(model.Country).Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.City }).ToList();
                 return View(model);
             }
 
             var token = Request.Form["g-recaptcha-response"].ToString();
-            var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString());
+            var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString(), "register");
             if (!ok)
             {
                 ModelState.AddModelError(string.Empty, "reCAPTCHA validation failed.");
+                model.CountryOptions = _locationService.GetCountries().Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.Country }).ToList();
+                model.CityOptions = _locationService.GetCities(model.Country).Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.City }).ToList();
                 return View(model);
             }
+
+            // Map country/city to currency and timezone
+            var currency = _locationService.ResolveCurrency(model.Country) ?? "NZD";
+            var timeZoneId = _locationService.ResolveTimeZone(model.Country, model.City) ?? "Pacific/Auckland";
 
             var user = new ApplicationUser
             {
                 UserName = model.Email,
                 Email = model.Email,
-                PreferredCurrency = model.PreferredCurrency ?? "NZD",
-                TimeZoneId = model.TimeZoneId ?? "Pacific/Auckland"
+                Country = model.Country,
+                City = model.City,
+                PreferredCurrency = currency,
+                TimeZoneId = timeZoneId
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "SiteUser");
+
+                await _locationProvider.SetFromCountryCityAsync(model.Country, model.City, "register");
 
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -138,6 +174,8 @@ namespace RailTix.Controllers
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+            model.CountryOptions = _locationService.GetCountries().Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.Country }).ToList();
+            model.CityOptions = _locationService.GetCities(model.Country).Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.City }).ToList();
             return View(model);
         }
 
@@ -177,7 +215,7 @@ namespace RailTix.Controllers
             if (!ModelState.IsValid) return View(model);
 
             var token = Request.Form["g-recaptcha-response"].ToString();
-            var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString());
+            var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString(), "forgot_password");
             if (!ok)
             {
                 ModelState.AddModelError(string.Empty, "reCAPTCHA validation failed.");
@@ -260,6 +298,8 @@ namespace RailTix.Controllers
             return View();
         }
 
+        // mapping logic moved to ILocationService
+
         public class LoginViewModel
         {
             [Required, EmailAddress]
@@ -278,10 +318,17 @@ namespace RailTix.Controllers
             public string Password { get; set; } = string.Empty;
             [DataType(DataType.Password), Display(Name = "Confirm password"), Compare("Password")]
             public string ConfirmPassword { get; set; } = string.Empty;
-            [Display(Name = "Preferred currency (ISO)")]
-            public string? PreferredCurrency { get; set; } = "NZD";
-            [Display(Name = "Time zone (IANA)")]
-            public string? TimeZoneId { get; set; } = "Pacific/Auckland";
+            [Required]
+            [Display(Name = "Country")]
+            public string Country { get; set; } = "New Zealand";
+            [Required]
+            [Display(Name = "City")]
+            public string City { get; set; } = "Auckland";
+            public IEnumerable<SelectListItem> CountryOptions { get; set; } = Enumerable.Empty<SelectListItem>();
+            public IEnumerable<SelectListItem> CityOptions { get; set; } = Enumerable.Empty<SelectListItem>();
+            // Computed server-side:
+            public string? PreferredCurrency { get; set; }
+            public string? TimeZoneId { get; set; }
         }
 
         public class ForgotPasswordViewModel

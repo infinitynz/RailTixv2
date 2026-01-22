@@ -12,6 +12,10 @@ namespace RailTix.Models.Domain
 
         // BCP-47 language tag (e.g., en-NZ)
         public string? Locale { get; set; }
+
+        // Profile location
+        public string? Country { get; set; }
+        public string? City { get; set; }
     }
 }
 

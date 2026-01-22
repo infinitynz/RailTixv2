@@ -20,10 +20,12 @@ namespace RailTix.Services.Recaptcha
 
         public async Task<bool> VerifyAsync(string token, string? remoteIp)
         {
-            if (string.IsNullOrWhiteSpace(token))
-            {
-                return false;
-            }
+            return await VerifyAsync(token, remoteIp, action: string.Empty, minimumScore: _options.MinimumScore);
+        }
+
+        public async Task<bool> VerifyAsync(string token, string? remoteIp, string action, double? minimumScore = null)
+        {
+            if (string.IsNullOrWhiteSpace(token)) return false;
 
             var content = new StringContent(
                 $"secret={_options.SecretKey}&response={token}&remoteip={remoteIp}",
@@ -39,12 +41,21 @@ namespace RailTix.Services.Recaptcha
                 PropertyNameCaseInsensitive = true
             });
 
-            return obj?.Success ?? false;
+            if (obj is null || !obj.Success) return false;
+            if (!string.IsNullOrWhiteSpace(action) && !string.Equals(obj.Action, action, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+            var threshold = minimumScore ?? _options.MinimumScore;
+            if (obj.Score < threshold) return false;
+            return true;
         }
 
         private sealed class RecaptchaVerifyResponse
         {
             public bool Success { get; set; }
+            public double Score { get; set; }
+            public string? Action { get; set; }
         }
     }
 }

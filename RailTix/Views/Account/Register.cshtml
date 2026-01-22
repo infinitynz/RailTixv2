@@ -7,7 +7,7 @@
 
 <div class="container py-5" style="max-width: 520px;">
     <h1 class="h3 mb-3">Create your account</h1>
-    <form asp-action="Register" asp-route-returnUrl="@returnUrl" method="post">
+    <form id="register-form" asp-action="Register" asp-route-returnUrl="@returnUrl" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="mb-3">
             <label asp-for="Email" class="form-label"></label>
@@ -26,19 +26,17 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label asp-for="PreferredCurrency" class="form-label"></label>
-                <input asp-for="PreferredCurrency" class="form-control" placeholder="NZD" />
-                <span asp-validation-for="PreferredCurrency" class="text-danger"></span>
+                <label asp-for="Country" class="form-label"></label>
+                <select asp-for="Country" class="form-select" asp-items="Model.CountryOptions" id="countrySelect"></select>
+                <span asp-validation-for="Country" class="text-danger"></span>
             </div>
             <div class="col-md-6 mb-3">
-                <label asp-for="TimeZoneId" class="form-label"></label>
-                <input asp-for="TimeZoneId" class="form-control" placeholder="Pacific/Auckland" />
-                <span asp-validation-for="TimeZoneId" class="text-danger"></span>
+                <label asp-for="City" class="form-label"></label>
+                <select asp-for="City" class="form-select" asp-items="Model.CityOptions" id="citySelect"></select>
+                <span asp-validation-for="City" class="text-danger"></span>
             </div>
         </div>
-        <div class="mb-3">
-            <div class="g-recaptcha" data-sitekey="@siteKey"></div>
-        </div>
+        <input type="hidden" id="recaptchaToken" name="g-recaptcha-response" />
         <button type="submit" class="btn btn-primary w-100">Register</button>
         <div class="mt-3">
             <a asp-action="Login">Already have an account? Log in</a>
@@ -48,7 +46,17 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=@siteKey"></script>
+    <script src="~/js/modules/account/register.js" asp-append-version="true"></script>
+    <script>
+        window.RailTixRegister && window.RailTixRegister.init({
+            formSelector: '#register-form',
+            siteKey: '@siteKey',
+            citiesEndpoint: '@Url.Action("Cities","Location")',
+            countrySelector: '#countrySelect',
+            citySelector: '#citySelect'
+        });
+    </script>
 }
 
 

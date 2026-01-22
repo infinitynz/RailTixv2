@@ -56,6 +56,17 @@
     </footer>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script>
+        window.RailTixContext = { isAuthenticated: @(User?.Identity?.IsAuthenticated ?? false ? "true" : "false") };
+    </script>
+    <script src="~/js/modules/location/bootstrap.js" asp-append-version="true"></script>
+    <script>
+        window.RailTixLocation && window.RailTixLocation.init({
+            isAuthenticated: window.RailTixContext.isAuthenticated === "true",
+            updateUrl: '@Url.Action("Update","Location")',
+            guessUrl: '@Url.Action("Guess","Location")'
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

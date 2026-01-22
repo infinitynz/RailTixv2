@@ -7,7 +7,7 @@
 
 <div class="container py-5" style="max-width: 480px;">
     <h1 class="h3 mb-3">Log in</h1>
-    <form asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
+    <form id="login-form" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="mb-3">
             <label asp-for="Email" class="form-label"></label>
@@ -23,9 +23,7 @@
             <input asp-for="RememberMe" class="form-check-input" />
             <label asp-for="RememberMe" class="form-check-label"></label>
         </div>
-        <div class="mb-3">
-            <div class="g-recaptcha" data-sitekey="@siteKey"></div>
-        </div>
+        <input type="hidden" id="recaptchaToken" name="g-recaptcha-response" />
         <button type="submit" class="btn btn-primary w-100">Log in</button>
         <div class="d-flex justify-content-between mt-3">
             <a asp-action="ForgotPassword">Forgot your password?</a>
@@ -36,7 +34,21 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=@siteKey"></script>
+    <script>
+        (function () {
+            const form = document.getElementById('login-form');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                grecaptcha.ready(function () {
+                    grecaptcha.execute('@siteKey', { action: 'login' }).then(function (token) {
+                        document.getElementById('recaptchaToken').value = token;
+                        form.submit();
+                    });
+                });
+            });
+        })();
+    </script>
 }
 
 

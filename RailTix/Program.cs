@@ -7,11 +7,14 @@ using RailTix.Models.Domain;
 using RailTix.Models.Options;
 using RailTix.Services.Email;
 using RailTix.Services.Recaptcha;
+using RailTix.Services.Location;
+using RailTix.Services.Geo;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -34,6 +37,9 @@ builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("Smtp")
 builder.Services.Configure<GoogleRecaptchaOptions>(builder.Configuration.GetSection("Recaptcha"));
 builder.Services.AddTransient<IEmailSender, SmtpEmailSender>();
 builder.Services.AddHttpClient<IGoogleRecaptchaService, GoogleRecaptchaService>();
+builder.Services.AddSingleton<ILocationService, LocationService>();
+builder.Services.AddHttpClient<IGeoIpService, GeoIpService>();
+builder.Services.AddScoped<ILocationProvider, LocationProvider>();
 
 var app = builder.Build();
 

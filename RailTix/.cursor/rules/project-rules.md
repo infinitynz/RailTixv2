@@ -35,6 +35,8 @@ Front-End JavaScript (No bundlers)
 - Prefer modern, framework‑free JS (ES modules). Avoid global variables; expose minimal entry points per page.
 - No Gulp/Bower/Grunt/Webpack/Vite. Download libraries and place under `wwwroot/lib/<library>/<version>/`.
 - Keep payload small: include only required CSS/JS on each page; defer scripts where possible.
+- Prefer OO jQuery modules for UI behavior when appropriate. Follow SOLID: single‑responsibility modules, no inline business logic.
+- Do NOT hardcode selectable data (e.g., country/city lists) in client code. Fetch from server endpoints and validate again on the server.
 
 UI Framework and Toolkit
 - Base framework: Bootstrap 5.x with Tabler CSS (free, Bootstrap‑based) for cohesive styling and rich components.

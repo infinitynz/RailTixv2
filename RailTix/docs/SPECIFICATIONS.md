@@ -45,6 +45,8 @@ Front‑End Strategy (Modular JS, No Bundlers)
 - Keep a small set of shared utilities in `wwwroot/js/common/` (e.g., fetch wrappers, DOM helpers).
 - Avoid global variables; export minimal entry points from modules.
 - Vendor scripts live in `wwwroot/lib/<library>/<version>/` (downloaded files or CDN fallback).
+- Client inputs shown to the user (e.g., country/city lists) MUST come from the server (AJAX/JSON) and are validated server-side on submit. No hardcoded choice lists in client JS.
+- Use OO jQuery modules for page-specific behaviors (e.g., `wwwroot/js/modules/account/register.js`) and keep inline scripts out of views.
 
 Views and ViewModels
 - Strongly‑typed ViewModels per page; no business logic in views.
@@ -109,6 +111,16 @@ Currency, Locale & Timezone
 
 Location & “Near Me”
 - Events store latitude/longitude plus city/region metadata.
-- v1: use browser Geolocation API for user location; search by radius (Haversine) with server‑side filtering.
-- Google Maps API key in config for optional geocoding/places (enable as needed).
+- v1 (unauthenticated): layered fallback with caching
+  1) Cookie (`rtx_loc`) if present (HttpOnly, signed, 30‑day TTL)
+  2) Browser Geolocation API (with consent) → server maps to nearest supported city and sets cookie
+  3) IP geolocation (free provider) → server maps to nearest supported city and sets cookie
+  4) Sane default (NZ/AU mapping)
+- Authenticated users: use profile Country/City and set/refresh the cookie on login; no geolocation calls needed.
+- Server is the source of truth: all Country/City/currency/timezone mapping is computed server‑side via `ILocationService`; client never hardcodes lists.
+- Endpoints:
+  - `GET /Location/cities?country=…` → server-sourced cities
+  - `POST /Location/update { lat,lng }` → set cookie from browser geolocation
+  - `GET /Location/guess` → set cookie from IP geolocation
+  - `GET /Location/current` → returns current cookie state (for diagnostics)
 
