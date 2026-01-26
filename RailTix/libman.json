@@ -1,0 +1,14 @@
+{
+  "version": "3.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "bulma@1.0.0",
+      "destination": "wwwroot/lib/bulma",
+      "files": [
+        "sass/**",
+        "LICENSE"
+      ]
+    }
+  ]
+}

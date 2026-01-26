@@ -5,8 +5,8 @@
     "sourceMap": true
   },
   {
-    "outputFile": "wwwroot/css/theme.css",
-    "inputFile": "wwwroot/css/theme.scss",
+    "outputFile": "wwwroot/css/components/forms.css",
+    "inputFile": "wwwroot/css/components/forms.scss",
     "sourceMap": true
   }
 ]

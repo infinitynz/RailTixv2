@@ -1,73 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@ViewData["Title"] - RailTix</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>@ViewData["Title"] - RailTix</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300..800&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	@RenderSection("Styles", required: false)
 </head>
-<body class="text-light">
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom border-secondary">
-            <div class="container">
-				<a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index"><img src="~/images/railtix-logo.png" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        @if (User?.Identity?.IsAuthenticated ?? false)
-                        {
-                            <li class="nav-item me-2">
-                                <a class="nav-link" asp-controller="Account" asp-action="Manage">
-                                    @User.Identity!.Name
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                                    <button type="submit" class="btn btn-link nav-link p-0">Logout</button>
-                                    @Html.AntiForgeryToken()
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Register">Sign Up</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Login">Sign In</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-    <footer class="border-top border-secondary py-3">
-        <div class="container text-muted small">
-            &copy; @DateTime.Now.Year - RailTix
-        </div>
-    </footer>
+<body>
+	<header>
+		<div class="site-header">
+			<nav class="nav" role="navigation" aria-label="main navigation">
+				<div class="container">
+					<div class="header-wrapper">
+						<a class="nav-brand" asp-controller="Home" asp-action="Index">
+							<img src="~/images/railtix-logo.png" />
+						</a>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
-    <script>
-        window.RailTixContext = { isAuthenticated: @(User?.Identity?.IsAuthenticated ?? false ? "true" : "false") };
-    </script>
-    <script src="~/js/modules/location/bootstrap.js" asp-append-version="true"></script>
-    <script>
-        window.RailTixLocation && window.RailTixLocation.init({
-            isAuthenticated: window.RailTixContext.isAuthenticated === "true",
-            updateUrl: '@Url.Action("Update","Location")',
-            guessUrl: '@Url.Action("Guess","Location")'
-        });
-    </script>
-    @RenderSection("Scripts", required: false)
+						<div id="navMain" class="nav-menu">
+							@if (User?.Identity?.IsAuthenticated ?? false)
+							{
+								<a class="nav-item" asp-controller="Account" asp-action="Manage">@User.Identity!.Name</a>
+								<div class="nav-item">
+									<form asp-controller="Account" asp-action="Logout" method="post">
+										<button type="submit" class="btn btn-link">Logout</button>
+										@Html.AntiForgeryToken()
+									</form>
+								</div>
+							}
+							else
+							{
+								<a class="nav-item" asp-controller="Account" asp-action="Register">Sign Up</a>
+								<a class="nav-item" asp-controller="Account" asp-action="Login">Sign In</a>
+							}
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<main role="main" class="section">
+		@RenderBody()
+	</main>
+	<footer class="section">
+		<div class="container" style="color:#9aa0a6;font-size:.875rem;">
+			&copy; @DateTime.Now.Year - RailTix
+		</div>
+	</footer>
+
+	<script>
+		// Simple navbar toggle
+		(function () {
+			const toggle = document.querySelector('.nav-toggle');
+			const menu = document.getElementById(toggle?.getAttribute('data-target') || '');
+			if (toggle && menu) {
+				toggle.addEventListener('click', function () {
+					menu.classList.toggle('is-open');
+				});
+			}
+			window.RailTixContext = { isAuthenticated: @(User?.Identity?.IsAuthenticated ?? false ? "true" : "false") };
+		})();
+	</script>
+	<script src="~/js/modules/location/bootstrap.js" asp-append-version="true"></script>
+	<script>
+		window.RailTixLocation && window.RailTixLocation.init({
+			isAuthenticated: window.RailTixContext.isAuthenticated === "true",
+			updateUrl: '@Url.Action("Update", "Location")',
+			guessUrl: '@Url.Action("Guess", "Location")'
+		});
+	</script>
+	@RenderSection("Scripts", required: false)
 </body>
 </html>
 

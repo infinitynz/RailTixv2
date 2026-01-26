@@ -24,20 +24,21 @@ Entity Framework Core (Code‑First)
 - Use migrations for schema changes; version and review changes.
 - Performance: project to DTOs, `AsNoTracking()` where appropriate, indexes via Fluent API.
 
-UI Framework Selection
-- Observed in reference (hi.events.full): Mantine UI + Tabler Icons (React/TypeScript).
-- Target stack (MVC/Razor, no React) requires framework‑agnostic components.
-- Decision: Bootstrap 5.x + Tabler CSS (free, Bootstrap‑based) as the primary UI framework, complemented by focused, free JS libraries only when needed:
-  - Modals/Offcanvas/Collapse/Tooltips/Toasts: Bootstrap JS.
-  - Forms/Inputs/Layout: Bootstrap + Tabler CSS.
-  - Icons: Tabler Icons (MIT).
-  - Date/Time picker: Flatpickr (Bootstrap theme).
-  - File upload (dropzone): Dropzone.js.
-  - Carousel: Swiper (or Bootstrap Carousel if sufficient).
-  - Charts: Chart.js.
-  - Rich Text Editor (if required): Quill.
-  - Advanced tables (when needed): DataTables (Bootstrap 5).
-- Rationale: free, MVC‑friendly, no build step required, excellent docs, and feature parity with Mantine’s key UX needs via small, well‑scoped libraries.
+UI Framework and Styling
+- No third‑party CSS framework. Custom SCSS only.
+- Structure:
+  - `wwwroot/css/_tokens.scss`: shared variables/mixins (colors, radii, shadows, transitions).
+  - `wwwroot/css/site.scss`: global base (typography, layout, navbar, buttons).
+  - `wwwroot/css/components/forms.scss`: form controls, dialog cards, validation.
+- Loading:
+  - Layout includes `site.css` globally and exposes a `Styles` section.
+  - Views include component styles only when needed (e.g., forms.css once per page).
+
+UI/UX Style & Theming
+- The app uses a custom dark theme layered on top of Bootstrap.
+- Primary highlight is green (#5fff00); negative/cancel accent is pink (#ff00d8).
+- Forms can be rendered as dialog-like white cards using the `.form-dialog` helper.
+- See `docs/STYLE_GUIDE.md` for tokens, utilities, and usage patterns.
 
 Front‑End Strategy (Modular JS, No Bundlers)
 - Place feature modules under `wwwroot/js/modules/<feature>/...`.

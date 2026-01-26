@@ -5,43 +5,57 @@
     var returnUrl = (string?)ViewBag.ReturnUrl;
 }
 
-<div class="container py-5" style="max-width: 520px;">
-    <h1 class="h3 mb-3">Create your account</h1>
-    <form id="register-form" asp-action="Register" asp-route-returnUrl="@returnUrl" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="mb-3">
-            <label asp-for="Email" class="form-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Password" class="form-label"></label>
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="ConfirmPassword" class="form-label"></label>
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="Country" class="form-label"></label>
-                <select asp-for="Country" class="form-select" asp-items="Model.CountryOptions" id="countrySelect"></select>
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label asp-for="City" class="form-label"></label>
-                <select asp-for="City" class="form-select" asp-items="Model.CityOptions" id="citySelect"></select>
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-        </div>
-        <input type="hidden" id="recaptchaToken" name="g-recaptcha-response" />
-        <button type="submit" class="btn btn-primary w-100">Register</button>
-        <div class="mt-3">
-            <a asp-action="Login">Already have an account? Log in</a>
-        </div>
-    </form>
+@section Styles {
+	<link rel="stylesheet" href="~/css/components/forms.css" asp-append-version="true" />
+}
+
+<div class="section">
+	<div class="container">
+	<div class="form-dialog" style="max-width: 640px; margin: 0 auto;">
+		<h1 class="h3 mb-3">Create your account</h1>
+		<form id="register-form" asp-action="Register" asp-route-returnUrl="@returnUrl" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="mb-3">
+				<label asp-for="Email" class="form-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Password" class="form-label"></label>
+				<input asp-for="Password" class="form-control" />
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ConfirmPassword" class="form-label"></label>
+				<input asp-for="ConfirmPassword" class="form-control" />
+				<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+			</div>
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<label asp-for="Country" class="form-label"></label>
+					<div class="rtx-select">
+						<select asp-for="Country" class="form-select" asp-items="Model.CountryOptions" id="countrySelect"></select>
+						<svg class="rtx-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+					</div>
+					<span asp-validation-for="Country" class="text-danger"></span>
+				</div>
+				<div class="col-md-6 mb-3">
+					<label asp-for="City" class="form-label"></label>
+					<div class="rtx-select">
+						<select asp-for="City" class="form-select" asp-items="Model.CityOptions" id="citySelect"></select>
+						<svg class="rtx-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+					</div>
+					<span asp-validation-for="City" class="text-danger"></span>
+				</div>
+			</div>
+			<input type="hidden" id="recaptchaToken" name="g-recaptcha-response" />
+			<button type="submit" class="btn btn-primary">Register</button>
+			<div class="mt-3">
+				<a asp-action="Login">Already have an account? Log in</a>
+			</div>
+		</form>
+	</div>
+	</div>
 </div>
 
 @section Scripts {

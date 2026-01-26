@@ -1,0 +1,43 @@
+// Global tokens and mixins for RailTix custom UI
+
+// Colors
+$rtx-bg: #0e0f10;
+$rtx-bg-elevated: #121212;
+$rtx-surface: #0f0f10;
+$rtx-border: #222;
+$rtx-text: #d7dadd;
+$rtx-text-muted: #a7abb1;
+$rtx-white: #ffffff;
+
+// Highlights
+$rtx-green: #5fff00;
+$rtx-green-dark: #358e00;
+$rtx-pink: #ff00d8;
+
+// Radii & shadows
+$rtx-radius-lg: 14px;
+$rtx-radius-md: 10px;
+$rtx-radius-sm: 8px;
+$rtx-shadow-dark-soft: 0 6px 24px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .35);
+$rtx-shadow-light-soft: 0 8px 22px rgba(0, 0, 0, .20);
+
+// Transitions
+$rtx-ease-fast: .15s ease;
+$rtx-ease: .25s ease;
+$rtx-ease-slow: .35s ease;
+
+// Mixins
+@mixin rtx-interactive {
+	transition: color $rtx-ease, background-color $rtx-ease, border-color $rtx-ease, filter $rtx-ease, box-shadow $rtx-ease, transform $rtx-ease;
+	will-change: color, background-color, border-color, filter, box-shadow, transform;
+}
+
+@mixin rtx-dark-gradient($from: #0a0a0a, $to: #131313) {
+	background: linear-gradient(180deg, $from 0%, $to 100%);
+}
+
+@mixin rtx-pinstripes($color: $rtx-pink, $spacing: 14px, $width: 1px) {
+	background-image: repeating-linear-gradient(135deg, rgba($color, .22) 0, rgba($color, .22) $width, transparent $width, transparent $spacing);
+}
+
+

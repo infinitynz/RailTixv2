@@ -13,7 +13,12 @@ using RailTix.Services.Geo;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+var mvcBuilder = builder.Services.AddControllersWithViews();
+if (builder.Environment.IsDevelopment())
+{
+	// Enable runtime compilation of Razor views so .cshtml edits appear on refresh
+	mvcBuilder.AddRazorRuntimeCompilation();
+}
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

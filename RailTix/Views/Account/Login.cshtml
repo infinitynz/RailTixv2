@@ -5,31 +5,39 @@
     var returnUrl = (string?)ViewBag.ReturnUrl;
 }
 
-<div class="container py-5" style="max-width: 480px;">
-    <h1 class="h3 mb-3">Log in</h1>
-    <form id="login-form" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="mb-3">
-            <label asp-for="Email" class="form-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Password" class="form-label"></label>
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-check mb-3">
-            <input asp-for="RememberMe" class="form-check-input" />
-            <label asp-for="RememberMe" class="form-check-label"></label>
-        </div>
-        <input type="hidden" id="recaptchaToken" name="g-recaptcha-response" />
-        <button type="submit" class="btn btn-primary w-100">Log in</button>
-        <div class="d-flex justify-content-between mt-3">
-            <a asp-action="ForgotPassword">Forgot your password?</a>
-            <a asp-action="Register">Register as a new user</a>
-        </div>
-    </form>
+@section Styles {
+	<link rel="stylesheet" href="~/css/components/forms.css" asp-append-version="true" />
+}
+
+<div class="section">
+	<div class="container">
+	<div class="form-dialog" style="max-width: 560px; margin: 0 auto;">
+		<h1 class="h3 mb-3">Log in</h1>
+		<form id="login-form" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="mb-3">
+				<label asp-for="Email" class="form-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Password" class="form-label"></label>
+				<input asp-for="Password" class="form-control" />
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+			<div class="form-check mb-3">
+				<input asp-for="RememberMe" class="form-check-input" />
+				<label asp-for="RememberMe" class="form-check-label"></label>
+			</div>
+			<input type="hidden" id="recaptchaToken" name="g-recaptcha-response" />
+			<button type="submit" class="btn btn-primary">Log in</button>
+			<div class="d-flex justify-content-between mt-3">
+				<a asp-action="ForgotPassword">Forgot your password?</a>
+				<a asp-action="Register">Register as a new user</a>
+			</div>
+		</form>
+	</div>
+	</div>
 </div>
 
 @section Scripts {
