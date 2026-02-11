@@ -1,0 +1,64 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsPageEditViewModel
+@{
+	ViewData["Title"] = "Edit Page";
+}
+
+<h1>Edit Page</h1>
+
+<form method="post">
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@await Html.PartialAsync("_PageForm", Model)
+	<button type="submit" class="button">Save</button>
+	<a href="/account/admin/content/pages" class="button button--ghost">Back</a>
+</form>
+
+@if (!Model.IsHomepage)
+{
+	<form method="post" action="/account/admin/content/pages/@Model.Id/delete" onsubmit="return confirm('Delete this page and its children?');">
+		@Html.AntiForgeryToken()
+		<button type="submit" class="button button--danger">Delete Page</button>
+	</form>
+}
+
+<hr />
+
+<section>
+	<h2>Components</h2>
+	<a class="button" href="/account/admin/content/pages/@Model.Id/components/create">Add Component</a>
+	@if (Model.Components.Count == 0)
+	{
+		<p>No components yet.</p>
+	}
+	else
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Position</th>
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var component in Model.Components)
+				{
+					<tr>
+						<td>@component.Type</td>
+						<td>@component.Position</td>
+						<td>@(component.IsEnabled ? "Enabled" : "Disabled")</td>
+						<td>
+							<a href="/account/admin/content/pages/@Model.Id/components/@component.Id/edit">Edit</a>
+							<form method="post" action="/account/admin/content/pages/@Model.Id/components/@component.Id/delete" style="display:inline;" onsubmit="return confirm('Delete this component?');">
+								@Html.AntiForgeryToken()
+								<button type="submit" class="link-button">Delete</button>
+							</form>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+</section>
+

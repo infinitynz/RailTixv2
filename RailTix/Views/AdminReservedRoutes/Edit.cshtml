@@ -1,0 +1,24 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsReservedRouteEditViewModel
+@{
+	ViewData["Title"] = "Edit Reserved Route";
+}
+
+<h1>Edit Reserved Route</h1>
+
+<form method="post">
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group">
+		<label asp-for="Segment"></label>
+		<input asp-for="Segment" class="form-control" />
+		<span asp-validation-for="Segment" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>
+			<input asp-for="IsActive" /> Active
+		</label>
+	</div>
+	<button type="submit" class="button">Save</button>
+	<a href="/account/admin/content/reserved-routes" class="button button--ghost">Cancel</a>
+</form>
+

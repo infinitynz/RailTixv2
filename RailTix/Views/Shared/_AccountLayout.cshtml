@@ -1,0 +1,23 @@
+@{
+	Layout = "_Layout";
+	ViewData["Title"] = ViewData["Title"] ?? "Account";
+}
+
+<div class="container">
+	<div class="account-layout">
+		<aside class="account-sidebar" aria-label="Account navigation">
+			@await Html.PartialAsync("_AccountSidebar")
+		</aside>
+		<section class="account-content" role="region" aria-label="Account content">
+			@RenderBody()
+		</section>
+	</div>
+</div>
+
+@section Styles {
+	<style>
+		/* Keep minimal here; main styles live in site.css */
+	</style>
+}
+
+

@@ -1,0 +1,63 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsPageEditViewModel
+
+<div class="form-group">
+	<label asp-for="Title"></label>
+	<input asp-for="Title" class="form-control" />
+	<span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+	<label asp-for="Slug"></label>
+	@if (Model.IsHomepage)
+	{
+		<input asp-for="Slug" class="form-control" readonly />
+	}
+	else
+	{
+		<input asp-for="Slug" class="form-control" />
+	}
+	<span asp-validation-for="Slug" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+	<label asp-for="CustomUrl"></label>
+	@if (Model.IsHomepage)
+	{
+		<input asp-for="CustomUrl" class="form-control" readonly />
+	}
+	else
+	{
+		<input asp-for="CustomUrl" class="form-control" />
+	}
+	<span asp-validation-for="CustomUrl" class="text-danger"></span>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.CurrentPath))
+{
+	<p class="text-muted">Current URL: <code>@Model.CurrentPath</code></p>
+}
+
+<div class="form-group">
+	<label asp-for="ParentId">Parent Page</label>
+	@if (Model.IsHomepage)
+	{
+		<select asp-for="ParentId" asp-items="Model.ParentOptions" class="form-control" disabled></select>
+	}
+	else
+	{
+		<select asp-for="ParentId" asp-items="Model.ParentOptions" class="form-control"></select>
+	}
+	<span asp-validation-for="ParentId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+	<label asp-for="Position"></label>
+	<input asp-for="Position" type="number" class="form-control" />
+</div>
+
+<div class="form-group">
+	<label>
+		<input asp-for="IsPublished" /> Published
+	</label>
+</div>
+

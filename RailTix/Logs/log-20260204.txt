@@ -1,0 +1,45 @@
+2026-02-04 22:43:35.056 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (55ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-02-04 22:43:35.137 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-02-04 22:43:35.181 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-02-04 22:43:35.222 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-02-04 22:43:35.322 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-02-04 22:43:35.332 +13:00 [INF] Microsoft.EntityFrameworkCore.Migrations Applying migration '20260204090000_AddEvents'.
+2026-02-04 22:43:35.487 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Events] (
+    [Id] uniqueidentifier NOT NULL,
+    [Title] nvarchar(200) NOT NULL,
+    [Description] nvarchar(4000) NULL,
+    [Slug] nvarchar(200) NOT NULL,
+    [Status] nvarchar(30) NOT NULL,
+    [StartsAtLocal] datetime2 NOT NULL,
+    [EndsAtLocal] datetime2 NOT NULL,
+    [TimeZoneId] nvarchar(100) NOT NULL,
+    [CurrencyCode] nvarchar(3) NOT NULL,
+    [OrganizerName] nvarchar(200) NULL,
+    [VenueName] nvarchar(200) NULL,
+    [AddressLine1] nvarchar(200) NULL,
+    [AddressLine2] nvarchar(200) NULL,
+    [City] nvarchar(100) NULL,
+    [Region] nvarchar(100) NULL,
+    [Country] nvarchar(100) NULL,
+    [PostalCode] nvarchar(20) NULL,
+    [CreatedByUserId] nvarchar(450) NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NOT NULL,
+    CONSTRAINT [PK_Events] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Events_AspNetUsers_CreatedByUserId] FOREIGN KEY ([CreatedByUserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE NO ACTION
+);
+2026-02-04 22:43:35.539 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Events_CreatedByUserId] ON [Events] ([CreatedByUserId]);
+2026-02-04 22:43:35.582 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [IX_Events_Slug] ON [Events] ([Slug]);
+2026-02-04 22:43:35.624 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260204090000_AddEvents', N'8.0.5');

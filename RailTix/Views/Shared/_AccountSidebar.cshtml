@@ -1,0 +1,98 @@
+@using Microsoft.AspNetCore.Http
+@{
+	var path = Context?.Request?.Path ?? PathString.Empty;
+	bool isAdmin = User?.IsInRole("Admin") ?? false;
+	bool isEventManager = User?.IsInRole("EventManager") ?? false;
+	bool canManageEvents = isAdmin || isEventManager;
+
+	string Active(string segment)
+	{
+		return path.StartsWithSegments(segment) ? "is-active" : string.Empty;
+	}
+	string ActiveExact(string segment)
+	{
+		return string.Equals(path.ToString(), segment, System.StringComparison.OrdinalIgnoreCase) ? "is-active" : string.Empty;
+	}
+}
+
+<nav class="account-nav">
+	<ul class="account-nav__list" role="list">
+		<li class="account-nav__item">
+			<a class="account-nav__link @Active("/account/profile")" href="/account/profile">
+				<svg class="account-nav__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path d="M15.75 6C15.75 8.07107 14.071 9.75 12 9.75C9.9289 9.75 8.24996 8.07107 8.24996 6C8.24996 3.92893 9.9289 2.25 12 2.25C14.071 2.25 15.75 3.92893 15.75 6Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M4.5011 20.1182C4.5714 16.0369 7.90184 12.75 12 12.75C16.0982 12.75 19.4287 16.0371 19.4988 20.1185C17.216 21.166 14.6764 21.75 12.0003 21.75C9.32396 21.75 6.78406 21.1659 4.5011 20.1182Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+				<span class="account-nav__label">Profile</span>
+			</a>
+		</li>
+
+		@if (canManageEvents)
+		{
+			<li class="account-nav__section">Event Management</li>
+			<li class="account-nav__item">
+				<a class="account-nav__link @ActiveExact("/account")" href="/account">
+					<svg class="account-nav__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2.25 12L11.2045 3.04549C11.6438 2.60615 12.3562 2.60615 12.7955 3.04549L21.75 12M4.5 9.75V19.875C4.5 20.4963 5.00368 21 5.625 21H9.75V16.125C9.75 15.5037 10.2537 15 10.875 15H13.125C13.7463 15 14.25 15.5037 14.25 16.125V21H18.375C18.9963 21 19.5 20.4963 19.5 19.875V9.75M8.25 21H16.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					<span class="account-nav__label">Dashboard</span>
+				</a>
+			</li>
+			<li class="account-nav__item">
+				<a class="account-nav__link @Active("/account/events")" href="/account/events">
+					<svg class="account-nav__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M6.75 3V5.25M17.25 3V5.25M3 18.75V7.5C3 6.25736 4.00736 5.25 5.25 5.25H18.75C19.9926 5.25 21 6.25736 21 7.5V18.75M3 18.75C3 19.9926 4.00736 21 5.25 21H18.75C19.9926 21 21 19.9926 21 18.75M3 18.75V11.25C3 10.0074 4.00736 9 5.25 9H18.75C19.9926 9 21 10.0074 21 11.25V18.75" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					<span class="account-nav__label">My Events</span>
+				</a>
+			</li>
+			<li class="account-nav__item">
+				<a class="account-nav__link @Active("/account/reports")" href="/account/reports">
+					<svg class="account-nav__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M3 13.125C3 12.5037 3.50368 12 4.125 12H6.375C6.99632 12 7.5 12.5037 7.5 13.125V19.875C7.5 20.4963 6.99632 21 6.375 21H4.125C3.50368 21 3 20.4963 3 19.875V13.125Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M9.75 8.625C9.75 8.00368 10.2537 7.5 10.875 7.5H13.125C13.7463 7.5 14.25 8.00368 14.25 8.625V19.875C14.25 20.4963 13.7463 21 13.125 21H10.875C10.2537 21 9.75 20.4963 9.75 19.875V8.625Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M16.5 4.125C16.5 3.50368 17.0037 3 17.625 3H19.875C20.4963 3 21 3.50368 21 4.125V19.875C21 20.4963 20.4963 21 19.875 21H17.625C17.0037 21 16.5 20.4963 16.5 19.875V4.125Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					<span class="account-nav__label">Reports</span>
+				</a>
+			</li>
+			<li class="account-nav__item">
+				<a class="account-nav__link @Active("/account/checkin")" href="/account/checkin">
+					<svg class="account-nav__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M3.75 4.875C3.75 4.25368 4.25368 3.75 4.875 3.75H9.375C9.99632 3.75 10.5 4.25368 10.5 4.875V9.375C10.5 9.99632 9.99632 10.5 9.375 10.5H4.875C4.25368 10.5 3.75 9.99632 3.75 9.375V4.875Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M3.75 14.625C3.75 14.0037 4.25368 13.5 4.875 13.5H9.375C9.99632 13.5 10.5 14.0037 10.5 14.625V19.125C10.5 19.7463 9.99632 20.25 9.375 20.25H4.875C4.25368 20.25 3.75 19.7463 3.75 19.125V14.625Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M13.5 4.875C13.5 4.25368 14.0037 3.75 14.625 3.75H19.125C19.7463 3.75 20.25 4.25368 20.25 4.875V9.375C20.25 9.99632 19.7463 10.5 19.125 10.5H14.625C14.0037 10.5 13.5 9.99632 13.5 9.375V4.875Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M6.75 6.75H7.5V7.5H6.75V6.75Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M6.75 16.5H7.5V17.25H6.75V16.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M16.5 6.75H17.25V7.5H16.5V6.75Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M13.5 13.5H14.25V14.25H13.5V13.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M13.5 19.5H14.25V20.25H13.5V19.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M19.5 13.5H20.25V14.25H19.5V13.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M19.5 19.5H20.25V20.25H19.5V19.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M16.5 16.5H17.25V17.25H16.5V16.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					<span class="account-nav__label">Check-in</span>
+				</a>
+			</li>
+		}
+
+		@if (isAdmin)
+		{
+			<li class="account-nav__section">Administration</li>
+			<li class="account-nav__item">
+				<a class="account-nav__link @Active("/account/admin")" href="/account/admin">
+					<svg class="account-nav__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M9 12.7498L11.25 14.9998L15 9.74985M12 2.71411C9.8495 4.75073 6.94563 5.99986 3.75 5.99986C3.69922 5.99986 3.64852 5.99955 3.59789 5.99892C3.2099 7.17903 3 8.43995 3 9.74991C3 15.3414 6.82432 20.0397 12 21.3719C17.1757 20.0397 21 15.3414 21 9.74991C21 8.43995 20.7901 7.17903 20.4021 5.99892C20.3515 5.99955 20.3008 5.99986 20.25 5.99986C17.0544 5.99986 14.1505 4.75073 12 2.71411Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					<span class="account-nav__label">Admin Center</span>
+				</a>
+			</li>
+		}
+	</ul>
+
+	<div class="account-nav__footnote">
+		<!-- If an icon is missing, add it under wwwroot/images/icons and update docs/account/icons.md -->
+	</div>
+</nav>
+
+

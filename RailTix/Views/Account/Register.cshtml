@@ -15,6 +15,18 @@
 		<h1 class="h3 mb-3">Create your account</h1>
 		<form id="register-form" asp-action="Register" asp-route-returnUrl="@returnUrl" method="post">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<label asp-for="FirstName" class="form-label"></label>
+					<input asp-for="FirstName" class="form-control" required />
+					<span asp-validation-for="FirstName" class="text-danger"></span>
+				</div>
+				<div class="col-md-6 mb-3">
+					<label asp-for="LastName" class="form-label"></label>
+					<input asp-for="LastName" class="form-control" required />
+					<span asp-validation-for="LastName" class="text-danger"></span>
+				</div>
+			</div>
 			<div class="mb-3">
 				<label asp-for="Email" class="form-label"></label>
 				<input asp-for="Email" class="form-control" />
@@ -22,8 +34,18 @@
 			</div>
 			<div class="mb-3">
 				<label asp-for="Password" class="form-label"></label>
-				<input asp-for="Password" class="form-control" />
+				<input asp-for="Password" class="form-control" autocomplete="new-password" />
 				<span asp-validation-for="Password" class="text-danger"></span>
+				<div id="password-policy" class="password-policy mt-3" data-email="@Model.Email">
+					<div class="policy-title">Your password must include:</div>
+					<ul class="policy-list">
+						<li data-rule="len">At least 10 characters</li>
+						<li data-rule="upper">An uppercase letter</li>
+						<li data-rule="lower">A lowercase letter</li>
+						<li data-rule="digit">A number</li>
+						<li data-rule="symbol">A symbol</li>
+					</ul>
+				</div>
 			</div>
 			<div class="mb-3">
 				<label asp-for="ConfirmPassword" class="form-label"></label>
@@ -62,6 +84,16 @@
     <partial name="_ValidationScriptsPartial" />
     <script src="https://www.google.com/recaptcha/api.js?render=@siteKey"></script>
     <script src="~/js/modules/account/register.js" asp-append-version="true"></script>
+    <script type="module">
+        import { initPasswordPolicy } from '/js/modules/account/passwordPolicy.js';
+        initPasswordPolicy({
+            passwordSelector: '#Password',
+            firstNameSelector: '#FirstName',
+            lastNameSelector: '#LastName',
+            emailSelector: '#Email',
+            policyRootSelector: '#password-policy'
+        });
+    </script>
     <script>
         window.RailTixRegister && window.RailTixRegister.init({
             formSelector: '#register-form',

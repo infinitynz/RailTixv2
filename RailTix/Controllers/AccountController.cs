@@ -28,6 +28,7 @@ namespace RailTix.Controllers
         private readonly GoogleRecaptchaOptions _recaptchaOptions;
         private readonly ILocationService _locationService;
         private readonly ILocationProvider _locationProvider;
+        private readonly ILogger<AccountController> _logger;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -36,7 +37,8 @@ namespace RailTix.Controllers
             IGoogleRecaptchaService recaptchaService,
             IOptions<GoogleRecaptchaOptions> recaptchaOptions,
             ILocationService locationService,
-            ILocationProvider locationProvider)
+            ILocationProvider locationProvider,
+            ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,11 +47,13 @@ namespace RailTix.Controllers
             _recaptchaOptions = recaptchaOptions.Value;
             _locationService = locationService;
             _locationProvider = locationProvider;
+            _logger = logger;
         }
 
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
+            _logger.LogInformation("GET /Account/Login returnUrl={ReturnUrl}", returnUrl);
             ViewBag.SiteKey = _recaptchaOptions.SiteKey;
             ViewBag.ReturnUrl = returnUrl;
             return View(new LoginViewModel());
@@ -70,13 +74,33 @@ namespace RailTix.Controllers
             var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString(), "login");
             if (!ok)
             {
+                _logger.LogWarning("Login reCAPTCHA failed for {Email} from {IP}", model.Email, HttpContext.Connection.RemoteIpAddress?.ToString());
                 ModelState.AddModelError(string.Empty, "reCAPTCHA validation failed.");
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+            var userForLogin = await _userManager.FindByEmailAsync(model.Email);
+            if (userForLogin == null)
+            {
+                _logger.LogWarning("Login failed: unknown email {Email}", model.Email);
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(model);
+            }
+
+            // If email is not confirmed, show specific message with ability to resend
+            if (!await _userManager.IsEmailConfirmedAsync(userForLogin))
+            {
+                _logger.LogInformation("Login blocked for unconfirmed email {Email}", model.Email);
+                ViewBag.EmailNotConfirmed = true;
+                ViewBag.PendingEmail = model.Email;
+                ModelState.AddModelError(string.Empty, "Your email address is not yet verified.");
+                return View(model);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(userForLogin, model.Password, model.RememberMe, lockoutOnFailure: true);
             if (result.Succeeded)
             {
+                _logger.LogInformation("Login success for {UserId}", userForLogin.Id);
                 var u = await _userManager.FindByEmailAsync(model.Email);
                 if (u != null && !string.IsNullOrEmpty(u.Country) && !string.IsNullOrEmpty(u.City))
                 {
@@ -87,14 +111,17 @@ namespace RailTix.Controllers
             if (result.RequiresTwoFactor)
             {
                 // future 2FA flow
+                _logger.LogInformation("Login requires 2FA for {UserId}", userForLogin.Id);
                 ModelState.AddModelError(string.Empty, "Two-factor authentication is required.");
                 return View(model);
             }
             if (result.IsLockedOut)
             {
+                _logger.LogWarning("Login locked out for {UserId}", userForLogin.Id);
                 return RedirectToAction(nameof(Lockout));
             }
 
+            _logger.LogWarning("Login failed for {UserId}", userForLogin.Id);
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(model);
         }
@@ -133,6 +160,7 @@ namespace RailTix.Controllers
             var ok = await _recaptchaService.VerifyAsync(token, HttpContext.Connection.RemoteIpAddress?.ToString(), "register");
             if (!ok)
             {
+                _logger.LogWarning("Register reCAPTCHA failed for {Email} from {IP}", model.Email, HttpContext.Connection.RemoteIpAddress?.ToString());
                 ModelState.AddModelError(string.Empty, "reCAPTCHA validation failed.");
                 model.CountryOptions = _locationService.GetCountries().Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.Country }).ToList();
                 model.CityOptions = _locationService.GetCities(model.Country).Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.City }).ToList();
@@ -143,10 +171,13 @@ namespace RailTix.Controllers
             var currency = _locationService.ResolveCurrency(model.Country) ?? "NZD";
             var timeZoneId = _locationService.ResolveTimeZone(model.Country, model.City) ?? "Pacific/Auckland";
 
+            var generatedUserName = $"user_{Guid.NewGuid().ToString("N").Substring(0, 12)}";
             var user = new ApplicationUser
             {
-                UserName = model.Email,
+                UserName = generatedUserName,
                 Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 Country = model.Country,
                 City = model.City,
                 PreferredCurrency = currency,
@@ -155,6 +186,7 @@ namespace RailTix.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                _logger.LogInformation("New user registered {UserId} {Email}", user.Id, user.Email);
                 await _userManager.AddToRoleAsync(user, "SiteUser");
 
                 await _locationProvider.SetFromCountryCityAsync(model.Country, model.City, "register");
@@ -165,13 +197,23 @@ namespace RailTix.Controllers
                 var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account",
                     new { userId, code, returnUrl }, protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl!)}'>clicking here</a>.");
+                try
+                {
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl!)}'>clicking here</a>.");
+                    _logger.LogInformation("Sent confirmation email to {Email}", model.Email);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to send confirmation email to {Email}", model.Email);
+                    // Continue to confirmation page; user can request resend from login
+                }
 
                 return RedirectToAction(nameof(RegisterConfirmation), new { email = model.Email, returnUrl });
             }
             foreach (var error in result.Errors)
             {
+                _logger.LogWarning("Registration error for {Email}: {Code} {Desc}", model.Email, error.Code, error.Description);
                 ModelState.AddModelError(string.Empty, error.Description);
             }
             model.CountryOptions = _locationService.GetCountries().Select(c => new SelectListItem { Text = c, Value = c, Selected = c == model.Country }).ToList();
@@ -198,6 +240,47 @@ namespace RailTix.Controllers
             if (!result.Succeeded) return BadRequest();
 
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResendEmailConfirmation(string email)
+        {
+            _logger.LogInformation("Resend email confirmation requested for {Email}", email);
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return Json(new { ok = false });
+            }
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                // Do not reveal existence
+                return Json(new { ok = true });
+            }
+            if (await _userManager.IsEmailConfirmedAsync(user))
+            {
+                return Json(new { ok = true, alreadyConfirmed = true });
+            }
+
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account",
+                new { userId = user.Id, code }, protocol: Request.Scheme);
+
+            try
+            {
+                await _emailSender.SendEmailAsync(user.Email!, "Confirm your email",
+                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl!)}'>clicking here</a>.");
+                _logger.LogInformation("Resent confirmation email to {Email}", email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to resend confirmation email to {Email}", email);
+                Response.StatusCode = 500;
+                return Json(new { ok = false });
+            }
+
+            return Json(new { ok = true });
         }
 
         [HttpGet]
@@ -312,9 +395,17 @@ namespace RailTix.Controllers
 
         public class RegisterViewModel
         {
+            [Required, StringLength(100), Display(Name = "First name")]
+            public string FirstName { get; set; } = string.Empty;
+
+            [Required, StringLength(100), Display(Name = "Last name")]
+            public string LastName { get; set; } = string.Empty;
+
             [Required, EmailAddress]
             public string Email { get; set; } = string.Empty;
-            [Required, StringLength(100, MinimumLength = 8), DataType(DataType.Password)]
+            [Required, StringLength(100, MinimumLength = 10), DataType(DataType.Password)]
+            [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{10,}$",
+                ErrorMessage = "Password must be at least 10 chars and include upper, lower, digit, and symbol.")]
             public string Password { get; set; } = string.Empty;
             [DataType(DataType.Password), Display(Name = "Confirm password"), Compare("Password")]
             public string ConfirmPassword { get; set; } = string.Empty;

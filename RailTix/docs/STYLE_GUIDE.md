@@ -14,6 +14,11 @@ SCSS Structure
 - Components: one file per component under `wwwroot/css/components/` (e.g., `forms.scss`)
 - Views load component CSS via Razor `@section Styles` to avoid duplicates.
 
+Hard Rules (CSS/SCSS)
+- DO NOT edit any compiled `.css` files in `wwwroot/css` (including `site.css`).
+- Always edit the `.scss` source (`site.scss` or `components/*.scss`) and compile.
+- Do NOT use CSS Grid for layout; use Flexbox instead.
+
 Loading Pattern
 - Layout:
   - Always: `site.css`
@@ -39,6 +44,10 @@ Navbar and Layout
 Implementation Notes
 - All SCSS files compile via `compilerconfig.json`. Edit and Save in Visual Studio to compile.
 - Keep specificity low; use nesting sparingly and rely on tokens/mixins.
+
+Local Workflow Rule
+- Do not run `dotnet build` by default after edits. This project is often already running in the developer's environment.
+- Run full build/start commands only when explicitly requested.
 
 Usage Tips
 - Include component CSS only on pages that use it; don’t include the same CSS file multiple times.

@@ -1,0 +1,15 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsComponentEditViewModel
+@{
+	ViewData["Title"] = "Add Component";
+}
+
+<h1>Add Component</h1>
+
+<form method="post">
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@await Html.PartialAsync("_ComponentForm", Model)
+	<button type="submit" class="button">Add Component</button>
+	<a href="/account/admin/content/pages/@Model.PageId/edit" class="button button--ghost">Cancel</a>
+</form>
+

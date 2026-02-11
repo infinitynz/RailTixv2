@@ -4,6 +4,7 @@
 .form-control, .form-select, .form-check-input, textarea.form-control {
 	@include rtx-interactive;
 	background-color: $rtx-bg-elevated;
+
 	color: $rtx-text;
 	border: 1px solid transparent;
 	padding: 8px 16px;
@@ -44,6 +45,24 @@ form {
 .form-check-input:checked {
 	background-color: $rtx-green;
 	border-color: $rtx-green;
+}
+
+// Required field indicator (shows a red asterisk on labels)
+.mb-3:has(input[required], select[required], textarea[required], input[data-val-required], select[data-val-required], textarea[data-val-required]) > .form-label::after,
+.form-group:has(input[required], select[required], textarea[required], input[data-val-required], select[data-val-required], textarea[data-val-required]) > .form-label::after,
+.form-dialog .mb-3:has(input[required], select[required], textarea[required], input[data-val-required], select[data-val-required], textarea[data-val-required]) > .form-label::after {
+	content: " *";
+	color: $rtx-pink;
+	margin-left: .25rem;
+	font-weight: 700;
+}
+
+// Checkbox required asterisk
+.form-check:has(input[required], input[data-val-required]) > .form-check-label::after {
+	content: " *";
+	color: $rtx-pink;
+	margin-left: .25rem;
+	font-weight: 700;
 }
 
 // Custom select chevron wrapper to prevent oversized arrows
@@ -104,13 +123,14 @@ form {
 	.form-control, .form-select {
 		background-color: #ffffff;
 		color: #111827;
-		border: 1px solid #e5e7eb;
+		border: 1px solid #d1d5db;
 		border-radius: $rtx-radius-sm;
 		padding: 8px 16px;
-		width:100%;
+		width: 100%;
+
 		&:focus {
-			border-color: $rtx-green;
-			box-shadow: 0 0 0 .2rem rgba($rtx-green, .15);
+			outline: none;
+			border: $rtx-green 1px solid;
 		}
 
 		&::placeholder {
@@ -133,7 +153,6 @@ form {
 	}
 
 	.btn {
-
 	}
 }
 *{
@@ -163,6 +182,159 @@ form .form-select.input-validation-error {
 	color: $rtx-text;
 	padding: .5rem .75rem;
 	border-radius: $rtx-radius-sm;
+}
+
+// state variants for summary (info/success/error)
+.validation-summary-errors.state-info {
+	background-color: rgba(59, 130, 246, .10); // blue-500 @ 10%
+	border-left-color: #3b82f6;
+}
+.validation-summary-errors.state-success {
+	background-color: rgba(34, 197, 94, .10); // green-500 @ 10%
+	border-left-color: #22c55e;
+}
+.validation-summary-errors.state-error {
+	// uses default pink styling
+}
+
+// Password policy UI
+.password-policy {
+	background-color: rgba(255,255,255,.04);
+	border: 1px solid rgba(255,255,255,.08);
+	border-radius: $rtx-radius-sm;
+	padding: .75rem .9rem;
+	color: $rtx-text-muted;
+
+	.policy-title {
+		font-weight: 600;
+		margin-bottom: .35rem;
+		color: $rtx-text;
+	}
+
+	.policy-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li {
+			margin: .2rem 0;
+			position: relative;
+			padding-left: 20px;
+
+			&::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 7px;
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: $rtx-text-muted;
+				transition: background-color $rtx-ease, transform $rtx-ease;
+			}
+
+			&.ok { color: $rtx-text; }
+			&.ok::before { background-color: $rtx-green; transform: scale(1.1); }
+			&.bad::before { background-color: $rtx-pink; }
+		}
+	}
+}
+
+// ------------------------------------------------------------
+// Custom checkbox and radio (pure CSS, smooth animation)
+// ------------------------------------------------------------
+.form-check {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+}
+
+.form-check-input[type="checkbox"],
+.form-check-input[type="radio"] {
+	appearance: none;
+	-webkit-appearance: none;
+	display: inline-block;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	border: 1px solid #d1d5db;
+	background-color: #fff;
+	cursor: pointer;
+	transition: border-color $rtx-ease, background-color $rtx-ease, box-shadow $rtx-ease, transform $rtx-ease;
+	padding:0 0 0 0;
+}
+
+// Checkbox (rounded square with animated tick)
+.form-check-input[type="checkbox"] {
+	border-radius: 6px;
+
+
+
+
+
+	&::after {
+		content: "";
+		position: absolute;
+
+		width: 5px;
+		height: 12px;
+		border-right: 3px solid #0b1a00;
+		border-bottom: 3px solid #0b1a00;
+		left: 5px;
+		top: 0px;
+		transform: rotate(45deg) scale(0);
+		opacity: 0;
+		transition: transform $rtx-ease, opacity $rtx-ease;
+	}
+
+	&:checked {
+	}
+
+	&:checked::after {
+		transform: rotate(45deg) scale(1);
+		opacity: 1;
+	}
+}
+
+// Radio (circle with inner dot)
+.form-check-input[type="radio"] {
+	border-radius: 50%;
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background-color: $rtx-green;
+		transform: translate(-50%, -50%) scale(0);
+		transition: transform $rtx-ease;
+	}
+
+	&:checked {
+		border-color: $rtx-green;
+		background-color: #ffffff;
+	}
+
+	&:checked::after {
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+// Focus states
+.form-check-input:focus {
+	outline: none;
+	box-shadow: 0 0 0 .2rem rgba($rtx-green, .15);
+	border-color: $rtx-green;
+}
+
+// Dark-page variant outside of .form-dialog
+.form-check-input:not(.form-dialog *) {
+	background-color: $rtx-bg-elevated;
+	border-color: $rtx-border;
 }
 
 

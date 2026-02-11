@@ -17,7 +17,15 @@
         this.$country.on('change', function () {
             self.loadCities($(this).val());
         });
+        // ensure unobtrusive validation is parsed
+        if ($.validator && $.validator.unobtrusive) {
+            $.validator.unobtrusive.parse(self.$form);
+        }
         this.$form.on('submit', function (e) {
+            if ($.validator && !self.$form.valid()) {
+                // client-side validation failed; let MVC show messages
+                return false;
+            }
             e.preventDefault();
             grecaptcha.ready(function () {
                 grecaptcha.execute(self.siteKey, { action: 'register' }).then(function (token) {

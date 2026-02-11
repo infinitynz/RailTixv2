@@ -18,9 +18,11 @@
   - Request Event Manager upgrade
   - Create/Edit/Publish own events
   - Define ticket types, pricing, inventory
+  - Mark ticket types as kids tickets
   - Issue/Manage promo codes and comp tickets
   - View sales & attendance reports (own events)
   - Export attendees/orders
+  - View guardian details for attendees on own events (for check-in verification)
   - Manage check-in devices & staff for own events
   - Process refunds within policy (own events)
 - POS & Check-in
@@ -56,5 +58,6 @@
 - Policy-based checks wrap resource ownership (e.g., event owner).
 - Inheritance ensures higher roles can perform lower-level actions.
 - Sensitive actions require explicit policies (refunds, POS).
+- Admin retains global powers by role, but dedicated global admin UI for cross-event guardian-detail management is deferred in v1.
 
 

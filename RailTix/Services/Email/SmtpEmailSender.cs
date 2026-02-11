@@ -16,11 +16,13 @@ namespace RailTix.Services.Email
             _options = options.Value;
         }
 
-        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             using var client = new SmtpClient(_options.Host, _options.Port)
             {
-                EnableSsl = _options.UseSsl
+                EnableSsl = _options.UseSsl,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Timeout = 10000 // 10s fail-fast to avoid hanging
             };
 
             if (!string.IsNullOrWhiteSpace(_options.UserName))
@@ -37,7 +39,7 @@ namespace RailTix.Services.Email
                 IsBodyHtml = true
             };
 
-            return client.SendMailAsync(msg);
+            await client.SendMailAsync(msg).ConfigureAwait(false);
         }
     }
 }

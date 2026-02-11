@@ -1,0 +1,45 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsReservedRouteListViewModel
+@{
+	ViewData["Title"] = "Reserved Routes";
+}
+
+<div class="cms-admin">
+	<div class="cms-admin__header">
+		<h1>Reserved Routes</h1>
+		<a class="button" href="/account/admin/content/reserved-routes/create">Add Reserved Route</a>
+	</div>
+
+	@if (Model.Routes.Count == 0)
+	{
+		<p>No reserved routes configured.</p>
+	}
+	else
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Segment</th>
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var route in Model.Routes)
+				{
+					<tr>
+						<td>@route.Segment</td>
+						<td>@(route.IsActive ? "Active" : "Inactive")</td>
+						<td>
+							<a href="/account/admin/content/reserved-routes/@route.Id/edit">Edit</a>
+							<form method="post" action="/account/admin/content/reserved-routes/@route.Id/delete" style="display:inline;" onsubmit="return confirm('Delete this reserved segment?');">
+								@Html.AntiForgeryToken()
+								<button type="submit" class="link-button">Delete</button>
+							</form>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+</div>
+

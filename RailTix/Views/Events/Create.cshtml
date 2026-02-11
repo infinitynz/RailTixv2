@@ -1,0 +1,27 @@
+@model RailTix.Models.ViewModels.Events.EventEditViewModel
+@{
+	ViewData["Title"] = "Create Event";
+}
+
+@section Styles {
+	<link rel="stylesheet" href="~/css/components/forms.css" asp-append-version="true" />
+}
+
+<section class="section">
+	<h1 class="h3 mb-3">Create Event</h1>
+
+	<form method="post">
+		@Html.AntiForgeryToken()
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		@await Html.PartialAsync("_EventForm", Model)
+
+		<button type="submit" class="btn btn-primary">Create event</button>
+		<a href="/account/events" class="btn btn-outline-primary" style="margin-left: 0.5rem;">Cancel</a>
+	</form>
+</section>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
+

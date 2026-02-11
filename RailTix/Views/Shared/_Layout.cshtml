@@ -1,3 +1,4 @@
+@inject Microsoft.AspNetCore.Identity.UserManager<RailTix.Models.Domain.ApplicationUser> UserManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,11 @@
 						<div id="navMain" class="nav-menu">
 							@if (User?.Identity?.IsAuthenticated ?? false)
 							{
-								<a class="nav-item" asp-controller="Account" asp-action="Manage">@User.Identity!.Name</a>
+ 								
+ 									var _u = await UserManager.GetUserAsync(User);
+ 									var _displayName = _u?.FirstName ?? User.Identity!.Name ?? "Account";
+ 							
+ 								<a class="nav-item" asp-controller="Account" asp-action="Manage">@_displayName</a>
 								<div class="nav-item">
 									<form asp-controller="Account" asp-action="Logout" method="post">
 										<button type="submit" class="btn btn-link">Logout</button>

@@ -4,6 +4,10 @@ namespace RailTix.Models.Domain
 {
     public class ApplicationUser : IdentityUser
     {
+        // Profile name
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+
         // ISO currency code preferred by the user (e.g., NZD, USD)
         public string? PreferredCurrency { get; set; }
 

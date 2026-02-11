@@ -1,4 +1,4 @@
-html {
+﻿html {
   /* Typography base size; overridden responsively below */
   font-size: 14px;
 }
@@ -268,3 +268,110 @@ a:hover, a:focus-visible {
 .bg-stripes-green {
   background-image: repeating-linear-gradient(135deg, rgba(95, 255, 0, 0.22) 0, rgba(95, 255, 0, 0.22) 2px, transparent 2px, transparent 16px);
 }
+
+.account-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .account-layout {
+    flex-direction: column;
+  }
+}
+.account-sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  flex: 0 0 240px;
+  width: 240px;
+}
+
+@media (max-width: 960px) {
+  .account-sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+.account-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.account-nav {
+  background: #0f0f10;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 0.75rem;
+}
+
+.account-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.account-nav__section {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  padding: 0.75rem 0.5rem 0.35rem 0.5rem;
+}
+
+.account-nav__item {
+  margin: 0.125rem 0;
+}
+
+.account-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  will-change: color, background-color, border-color, filter, box-shadow, transform;
+}
+.account-nav__link:hover, .account-nav__link:focus-visible {
+  background-color: rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+}
+.account-nav__link.is-active {
+  background-color: rgba(95, 255, 0, 0.12);
+  color: #5fff00;
+}
+
+.account-nav__icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.95;
+}
+.account-nav__icon path,
+.account-nav__icon circle,
+.account-nav__icon rect,
+.account-nav__icon line,
+.account-nav__icon polyline,
+.account-nav__icon polygon {
+  stroke: currentColor;
+}
+.account-nav__icon [fill]:not([fill=none]) {
+  fill: currentColor;
+}
+
+.account-nav__label {
+  line-height: 1.1;
+}
+
+.account-nav__footnote {
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8rem;
+}
+
+.account-nav__link:hover .account-nav__icon {
+  transform: translateX(1px);
+  transition: transform 0.15s ease;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/site.scss%22,%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/_tokens.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAEA;AACC;EACA;;;AAGD;EACC;IAEC;;;AAKF;EACC;EACA;;;AAGD;EACC;;;AAOD;EACC,kBC1BQ;ED2BR,OCvBU;EDwBV;EACA;EAGA,kBAEC;EAGD;;;AAGD;EACC;EACA;EACA;;;AAID;EACC;EACA;EACA;;;AAID;EACC;;;AAED;EACC;;;AAMD;EACC;EACA;EACA;EACA;;;AAID;ECxCC;ED0CA;;AAEA;EACC;;AAKA;EACC;EACA;EACA;EACA;;AAGA;EACC;EC/DH;EACA;EDiEG;EACA;;AAEA;EACC,OC3FO;ED4FP;EACA;;AAGD;EACC,OC9FO;;;ADqGZ;EACC;EACA;EACA;;AAGA;EACC;EACA;EACA;EACA;;AAEA;EACC;EACA;EACA;EACA;;AAWH;EACC;;;AAMD;EACC;EACA;;;AAMD;EAAY;;;AACZ;EACC;IAAY;;;AAEb;EAAQ;;;AACR;EAAQ;;;AACR;EAAS;;;AACT;EAAU;;;AACV;EAA2B;;;AAK3B;EACC,OC5JgB;ED6JhB;EC5IA;EACA;;AD8IA;EACC;EACA;;;AAOF;ECxJC;EACA;EDyJA,eCtKe;EDuKf;EACA;;AAEA;EACC;;AAGD;EACC;EACA;;AAGD;EACC;EACA;;;AAIF;EACC,kBChMW;EDiMX;EACA;EACA;EACA;EACA;EACA,eC/Le;EDgMf;EACA;EACA;EACA;;AAEA;EACC;;AAGD;EACC;EACA;EACA;;;AAIF;EACC,OCxNW;EDyNX;EACA;;AAEA;EACC;EACA,cC9NU;ED+NV;;;AAKD;EClNA;EACA;;;ADsND;EACC,kBCxOU;EDyOV,cCzOU;ED0OV;;AAEA;EACC;;;AAIF;EACC,OClPU;EDmPV;;AAEA;EACC;EACA,cCvPS;EDwPT;;;AAIF;EACC;EACA;EACA,OChQgB;EDiQhB;EChPA;EACA;;ADkPA;EAA2B;;;AAG5B;EACC;;;AAMD;EACC,kBCvRa;EDwRb;EACA,eC5Qe;ED6Qf;;;AAID;EACC;EACA,OC9RU;;ADgSV;EAEC;;AAGD;EACC;;AAEA;EACC;;;AAMH;EC/QC;;;ADmRD;ECnRC;;;AD0RD;EACC;EACA;EACA;;;AAGD;EACC;IACC;;;AAIF;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;IACC;IACA;;;AAIF;EACC;EACA;;;AAGD;EACC,YC7Va;ED8Vb;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA,eC3We;ED4Wf;ECjWA;EACA;;ADmWA;EACC;EACA;;AAGD;EACC;EACA,OC7XU;;;ADiYZ;EACC;EACA;EACA;;AAEA;AAAA;AAAA;AAAA;AAAA;AAAA;EAMC;;AAGD;EACC;;;AAIF;EACC;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA%22%7D */

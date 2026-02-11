@@ -1,0 +1,26 @@
+@using RailTix.Models.Domain
+@model RailTix.Models.ViewModels.Cms.CmsPageViewModel
+@{
+	ViewData["Title"] = Model.Title;
+}
+
+<div class="cms-page">
+	<h1>@Model.Title</h1>
+
+	@foreach (var component in Model.Components)
+	{
+		if (component.Type == CmsComponentTypes.Image)
+		{
+			@await Html.PartialAsync("Components/_Image", component.Image)
+		}
+		else if (component.Type == CmsComponentTypes.Banner)
+		{
+			@await Html.PartialAsync("Components/_Banner", component.Banner)
+		}
+		else if (component.Type == CmsComponentTypes.EventList)
+		{
+			@await Html.PartialAsync("Components/_EventList", component.EventList)
+		}
+	}
+</div>
+

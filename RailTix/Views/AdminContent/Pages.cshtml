@@ -1,0 +1,14 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsPageListViewModel
+@{
+	ViewData["Title"] = "Content Pages";
+}
+
+<div class="cms-admin">
+	<div class="cms-admin__header">
+		<h1>Content Pages</h1>
+		<a class="button" href="/account/admin/content/pages/create">Add Page</a>
+	</div>
+
+	@await Html.PartialAsync("_PageTree", Model.Pages)
+</div>
+

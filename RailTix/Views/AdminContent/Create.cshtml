@@ -1,0 +1,15 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsPageEditViewModel
+@{
+	ViewData["Title"] = "Create Page";
+}
+
+<h1>Create Page</h1>
+
+<form method="post">
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@await Html.PartialAsync("_PageForm", Model)
+	<button type="submit" class="button">Create</button>
+	<a href="/account/admin/content/pages" class="button button--ghost">Cancel</a>
+</form>
+

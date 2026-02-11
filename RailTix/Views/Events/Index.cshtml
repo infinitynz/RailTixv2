@@ -1,0 +1,52 @@
+@model RailTix.Models.ViewModels.Events.EventListViewModel
+@{
+	ViewData["Title"] = "My Events";
+}
+
+<section class="section">
+	<div class="d-flex justify-content-between align-items-center mb-3">
+		<div>
+			<h1 class="h3 mb-1">My Events</h1>
+			<p class="text-muted">Create and manage your events.</p>
+		</div>
+		<a class="btn btn-primary" href="/account/events/create">Create event</a>
+	</div>
+
+	@if (Model.Events.Count == 0)
+	{
+		<div class="card p-3">
+			<p class="mb-0">You do not have any events yet. Create one to get started.</p>
+		</div>
+	}
+	else
+	{
+		<div class="card p-3">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Event</th>
+							<th>Status</th>
+							<th>Start</th>
+							<th>End</th>
+							<th>URL</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.Events)
+						{
+							<tr>
+								<td>@item.Title</td>
+								<td>@item.Status</td>
+								<td>@item.StartsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
+								<td>@item.EndsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
+								<td><code>/event/@item.Slug</code></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	}
+</section>
+

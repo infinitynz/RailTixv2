@@ -1,0 +1,24 @@
+@model List<RailTix.Models.ViewModels.Cms.Admin.CmsPageTreeItemViewModel>
+
+@if (Model != null && Model.Count > 0)
+{
+	<ul class="cms-page-tree" role="list">
+		@foreach (var node in Model)
+		{
+			<li class="cms-page-tree__item">
+				<div class="cms-page-tree__row">
+					<span class="cms-page-tree__title">@node.Title</span>
+					<span class="cms-page-tree__path">@node.Path</span>
+					@if (!node.IsPublished)
+					{
+						<span class="cms-page-tree__status">Draft</span>
+					}
+					<a class="cms-page-tree__action" href="/account/admin/content/pages/@node.Id/edit">Edit</a>
+					<a class="cms-page-tree__action" href="/account/admin/content/pages/create?parentId=@node.Id">Add Child</a>
+				</div>
+				@await Html.PartialAsync("_PageTree", node.Children)
+			</li>
+		}
+	</ul>
+}
+

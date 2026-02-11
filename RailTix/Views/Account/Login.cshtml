@@ -14,6 +14,7 @@
 	<div class="form-dialog" style="max-width: 560px; margin: 0 auto;">
 		<h1 class="h3 mb-3">Log in</h1>
 		<form id="login-form" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
+			@Html.AntiForgeryToken()
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="mb-3">
 				<label asp-for="Email" class="form-label"></label>
@@ -44,18 +45,63 @@
     <partial name="_ValidationScriptsPartial" />
     <script src="https://www.google.com/recaptcha/api.js?render=@siteKey"></script>
     <script>
-        (function () {
-            const form = document.getElementById('login-form');
-            form.addEventListener('submit', function (e) {
+        (function ($) {
+            var $form = $('#login-form');
+            if ($.validator && $.validator.unobtrusive) {
+                $.validator.unobtrusive.parse($form);
+            }
+            $form.on('submit', function (e) {
+                if ($.validator && !$form.valid()) {
+                    return false;
+                }
                 e.preventDefault();
                 grecaptcha.ready(function () {
                     grecaptcha.execute('@siteKey', { action: 'login' }).then(function (token) {
-                        document.getElementById('recaptchaToken').value = token;
-                        form.submit();
+                        $('#recaptchaToken').val(token);
+                        e.currentTarget.submit();
                     });
                 });
             });
-        })();
+
+            // If server indicated not confirmed, transform the validation summary to include (Resend)
+            @if (ViewBag.EmailNotConfirmed == true)
+            {
+                <text>
+                (function () {
+                    var $summary = $('.validation-summary-errors');
+                    if ($summary.length) {
+                        $summary.removeClass('text-danger').addClass('state-error');
+                        var $ul = $summary.find('ul');
+                        if ($ul.length === 0) { $ul = $('<ul/>').appendTo($summary); }
+                        $ul.empty();
+                        var $li = $('<li/>').html('Your email address is not yet verified. <a href="#" id="resend-link">(Resend)</a>');
+                        $ul.append($li);
+                        $('#resend-link').on('click', function (ev) {
+                            ev.preventDefault();
+                            var email = $('#Email').val();
+                            if (!email) return;
+                            $summary.removeClass('state-error state-success').addClass('state-info');
+                            $li.text('Sending...');
+                            $.ajax({
+                                url: '@Url.Action("ResendEmailConfirmation","Account")',
+                                method: 'POST',
+                                data: {
+                                    email: email,
+                                    __RequestVerificationToken: $form.find('input[name="__RequestVerificationToken"]').val()
+                                }
+                            }).done(function () {
+                                $summary.removeClass('state-error state-info').addClass('state-success');
+                                $li.text('Done. Please check your inbox to verify your email address.');
+                            }).fail(function () {
+                                $summary.removeClass('state-info state-success').addClass('state-error');
+                                $li.text('Failed to send email. Please try again shortly.');
+                            });
+                        });
+                    }
+                })();
+                </text>
+            }
+        })(window.jQuery);
     </script>
 }
 

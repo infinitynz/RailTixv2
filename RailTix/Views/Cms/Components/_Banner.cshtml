@@ -1,0 +1,26 @@
+@model RailTix.Models.Domain.CmsBannerSettings
+
+@if (Model != null)
+{
+	<section class="cms-banner">
+		@if (!string.IsNullOrWhiteSpace(Model.BackgroundImageUrl))
+		{
+			<div class="cms-banner__bg" style="background-image:url('@Model.BackgroundImageUrl')"></div>
+		}
+		<div class="cms-banner__content">
+			@if (!string.IsNullOrWhiteSpace(Model.Heading))
+			{
+				<h2>@Model.Heading</h2>
+			}
+			@if (!string.IsNullOrWhiteSpace(Model.Subheading))
+			{
+				<p>@Model.Subheading</p>
+			}
+			@if (!string.IsNullOrWhiteSpace(Model.CtaLabel) && !string.IsNullOrWhiteSpace(Model.CtaUrl))
+			{
+				<a class="cms-banner__cta" href="@Model.CtaUrl">@Model.CtaLabel</a>
+			}
+		</div>
+	</section>
+}
+

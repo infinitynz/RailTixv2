@@ -7,9 +7,11 @@ html {
 
 @media (min-width: 768px) {
 	html {
+
 		font-size: 16px;
 	}
 }
+
 
 html {
 	position: relative;
@@ -141,7 +143,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 // ------------------------------------------------------------
-// Simple grid and utilities (bootstrap-like)
+// Simple layout and utilities (bootstrap-like)
 // ------------------------------------------------------------
 .row {
 	display: flex;
@@ -312,6 +314,119 @@ a {
 
 .bg-stripes-green {
 	@include rtx-pinstripes($rtx-green, 16px, 2px);
+}
+
+// ------------------------------------------------------------
+// Account layout (flex-based; no CSS grid)
+// ------------------------------------------------------------
+.account-layout {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.5rem;
+}
+
+@media (max-width: 960px) {
+	.account-layout {
+		flex-direction: column;
+	}
+}
+
+.account-sidebar {
+	position: sticky;
+	top: 1rem;
+	align-self: start;
+	flex: 0 0 240px;
+	width: 240px;
+}
+
+@media (max-width: 960px) {
+	.account-sidebar {
+		position: static;
+		width: 100%;
+	}
+}
+
+.account-content {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.account-nav {
+	background: $rtx-surface;
+	border: 1px solid rgba($rtx-white, .06);
+	border-radius: 12px;
+	padding: .75rem;
+}
+
+.account-nav__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.account-nav__section {
+	color: rgba($rtx-white, .55);
+	font-size: .85rem;
+	letter-spacing: .3px;
+	padding: .75rem .5rem .35rem .5rem;
+}
+
+.account-nav__item {
+	margin: .125rem 0;
+}
+
+.account-nav__link {
+	display: flex;
+	align-items: center;
+	gap: .6rem;
+	padding: .5rem .6rem;
+	border-radius: $rtx-radius-sm;
+	color: rgba($rtx-white, .9);
+	@include rtx-interactive;
+
+	&:hover, &:focus-visible {
+		background-color: rgba($rtx-white, .06);
+		text-decoration: none;
+	}
+
+	&.is-active {
+		background-color: rgba($rtx-green, .12);
+		color: $rtx-green;
+	}
+}
+
+.account-nav__icon {
+	width: 20px;
+	height: 20px;
+	opacity: .95;
+
+	path,
+	circle,
+	rect,
+	line,
+	polyline,
+	polygon {
+		stroke: currentColor;
+	}
+
+	[fill]:not([fill="none"]) {
+		fill: currentColor;
+	}
+}
+
+.account-nav__label {
+	line-height: 1.1;
+}
+
+.account-nav__footnote {
+	margin-top: .5rem;
+	color: rgba($rtx-white, .45);
+	font-size: .8rem;
+}
+
+.account-nav__link:hover .account-nav__icon {
+	transform: translateX(1px);
+	transition: transform $rtx-ease-fast;
 }
 
 // (Validation moved to components/forms.scss)

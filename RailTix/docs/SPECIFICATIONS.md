@@ -18,6 +18,24 @@ Architecture Overview
   - Validation via Data Annotations and/or FluentValidation.
   - Authentication/Authorization via ASP.NET Core Identity or external providers (future decision).
 
+Content Management
+- See `docs/CONTENT_MANAGEMENT_SPEC.md` for CMS pages, components, and routing.
+
+Ticketing (Core)
+- See `docs/TICKETING_SPEC.md` for event creation, ticketing, checkout, payments, and check-in.
+
+Stripe Payments
+- See `docs/STRIPE_SPEC.md` for Stripe Connect, payment intents, webhooks, refunds, and payouts.
+
+Ticket Scraping (External Events)
+- See `docs/TICKET_SCRAPING_SPEC.md` for source ingestion, approval, and display rules.
+
+Rail Credits (Wallet + QR/POS)
+- See `docs/CREDITS_QR_SPEC.md` for credit purchase, ticket usage, and POS flow.
+
+Rail Credits Payouts
+- See `docs/CREDITS_PAYOUTS_SPEC.md` for idempotency and reconciliation.
+
 Entity Framework Core (Code‑First)
 - Define domain entities with clear relationships and invariants.
 - Central DbContext with per‑entity configuration classes.
@@ -33,6 +51,17 @@ UI Framework and Styling
 - Loading:
   - Layout includes `site.css` globally and exposes a `Styles` section.
   - Views include component styles only when needed (e.g., forms.css once per page).
+
+Form Validation
+- Client-side: jQuery Validation + Unobtrusive Validation.
+  - Include `@partial("_ValidationScriptsPartial")` inside `@section Scripts` on pages with forms.
+  - If intercepting submit (e.g., reCAPTCHA), call `$form.valid()` first and abort submit on failure.
+- Server-side: DataAnnotations on ViewModels; Identity enforces password policy.
+
+Logging
+- Server logs use Serilog and are written to `Logs/log-YYYYMMDD.txt` with daily rolling files (30-day retention).
+- HTTP requests are logged (status, timing) and key controller actions write contextual logs (info/warn/error).
+- On failures (e.g., email send, registration errors), details are logged with stack traces to aid debugging.
 
 UI/UX Style & Theming
 - The app uses a custom dark theme layered on top of Bootstrap.
@@ -69,6 +98,12 @@ Testing and Quality
 - Unit tests for Services and critical Data logic.
 - Integration tests for key flows (e.g., purchase, ticket issuance).
 - Linting and analyzers via `.editorconfig` and Roslyn analyzers.
+
+Local Development Workflow (Important)
+- Do not run `dotnet build` by default after making changes.
+- Reason: the project is often already running locally, and extra builds can interfere with the active developer session.
+- Only run `dotnet build` (or other full compile/start commands) when explicitly requested by the user.
+- Prefer non-disruptive checks first (targeted lint/diagnostics, focused file review, and user-requested verification steps).
 
 Initial Folder Structure (target)
 ```

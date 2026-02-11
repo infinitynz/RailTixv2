@@ -38,6 +38,22 @@ form .row .col-md-6 {
   border-color: #5fff00;
 }
 
+.mb-3:has(input[required], select[required], textarea[required], input[data-val-required], select[data-val-required], textarea[data-val-required]) > .form-label::after,
+.form-group:has(input[required], select[required], textarea[required], input[data-val-required], select[data-val-required], textarea[data-val-required]) > .form-label::after,
+.form-dialog .mb-3:has(input[required], select[required], textarea[required], input[data-val-required], select[data-val-required], textarea[data-val-required]) > .form-label::after {
+  content: " *";
+  color: #ff00d8;
+  margin-left: 0.25rem;
+  font-weight: 700;
+}
+
+.form-check:has(input[required], input[data-val-required]) > .form-check-label::after {
+  content: " *";
+  color: #ff00d8;
+  margin-left: 0.25rem;
+  font-weight: 700;
+}
+
 .rtx-select {
   position: relative;
   display: block;
@@ -90,14 +106,14 @@ form .row .col-md-6 {
 .form-dialog .form-control, .form-dialog .form-select {
   background-color: #ffffff;
   color: #111827;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 8px 16px;
   width: 100%;
 }
 .form-dialog .form-control:focus, .form-dialog .form-select:focus {
-  border-color: #5fff00;
-  box-shadow: 0 0 0 0.2rem rgba(95, 255, 0, 0.15);
+  outline: none;
+  border: #5fff00 1px solid;
 }
 .form-dialog .form-control::placeholder, .form-dialog .form-select::placeholder {
   color: #9ca3af;
@@ -141,4 +157,135 @@ form .form-select.input-validation-error {
   border-radius: 8px;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/components/forms.scss%22,%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/_tokens.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAGA;EC2BC;EACA;ED1BA,kBCDiB;EDEjB,OCCU;EDAV;EACA;;AAEA;EAIC,kBCVgB;EDWhB,OCRS;EDST,cCJU;EDKV;;AAGD;EACC,OCbe;;;ADiBhB;EACC;;AAEA;EACC;;;AAIH;EACC;EACA;EACA,OC7BU;;;ADgCX;EACC,OCjCU;;;ADoCX;EACC,kBChCW;EDiCX,cCjCW;;;ADqCZ;EACC;EACA;;AAEA;EACC;EACA;EACA;EACA;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA,QC3De;ED4Df;EACA;EACA;EACA;;AAGD;EACC,QC/DU;EDgEV;;;AAKF;EACC,kBCzEW;ED0EX;EACA,eCnEe;EDoEf,YChEuB;EDiEvB;;AAEA;EAPD;IAQE;;;AAGD;EACC;EACA;EACA;;AAGD;EACC;EACA;;AAGD;EACC;EACA;EACA;EACA,eCxFc;EDyFd;EACA;;AACA;EACC,cCnGS;EDoGT;;AAGD;EACC;;AAIF;EACC;;AAEA;EACC,cChHS;EDiHT;;AAGD;EACC,kBCrHS;EDsHT,cCtHS;;AD8HZ;EACC;;;AAID;AAAA;EAEC;EACA;EACA;EACA;EACA;EACA;;;AAGD;AAAA;AAAA;EAGC;;;AAGD;EACC;EACA;EACA,OC3JU;ED4JV;EACA,eCjJe%22%7D */
+.validation-summary-errors.state-info {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-left-color: #3b82f6;
+}
+
+.validation-summary-errors.state-success {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-left-color: #22c55e;
+}
+
+.password-policy {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  color: #a7abb1;
+}
+.password-policy .policy-title {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #d7dadd;
+}
+.password-policy .policy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.password-policy .policy-list li {
+  margin: 0.2rem 0;
+  position: relative;
+  padding-left: 20px;
+}
+.password-policy .policy-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #a7abb1;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+.password-policy .policy-list li.ok {
+  color: #d7dadd;
+}
+.password-policy .policy-list li.ok::before {
+  background-color: #5fff00;
+  transform: scale(1.1);
+}
+.password-policy .policy-list li.bad::before {
+  background-color: #ff00d8;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-check-input[type=checkbox],
+.form-check-input[type=radio] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  padding: 0 0 0 0;
+}
+
+.form-check-input[type=checkbox] {
+  border-radius: 6px;
+}
+.form-check-input[type=checkbox]::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 12px;
+  border-right: 3px solid #0b1a00;
+  border-bottom: 3px solid #0b1a00;
+  left: 5px;
+  top: 0px;
+  transform: rotate(45deg) scale(0);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.form-check-input[type=checkbox]:checked::after {
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+}
+
+.form-check-input[type=radio] {
+  border-radius: 50%;
+}
+.form-check-input[type=radio]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #5fff00;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.25s ease;
+}
+.form-check-input[type=radio]:checked {
+  border-color: #5fff00;
+  background-color: #ffffff;
+}
+.form-check-input[type=radio]:checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.form-check-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(95, 255, 0, 0.15);
+  border-color: #5fff00;
+}
+
+.form-check-input:not(.form-dialog *) {
+  background-color: #121212;
+  border-color: #222;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/components/forms.scss%22,%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/_tokens.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAGA;EC2BC;EACA;ED1BA,kBCDiB;EDGjB;EACA;EACA;;AAEA;EAIC,kBCXgB;EDYhB,OCTS;EDUT,cCLU;EDMV;;AAGD;EACC,OCde;;;ADkBhB;EACC;;AAEA;EACC;;;AAIH;EACC;EACA;EACA,OC9BU;;;ADiCX;EACC,OClCU;;;ADqCX;EACC,kBCjCW;EDkCX,cClCW;;;ADsCZ;AAAA;AAAA;EAGC;EACA,OCxCU;EDyCV;EACA;;;AAID;EACC;EACA,OChDU;EDiDV;EACA;;;AAID;EACC;EACA;;AAEA;EACC;EACA;EACA;EACA;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA,QC9Ee;ED+Ef;EACA;EACA;EACA;;AAGD;EACC,QClFU;EDmFV;;;AAKF;EACC,kBC5FW;ED6FX;EACA,eCtFe;EDuFf,YCnFuB;EDoFvB;;AAEA;EAPD;IAQE;;;AAGD;EACC;EACA;EACA;;AAGD;EACC;EACA;;AAGD;EACC;EACA;EACA;EACA,eC3Gc;ED4Gd;EACA;;AAEA;EACC;EACA;;AAGD;EACC;;AAIF;EACC;;AAEA;EACC,cCpIS;EDqIT;;AAGD;EACC,kBCzIS;ED0IT,cC1IS;;ADiJZ;EACC;;;AAID;AAAA;EAEC;EACA;EACA;EACA;EACA;EACA;;;AAGD;AAAA;AAAA;EAGC;;;AAGD;EACC;EACA;EACA,OC9KU;ED+KV;EACA,eCpKe;;;ADwKhB;EACC;EACA;;;AAED;EACC;EACA;;;AAOD;EACC;EACA;EACA,eCxLe;EDyLf;EACA,OCrMgB;;ADuMhB;EACC;EACA;EACA,OC3MS;;AD8MV;EACC;EACA;EACA;;AAEA;EACC;EACA;EACA;;AAEA;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA,kBC/Na;EDgOb;;AAGD;EAAO,OCpOC;;ADqOR;EAAe,kBChON;EDgOoC;;AAC7C;EAAgB,kBC/NR;;;ADuOX;EACC;EACA;EACA;;;AAGD;AAAA;EAEC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;;AAMA;EACC;EACA;EAEA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAMD;EACC;EACA;;;AAKF;EACC;;AAEA;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA,kBC3SU;ED4SV;EACA;;AAGD;EACC,cCjTU;EDkTV;;AAGD;EACC;;;AAKF;EACC;EACA;EACA,cC9TW;;;ADkUZ;EACC,kBC3UiB;ED4UjB,cC1UY%22%7D */

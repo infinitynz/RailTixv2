@@ -1,0 +1,13 @@
+@model RailTix.Models.Domain.CmsImageSettings
+
+@if (Model != null && !string.IsNullOrWhiteSpace(Model.Url))
+{
+	<figure class="cms-image">
+		<img src="@Model.Url" alt="@Model.AltText" />
+		@if (!string.IsNullOrWhiteSpace(Model.Caption))
+		{
+			<figcaption>@Model.Caption</figcaption>
+		}
+	</figure>
+}
+

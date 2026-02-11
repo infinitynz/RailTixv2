@@ -23,6 +23,8 @@
 3.2 Ticketing & Checkout
 - Ticket Types: general admission, VIP, child/student, bundles, time-slots; inventory, pricing, fees/tax.
 - Checkout: sign up / login, contact details, payment via Credits and/or card (provider TBD), order confirmation, e-receipts.
+- Event Rules: optional event-level rich text rules shown via popup at checkout; when enabled, buyer must explicitly agree before payment.
+- Kids Ticket Guardian Data: ticket types can be marked as kids tickets; if selected, one guardian record is required for the order and shown at check-in.
 - Order Management (user): view orders, tickets, invoices; refund/transfer policies per event; email ticket PDFs/QRs.
 - Promotions: promo codes, early-bird, group discounts.
 

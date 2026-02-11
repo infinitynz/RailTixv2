@@ -1,0 +1,95 @@
+@model RailTix.Models.ViewModels.Cms.Admin.CmsComponentEditViewModel
+
+<input type="hidden" asp-for="PageId" />
+
+<div class="form-group">
+	<label asp-for="Type"></label>
+	<select asp-for="Type" asp-items="ViewBag.ComponentTypes" class="form-control"></select>
+	<span asp-validation-for="Type" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+	<label asp-for="Position"></label>
+	<input asp-for="Position" type="number" class="form-control" />
+</div>
+
+<div class="form-group">
+	<label>
+		<input asp-for="IsEnabled" /> Enabled
+	</label>
+</div>
+
+<fieldset>
+	<legend>Image</legend>
+	<div class="form-group">
+		<label asp-for="ImageUrl"></label>
+		<input asp-for="ImageUrl" class="form-control" />
+		<span asp-validation-for="ImageUrl" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="AltText"></label>
+		<input asp-for="AltText" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="Caption"></label>
+		<input asp-for="Caption" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="Alignment"></label>
+		<input asp-for="Alignment" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="LinkUrl"></label>
+		<input asp-for="LinkUrl" class="form-control" />
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Banner</legend>
+	<div class="form-group">
+		<label asp-for="Heading"></label>
+		<input asp-for="Heading" class="form-control" />
+		<span asp-validation-for="Heading" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Subheading"></label>
+		<input asp-for="Subheading" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="BackgroundImageUrl"></label>
+		<input asp-for="BackgroundImageUrl" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="CtaLabel"></label>
+		<input asp-for="CtaLabel" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="CtaUrl"></label>
+		<input asp-for="CtaUrl" class="form-control" />
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Event List</legend>
+	<div class="form-group">
+		<label asp-for="Source"></label>
+		<input asp-for="Source" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="EventIds"></label>
+		<input asp-for="EventIds" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="Category"></label>
+		<input asp-for="Category" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="Location"></label>
+		<input asp-for="Location" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="Limit"></label>
+		<input asp-for="Limit" type="number" class="form-control" />
+	</div>
+</fieldset>
+
