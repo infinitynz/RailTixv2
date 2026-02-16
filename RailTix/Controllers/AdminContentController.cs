@@ -333,11 +333,15 @@ namespace RailTix.Controllers
                 return NotFound();
             }
 
-            ViewBag.ComponentTypes = GetComponentTypes(type);
+            var requestedType = IsSupportedComponentType(type ?? string.Empty) ? type! : CmsComponentTypes.Image;
+            ViewBag.ComponentTypes = GetComponentTypes(requestedType);
+            ViewBag.EventListSourceOptions = GetEventListSourceOptions(null);
             var model = new CmsComponentEditViewModel
             {
                 PageId = pageId,
-                Type = string.IsNullOrWhiteSpace(type) ? CmsComponentTypes.Image : type
+                Type = requestedType,
+                Source = "query",
+                Limit = 10
             };
             return View("ComponentCreate", model);
         }
@@ -362,6 +366,7 @@ namespace RailTix.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.ComponentTypes = GetComponentTypes(model.Type);
+                ViewBag.EventListSourceOptions = GetEventListSourceOptions(model.Source);
                 return View("ComponentCreate", model);
             }
 
@@ -396,6 +401,7 @@ namespace RailTix.Controllers
 
             var model = MapComponent(component);
             ViewBag.ComponentTypes = GetComponentTypes(component.Type);
+            ViewBag.EventListSourceOptions = GetEventListSourceOptions(model.Source);
             return View("ComponentEdit", model);
         }
 
@@ -419,6 +425,7 @@ namespace RailTix.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.ComponentTypes = GetComponentTypes(model.Type);
+                ViewBag.EventListSourceOptions = GetEventListSourceOptions(model.Source);
                 return View("ComponentEdit", model);
             }
 
@@ -670,6 +677,25 @@ namespace RailTix.Controllers
             {
                 ModelState.AddModelError(nameof(model.Heading), "Heading is required.");
             }
+
+            if (model.Type == CmsComponentTypes.EventList)
+            {
+                var source = NormalizeEventListSource(model.Source);
+                if (source != "query" && source != "manual")
+                {
+                    ModelState.AddModelError(nameof(model.Source), "Source must be query or manual.");
+                }
+
+                if (source == "manual" && string.IsNullOrWhiteSpace(model.EventIds))
+                {
+                    ModelState.AddModelError(nameof(model.EventIds), "Event IDs are required for manual source.");
+                }
+
+                if (model.Limit.HasValue && (model.Limit < 1 || model.Limit > 50))
+                {
+                    ModelState.AddModelError(nameof(model.Limit), "Limit must be between 1 and 50.");
+                }
+            }
         }
 
         private string BuildSettingsJson(CmsComponentEditViewModel model)
@@ -694,11 +720,11 @@ namespace RailTix.Controllers
                 },
                 _ => new CmsEventListSettings
                 {
-                    Source = model.Source,
-                    EventIds = model.EventIds,
-                    Category = model.Category,
-                    Location = model.Location,
-                    Limit = model.Limit
+                    Source = NormalizeEventListSource(model.Source),
+                    EventIds = string.IsNullOrWhiteSpace(model.EventIds) ? null : model.EventIds.Trim(),
+                    Category = string.IsNullOrWhiteSpace(model.Category) ? null : model.Category.Trim(),
+                    Location = string.IsNullOrWhiteSpace(model.Location) ? null : model.Location.Trim(),
+                    Limit = NormalizeEventListLimit(model.Limit)
                 }
             };
 
@@ -745,11 +771,16 @@ namespace RailTix.Controllers
                 var settings = Deserialize<CmsEventListSettings>(component.SettingsJson);
                 if (settings != null)
                 {
-                    model.Source = settings.Source;
+                    model.Source = NormalizeEventListSource(settings.Source);
                     model.EventIds = settings.EventIds;
                     model.Category = settings.Category;
                     model.Location = settings.Location;
-                    model.Limit = settings.Limit;
+                    model.Limit = NormalizeEventListLimit(settings.Limit);
+                }
+                else
+                {
+                    model.Source = "query";
+                    model.Limit = 10;
                 }
             }
 
@@ -775,6 +806,33 @@ namespace RailTix.Controllers
                 Value = t,
                 Selected = string.Equals(t, selected, StringComparison.OrdinalIgnoreCase)
             });
+        }
+
+        private IEnumerable<SelectListItem> GetEventListSourceOptions(string? selected)
+        {
+            var normalized = NormalizeEventListSource(selected);
+            return new[]
+            {
+                new SelectListItem { Text = "query", Value = "query", Selected = normalized == "query" },
+                new SelectListItem { Text = "manual", Value = "manual", Selected = normalized == "manual" }
+            };
+        }
+
+        private static string NormalizeEventListSource(string? source)
+        {
+            return string.Equals(source?.Trim(), "manual", StringComparison.OrdinalIgnoreCase)
+                ? "manual"
+                : "query";
+        }
+
+        private static int NormalizeEventListLimit(int? limit)
+        {
+            if (!limit.HasValue || limit.Value < 1)
+            {
+                return 10;
+            }
+
+            return limit.Value > 50 ? 50 : limit.Value;
         }
 
         private async Task<bool> TrySaveChangesAsync()

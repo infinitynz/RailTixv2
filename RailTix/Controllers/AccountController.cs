@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Collections.Generic;
 using RailTix.Services.Location;
+using RailTix.Models.ViewModels.Account;
+using RailTix.Services.Payments;
 
 namespace RailTix.Controllers
 {
@@ -28,6 +30,8 @@ namespace RailTix.Controllers
         private readonly GoogleRecaptchaOptions _recaptchaOptions;
         private readonly ILocationService _locationService;
         private readonly ILocationProvider _locationProvider;
+        private readonly IStripeConnectService _stripeConnectService;
+        private readonly StripeOptions _stripeOptions;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
@@ -38,6 +42,8 @@ namespace RailTix.Controllers
             IOptions<GoogleRecaptchaOptions> recaptchaOptions,
             ILocationService locationService,
             ILocationProvider locationProvider,
+            IStripeConnectService stripeConnectService,
+            IOptions<StripeOptions> stripeOptions,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
@@ -47,6 +53,8 @@ namespace RailTix.Controllers
             _recaptchaOptions = recaptchaOptions.Value;
             _locationService = locationService;
             _locationProvider = locationProvider;
+            _stripeConnectService = stripeConnectService;
+            _stripeOptions = stripeOptions.Value;
             _logger = logger;
         }
 
@@ -371,14 +379,278 @@ namespace RailTix.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet("/account")]
+        public async Task<IActionResult> Dashboard()
+        {
+            return await RenderAccountDashboardAsync();
+        }
+
         [HttpGet]
-        public IActionResult Manage()
+        public async Task<IActionResult> Manage()
+        {
+            return await RenderAccountDashboardAsync();
+        }
+
+        [HttpGet("/account/payment")]
+        public async Task<IActionResult> Payment(string? returnUrl = null)
+        {
+            if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            if (!CanManageStripeForEvents())
+            {
+                return Forbid();
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            var usesPlatformStripeAccount = ShouldUsePlatformStripeAccount();
+            var model = new AccountPaymentViewModel
+            {
+                IsAdmin = User.IsInRole("Admin"),
+                IsEventManager = User.IsInRole("EventManager"),
+                UsesPlatformStripeAccount = usesPlatformStripeAccount,
+                StripeEnvironmentLabel = GetStripeEnvironmentLabel(),
+                ReturnUrl = returnUrl,
+                PlatformFeePercent = _stripeOptions.PlatformFeePercent,
+                StripeStatus = await BuildStripeStatusViewModelAsync(user, usesPlatformStripeAccount)
+            };
+
+            return View(model);
+        }
+
+        [HttpPost("/account/payment/connect")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConnectStripe(string? returnUrl = null)
+        {
+            if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            if (!CanManageStripeForEvents())
+            {
+                return Forbid();
+            }
+
+            if (ShouldUsePlatformStripeAccount())
+            {
+                TempData["StripeWarning"] = "Admin accounts use the platform Stripe account. No separate Connect onboarding is required.";
+                return RedirectToAction(nameof(Payment), new { returnUrl });
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            try
+            {
+                var connectReturnUrl = Url.Action(nameof(StripeConnectReturn), "Account", new { returnUrl }, Request.Scheme);
+                var connectRefreshUrl = Url.Action(nameof(StripeConnectRefresh), "Account", new { returnUrl }, Request.Scheme);
+
+                if (string.IsNullOrWhiteSpace(connectReturnUrl) || string.IsNullOrWhiteSpace(connectRefreshUrl))
+                {
+                    TempData["StripeError"] = "Unable to create Stripe onboarding link. Please try again.";
+                    return RedirectToAction(nameof(Payment), new { returnUrl });
+                }
+
+                var onboardingUrl = await _stripeConnectService.CreateOrGetOnboardingLinkAsync(
+                    user,
+                    connectReturnUrl,
+                    connectRefreshUrl,
+                    HttpContext.RequestAborted);
+
+                return Redirect(onboardingUrl);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Stripe onboarding link creation failed for user {UserId}", user.Id);
+                TempData["StripeError"] = "Unable to connect with Stripe right now. Please verify your keys and try again.";
+                return RedirectToAction(nameof(Payment), new { returnUrl });
+            }
+        }
+
+        [HttpGet("/account/payment/return")]
+        public async Task<IActionResult> StripeConnectReturn(string? returnUrl = null)
+        {
+            if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            if (!CanManageStripeForEvents())
+            {
+                return Forbid();
+            }
+
+            if (ShouldUsePlatformStripeAccount())
+            {
+                TempData["StripeWarning"] = "Admin accounts use the platform Stripe account. Verify platform Stripe setup in Payment Settings.";
+                return RedirectToAction(nameof(Payment), new { returnUrl });
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            var status = await _stripeConnectService.GetStatusAsync(user, HttpContext.RequestAborted);
+            if (status.IsSetupComplete)
+            {
+                TempData["StripeSuccess"] = "Stripe setup is complete. You can now create and sell events.";
+                if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+            }
+            else
+            {
+                TempData["StripeWarning"] = "Stripe account linked. Complete all required Stripe steps to enable payouts.";
+            }
+
+            return RedirectToAction(nameof(Payment), new { returnUrl });
+        }
+
+        [HttpGet("/account/payment/refresh")]
+        public IActionResult StripeConnectRefresh(string? returnUrl = null)
+        {
+            if (ShouldUsePlatformStripeAccount())
+            {
+                TempData["StripeWarning"] = "Admin accounts use the platform Stripe account. No individual Connect onboarding step is required.";
+                return RedirectToAction(nameof(Payment), new { returnUrl });
+            }
+
+            TempData["StripeWarning"] = "Stripe setup was not completed yet. Continue onboarding to finish.";
+            return RedirectToAction(nameof(Payment), new { returnUrl });
+        }
+
+        [HttpPost("/account/payment/dashboard")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OpenStripeDashboard(string? returnUrl = null)
+        {
+            if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            if (!CanManageStripeForEvents())
+            {
+                return Forbid();
+            }
+
+            if (ShouldUsePlatformStripeAccount())
+            {
+                return Redirect(GetPlatformDashboardUrl());
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Login), new { returnUrl = "/account/payment" });
+            }
+
+            var loginLink = await _stripeConnectService.CreateDashboardLoginLinkAsync(user, HttpContext.RequestAborted);
+            if (string.IsNullOrWhiteSpace(loginLink))
+            {
+                TempData["StripeError"] = "Unable to open Stripe dashboard. Make sure your account is fully connected.";
+                return RedirectToAction(nameof(Payment), new { returnUrl });
+            }
+
+            return Redirect(loginLink);
+        }
+
+        private bool CanManageStripeForEvents()
+        {
+            return User.IsInRole("Admin") || User.IsInRole("EventManager");
+        }
+
+        private bool ShouldUsePlatformStripeAccount()
+        {
+            return User.IsInRole("Admin");
+        }
+
+        private string GetStripeEnvironmentLabel()
+        {
+            if (string.IsNullOrWhiteSpace(_stripeOptions.SecretKey))
+            {
+                return "Not Configured";
+            }
+
+            if (_stripeOptions.SecretKey.StartsWith("sk_live_"))
+            {
+                return "Live";
+            }
+
+            if (_stripeOptions.SecretKey.StartsWith("sk_test_"))
+            {
+                return "Test";
+            }
+
+            return "Unknown";
+        }
+
+        private string GetPlatformDashboardUrl()
+        {
+            return GetStripeEnvironmentLabel() == "Live"
+                ? "https://dashboard.stripe.com/"
+                : "https://dashboard.stripe.com/test/";
+        }
+
+        private async Task<IActionResult> RenderAccountDashboardAsync()
         {
             if (!(User?.Identity?.IsAuthenticated ?? false))
             {
                 return RedirectToAction(nameof(Login));
             }
-            return View();
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            var model = new AccountManageViewModel
+            {
+                IsAdmin = User.IsInRole("Admin"),
+                IsEventManager = User.IsInRole("EventManager")
+            };
+
+            if (model.CanManageEvents)
+            {
+                model.StripeStatus = await BuildStripeStatusViewModelAsync(user, ShouldUsePlatformStripeAccount());
+            }
+
+            return View("Manage", model);
+        }
+
+        private async Task<StripeConnectionStatusViewModel> BuildStripeStatusViewModelAsync(
+            ApplicationUser user,
+            bool usePlatformStripeAccount)
+        {
+            var status = usePlatformStripeAccount
+                ? await _stripeConnectService.GetPlatformStatusAsync(HttpContext.RequestAborted)
+                : await _stripeConnectService.GetStatusAsync(user, HttpContext.RequestAborted);
+            return new StripeConnectionStatusViewModel
+            {
+                IsStripeConfigured = status.IsStripeConfigured,
+                StripeAccountId = status.StripeAccountId,
+                StripeAccountType = status.StripeAccountType,
+                ChargesEnabled = status.ChargesEnabled,
+                PayoutsEnabled = status.PayoutsEnabled,
+                ErrorMessage = status.ErrorMessage,
+                RequirementsDisabledReason = status.RequirementsDisabledReason,
+                CapabilityIssues = status.CapabilityIssues,
+                MissingRequirements = status.MissingRequirements
+            };
         }
 
         // mapping logic moved to ILocationService

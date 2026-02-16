@@ -1,5 +1,10 @@
 @import "./tokens";
 
+:root {
+	--rtx-layout-max-width: 1340px;
+	--rtx-layout-gutter: 20px;
+}
+
 html {
 	/* Typography base size; overridden responsively below */
 	font-size: 14px;
@@ -10,6 +15,9 @@ html {
 
 		font-size: 16px;
 	}
+}
+*{
+	box-sizing:border-box;
 }
 
 
@@ -66,11 +74,33 @@ input[type="file"]::-webkit-file-upload-button {
 // Layout and navbar (custom)
 // ------------------------------------------------------------
 .container {
-	max-width: 1100px;
+	max-width: var(--rtx-layout-max-width);
 	margin: 0 auto;
-	width:100%;
-	padding: 0 1rem;
+	width: 100%;
+	padding: 0 var(--rtx-layout-gutter);
 
+}
+
+.container-fluid,
+.layout-full {
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	padding: 0 var(--rtx-layout-gutter);
+}
+
+.layout-full__inner {
+	width: 100%;
+	max-width: var(--rtx-layout-max-width);
+	margin: 0 auto;
+}
+
+.layout-flex {
+	display: flex;
+}
+
+.layout-flex-wrap {
+	flex-wrap: wrap;
 }
 
 .site-header {
@@ -79,28 +109,31 @@ input[type="file"]::-webkit-file-upload-button {
 
 	.header-wrapper {
 		display: flex;
-
-		.nav-brand {
-		}
+		align-items: center;
+		min-height: 72px;
 
 		.nav-menu {
 			margin-left: auto;
 			display: flex;
 			align-items: center;
-			gap: 1rem;
+			gap: .85rem;
+			position: relative;
 
 
 			.nav-item {
 				color: rgba(255,255,255, .82);
 				@include rtx-interactive;
 
-				padding: 8px 16px 8px 16px;
+				padding: .5rem .95rem;
 				background-color: rgba(255, 255, 255,0.13);
+				border: 1px solid rgba(255, 255, 255, .12);
+				border-radius: 999px;
 
 				&:hover, &:focus-visible {
 					color: $rtx-white;
 					filter: brightness(1.08);
 					background-color: rgba(255, 255, 225,0.23);
+					text-decoration: none;
 				}
 
 				&.active {
@@ -132,11 +165,200 @@ input[type="file"]::-webkit-file-upload-button {
 	}
 
 	.nav-menu {
+
+	}
+}
+
+.nav-account {
+	position: relative;
+}
+
+.nav-account__trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: .55rem;
+	padding: .35rem .7rem .35rem .35rem;
+	border-radius: 999px;
+	border: 1px solid rgba($rtx-accent-ember, .42);
+	background: linear-gradient(140deg, rgba($rtx-accent-violet, .5) 0%, rgba($rtx-bg, .85) 72%);
+	color: rgba($rtx-white, .93);
+	box-shadow: 0 10px 22px rgba(0, 0, 0, .35), 0 0 0 1px rgba($rtx-white, .04) inset;
+	cursor: pointer;
+	@include rtx-interactive;
+
+	&:hover,
+	&:focus-visible {
+		border-color: rgba($rtx-accent-ember, .78);
+		filter: brightness(1.06);
+		text-decoration: none;
+	}
+}
+
+.nav-account__avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: radial-gradient(circle at 30% 25%, rgba($rtx-accent-ember, .95) 0%, rgba($rtx-accent-violet, .92) 95%);
+	box-shadow: 0 0 0 1px rgba($rtx-white, .16);
+	color: rgba($rtx-white, .95);
+	flex: 0 0 30px;
+
+	svg {
+		width: 18px;
+		height: 18px;
+	}
+}
+
+.nav-account__name {
+	font-size: .93rem;
+	font-weight: 600;
+	line-height: 1;
+	max-width: 170px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.nav-account__chevron {
+	width: 16px;
+	height: 16px;
+	opacity: .84;
+	transition: transform $rtx-ease-fast, opacity $rtx-ease-fast;
+}
+
+.nav-account__menu {
+	position: absolute;
+	right: 0;
+	top: calc(100% + .65rem);
+	min-width: 260px;
+	padding: .45rem;
+	border-radius: $rtx-radius-md;
+	border: 1px solid rgba($rtx-accent-ember, .42);
+
+	background: linear-gradient(180deg, rgba(22, 14, 24, .96) 0%, rgba($rtx-surface, .98) 100%);
+	box-shadow: 0 16px 38px rgba(0, 0, 0, .45), 0 0 0 1px rgba($rtx-accent-violet, .35);
+	backdrop-filter: blur(8px);
+	opacity: 0;
+
+	transform: translateY(-8px) scale(.98);
+	pointer-events: none;
+	transform-origin: top right;
+	transition: opacity $rtx-ease, transform $rtx-ease;
+	z-index: 35;
+}
+
+
+.nav-account__item {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: .62rem;
+	padding: .58rem .66rem;
+	border-radius: $rtx-radius-sm;
+	border: 1px solid transparent;
+	background: transparent;
+	color: rgba($rtx-white, .9);
+	font: inherit;
+	line-height: 1.2;
+	text-align: left;
+	cursor: pointer;
+	@include rtx-interactive;
+
+	&:hover,
+	&:focus-visible {
+		background-color: rgba($rtx-accent-ember, .14);
+		border-color: rgba($rtx-accent-ember, .34);
+		color: $rtx-white;
+		text-decoration: none;
 	
 	}
-
-	
 }
+
+.nav-account__item-icon {
+	width: 18px;
+	height: 18px;
+	flex: 0 0 18px;
+	opacity: .94;
+
+	path,
+	circle,
+	rect,
+	line,
+	polyline,
+	polygon {
+		stroke: currentColor;
+	}
+
+	[fill]:not([fill="none"]) {
+		fill: currentColor;
+	}
+}
+
+.nav-account__divider {
+	height: 1px;
+	margin: .35rem .2rem .32rem;
+	background: linear-gradient(90deg, rgba($rtx-accent-ember, 0), rgba($rtx-accent-ember, .5), rgba($rtx-green, .4), rgba($rtx-accent-ember, 0));
+}
+
+.nav-account__logout-form {
+	margin: 0;
+}
+
+.nav-account__item--logout {
+	color: rgba(#ffb7a0, .98);
+
+	&:hover,
+	&:focus-visible {
+		background-color: rgba($rtx-accent-ember, .22);
+		border-color: rgba($rtx-accent-ember, .56);
+		color: $rtx-white;
+	}
+}
+
+.nav-account.is-open {
+	.nav-account__trigger {
+		border-color: rgba($rtx-accent-ember, .82);
+		box-shadow: 0 0 0 .2rem rgba($rtx-accent-ember, .2), 0 10px 22px rgba(0, 0, 0, .35), 0 0 0 1px rgba($rtx-white, .04) inset;
+	}
+
+	.nav-account__chevron {
+		transform: rotate(180deg);
+		opacity: 1;
+	}
+
+	.nav-account__menu {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		pointer-events: auto;
+	}
+}
+
+@media (max-width: 700px) {
+	.nav-account__name {
+		display: none;
+	}
+
+	.nav-account__trigger {
+		padding-right: .45rem;
+	}
+
+	.nav-account__menu {
+		min-width: 228px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.nav-account__trigger,
+	.nav-account__chevron,
+	.nav-account__menu,
+	.nav-account__item {
+		transition: none;
+	}
+}
+
 
 .section {
 	padding: 2rem 0;
@@ -424,9 +646,169 @@ a {
 	font-size: .8rem;
 }
 
-.account-nav__link:hover .account-nav__icon {
-	transform: translateX(1px);
-	transition: transform $rtx-ease-fast;
+.account-dashboard,
+.account-payment {
+	max-width: 980px;
 }
+
+.account-dashboard__card,
+.account-payment__card {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: .8rem;
+}
+
+.account-dashboard__title {
+	margin: 0;
+	color: $rtx-white;
+}
+
+.account-dashboard__subtitle {
+	margin: 0;
+	color: rgba($rtx-white, .78);
+}
+
+.account-stripe-status {
+	border: 1px solid rgba($rtx-white, .08);
+	border-radius: $rtx-radius-sm;
+	background: rgba($rtx-bg, .5);
+	padding: .85rem;
+	display: flex;
+	flex-direction: column;
+	gap: .65rem;
+}
+
+.account-stripe-status__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: .75rem;
+
+	h2 {
+		margin: 0;
+		font-size: 1.1rem;
+		color: $rtx-white;
+	}
+}
+
+.account-stripe-status__pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: .2rem .55rem;
+	font-size: .72rem;
+	font-weight: 700;
+	letter-spacing: .45px;
+	text-transform: uppercase;
+	border-radius: 999px;
+	border: 1px solid rgba($rtx-white, .25);
+	background: rgba($rtx-white, .08);
+	color: rgba($rtx-white, .88);
+
+	&.is-complete {
+		color: #bcff96;
+		border-color: rgba($rtx-green, .45);
+		background: rgba($rtx-green, .2);
+	}
+
+	&.is-incomplete {
+		color: #ffe6a3;
+		border-color: rgba(255, 193, 7, .35);
+		background: rgba(255, 193, 7, .15);
+	}
+}
+
+.account-stripe-status__copy {
+	margin: 0;
+	color: rgba($rtx-white, .84);
+}
+
+.account-stripe-status__checks {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .45rem;
+}
+
+.account-stripe-status__check {
+	display: inline-flex;
+	align-items: center;
+	padding: .14rem .5rem;
+	border-radius: 999px;
+	font-size: .74rem;
+	letter-spacing: .2px;
+	border: 1px solid rgba($rtx-white, .22);
+	color: rgba($rtx-white, .8);
+	background: rgba($rtx-white, .06);
+
+	&.is-on {
+		border-color: rgba($rtx-green, .45);
+		color: #bcff96;
+		background: rgba($rtx-green, .18);
+	}
+
+	&.is-off {
+		border-color: rgba($rtx-pink, .35);
+		color: #ffb9f0;
+		background: rgba($rtx-pink, .14);
+	}
+}
+
+.account-stripe-status__meta,
+.account-payment__meta {
+	margin: 0;
+	color: rgba($rtx-white, .72);
+	font-size: .88rem;
+}
+
+.account-stripe-status__meta code {
+	font-size: .8rem;
+	padding: .08rem .35rem;
+	border-radius: 6px;
+	background: rgba($rtx-white, .08);
+	border: 1px solid rgba($rtx-white, .18);
+}
+
+.account-stripe-status__error {
+	margin: 0;
+	color: #ffb9f0;
+	font-size: .88rem;
+}
+
+.account-stripe-status__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .6rem;
+}
+
+.account-stripe-status__actions .btn {
+	margin-top: 0;
+}
+
+.account-payment__notice {
+	border-radius: $rtx-radius-sm;
+	border: 1px solid rgba($rtx-white, .2);
+	padding: .65rem .78rem;
+	font-size: .9rem;
+}
+
+.account-payment__notice.is-success {
+	border-color: rgba($rtx-green, .45);
+	background: rgba($rtx-green, .15);
+	color: #bcff96;
+}
+
+.account-payment__notice.is-warning {
+	border-color: rgba(255, 193, 7, .35);
+	background: rgba(255, 193, 7, .14);
+	color: #ffe6a3;
+}
+
+.account-payment__notice.is-error {
+	border-color: rgba($rtx-pink, .4);
+	background: rgba($rtx-pink, .14);
+	color: #ffc8f5;
+}
+
 
 // (Validation moved to components/forms.scss)

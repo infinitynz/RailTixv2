@@ -16,6 +16,7 @@
   - View orders & tickets
 - Event Management
   - Request Event Manager upgrade
+  - Connect and maintain Stripe Connect payout account
   - Create/Edit/Publish own events
   - Define ticket types, pricing, inventory
   - Mark ticket types as kids tickets
@@ -29,6 +30,8 @@
   - Check-in tickets for own events
   - Deduct credits via POS (authorized staff)
 - Administration
+  - Connect/verify global platform Stripe account
+  - Manage default platform fee policy (global 2% default)
   - Approve Event Manager upgrades
   - Manage users & roles
   - Moderate events/content

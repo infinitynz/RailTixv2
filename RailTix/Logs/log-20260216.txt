@@ -1,0 +1,610 @@
+2026-02-16 21:46:33.067 +13:00 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using 'C:\Users\USER\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-16 21:47:04.986 +13:00 [ERR] Microsoft.EntityFrameworkCore.Database.Connection An error occurred using the connection to database 'RailTix-Dev' on server 'tcp:railtix.database.windows.net,1433'.
+2026-02-16 21:47:05.059 +13:00 [ERR] Microsoft.EntityFrameworkCore.Query An exception occurred while iterating over the results of a query for context type 'RailTix.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=231; handshake=271; [Login] initialization=3; authentication=3; [Post-Login] complete=29374; 
+ ---> System.ComponentModel.Win32Exception (258): The wait operation timed out.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ThrowExceptionAndWarning(Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:bb66458d-42f0-41ab-82be-cab6c7d87adf
+Error Number:-2,State:0,Class:11
+Microsoft.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=231; handshake=271; [Login] initialization=3; authentication=3; [Post-Login] complete=29374; 
+ ---> System.ComponentModel.Win32Exception (258): The wait operation timed out.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ThrowExceptionAndWarning(Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:bb66458d-42f0-41ab-82be-cab6c7d87adf
+Error Number:-2,State:0,Class:11
+2026-02-16 21:47:12.297 +13:00 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using 'C:\Users\USER\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-16 21:47:19.379 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (173ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 21:47:19.480 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (50ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 21:47:19.522 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 21:47:19.838 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: https://localhost:7113
+2026-02-16 21:47:19.838 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: http://localhost:5176
+2026-02-16 21:47:19.875 +13:00 [INF] Microsoft.Hosting.Lifetime Application started. Press Ctrl+C to shut down.
+2026-02-16 21:47:19.875 +13:00 [INF] Microsoft.Hosting.Lifetime Hosting environment: Development
+2026-02-16 21:47:19.875 +13:00 [INF] Microsoft.Hosting.Lifetime Content root path: X:\websites\rails\Rebuild\RailTix
+2026-02-16 21:47:20.703 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/ - null null
+2026-02-16 21:47:23.045 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (49ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 21:47:23.157 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (49ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2026-02-16 21:47:23.221 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (48ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2026-02-16 21:47:23.270 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (47ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 21:47:23.318 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2026-02-16 21:47:23.362 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 21:47:23.407 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2026-02-16 21:47:23.412 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-16 21:47:23.422 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.HomeController (RailTix).
+2026-02-16 21:47:23.539 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[CustomUrl], [t].[IsHomepage], [t].[IsPublished], [t].[ParentId], [t].[Path], [t].[Position], [t].[Slug], [t].[Title], [t].[UpdatedAt], [c0].[Id], [c0].[CreatedAt], [c0].[IsEnabled], [c0].[PageId], [c0].[Position], [c0].[SettingsJson], [c0].[Type], [c0].[UpdatedAt]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[CustomUrl], [c].[IsHomepage], [c].[IsPublished], [c].[ParentId], [c].[Path], [c].[Position], [c].[Slug], [c].[Title], [c].[UpdatedAt]
+    FROM [CmsPages] AS [c]
+    WHERE [c].[IsHomepage] = CAST(1 AS bit) AND [c].[IsPublished] = CAST(1 AS bit)
+) AS [t]
+LEFT JOIN [CmsPageComponents] AS [c0] ON [t].[Id] = [c0].[PageId]
+ORDER BY [t].[Id]
+2026-02-16 21:47:35.789 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view ~/Views/Cms/Page.cshtml.
+2026-02-16 21:47:36.448 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view ~/Views/Cms/Page.cshtml executed in 12897.0344ms.
+2026-02-16 21:47:36.452 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.HomeController.Index (RailTix) in 13029.9613ms
+2026-02-16 21:47:36.453 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-16 21:47:36.456 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET / responded 200 in 13592.0517 ms
+2026-02-16 21:47:36.465 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/ - 200 null text/html; charset=utf-8 15771.3043ms
+2026-02-16 21:47:36.479 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - null null
+2026-02-16 21:47:36.479 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 21:47:36.479 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=uFvnJOBNib_MlK5hn_qQCp6nI3wefNGb24jp9lJE_7o - null null
+2026-02-16 21:47:36.479 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 21:47:36.489 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 10.6421ms
+2026-02-16 21:47:36.490 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/images/railtix-logo.png - null null
+2026-02-16 21:47:36.502 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/js/modules/location/bootstrap.js'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\js\modules\location\bootstrap.js'
+2026-02-16 21:47:36.502 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /js/modules/location/bootstrap.js responded 200 in 23.1072 ms
+2026-02-16 21:47:36.502 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - 200 1366 text/javascript 23.8916ms
+2026-02-16 21:47:36.509 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 21:47:36.509 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 29.9145 ms
+2026-02-16 21:47:36.509 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=uFvnJOBNib_MlK5hn_qQCp6nI3wefNGb24jp9lJE_7o - 200 20337 text/css 30.859ms
+2026-02-16 21:47:36.524 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/images/railtix-logo.png'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\images\railtix-logo.png'
+2026-02-16 21:47:36.524 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /images/railtix-logo.png responded 200 in 33.3576 ms
+2026-02-16 21:47:36.524 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/images/railtix-logo.png - 200 304303 image/png 34.3104ms
+2026-02-16 21:47:36.543 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.0543ms
+2026-02-16 21:47:36.852 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/favicon.ico - null null
+2026-02-16 21:47:36.873 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/favicon.ico'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\favicon.ico'
+2026-02-16 21:47:36.873 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /favicon.ico responded 200 in 20.8538 ms
+2026-02-16 21:47:36.873 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/favicon.ico - 200 5430 image/x-icon 21.3417ms
+2026-02-16 21:47:41.546 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/Account/Manage - null null
+2026-02-16 21:47:41.552 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /Account/Manage responded 301 in 1.0700 ms
+2026-02-16 21:47:41.553 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/Account/Manage - 301 0 null 6.68ms
+2026-02-16 21:47:41.555 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/manage - null null
+2026-02-16 21:47:41.564 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-16 21:47:41.567 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Manage", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Manage() on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 21:47:41.633 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 21:47:41.691 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (51ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 128), @__p_2='?' (Size = 128)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[LoginProvider], [a].[Name], [a].[Value]
+FROM [AspNetUserTokens] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[LoginProvider] = @__p_1 AND [a].[Name] = @__p_2
+2026-02-16 21:47:42.074 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Manage.
+2026-02-16 21:47:42.609 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Manage executed in 915.8987ms.
+2026-02-16 21:47:42.610 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Manage (RailTix) in 1042.4988ms
+2026-02-16 21:47:42.610 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-16 21:47:42.610 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/manage responded 200 in 1052.4077 ms
+2026-02-16 21:47:42.610 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/manage - 200 null text/html; charset=utf-8 1054.9449ms
+2026-02-16 21:47:42.634 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 21:47:42.635 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 21:47:42.641 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 2.9237ms
+2026-02-16 21:47:42.652 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 17.7658ms
+2026-02-16 21:48:11.173 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 21:48:11.193 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:48:11.201 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 21:48:11.262 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 21:48:11.304 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 128), @__p_2='?' (Size = 128)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[LoginProvider], [a].[Name], [a].[Value]
+FROM [AspNetUserTokens] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[LoginProvider] = @__p_1 AND [a].[Name] = @__p_2
+2026-02-16 21:48:11.697 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Payment.
+2026-02-16 21:48:11.707 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Payment executed in 401.6991ms.
+2026-02-16 21:48:11.710 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 509.3ms
+2026-02-16 21:48:11.711 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:48:11.711 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 200 in 535.6190 ms
+2026-02-16 21:48:11.711 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 200 null text/html; charset=utf-8 538.194ms
+2026-02-16 21:48:11.736 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 21:48:11.742 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 21:48:11.743 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 1.9895ms
+2026-02-16 21:48:11.757 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 21.2828ms
+2026-02-16 21:48:20.671 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/profile - null null
+2026-02-16 21:48:20.673 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.CmsController.Page (RailTix)'
+2026-02-16 21:48:20.676 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Page", controller = "Cms", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Page(System.String) on controller RailTix.Controllers.CmsController (RailTix).
+2026-02-16 21:48:20.735 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Segment]
+FROM [CmsReservedRoutes] AS [c]
+WHERE [c].[IsActive] = CAST(1 AS bit)
+2026-02-16 21:48:20.739 +13:00 [INF] Microsoft.AspNetCore.Mvc.StatusCodeResult Executing StatusCodeResult, setting HTTP status code 404
+2026-02-16 21:48:20.739 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.CmsController.Page (RailTix) in 62.6392ms
+2026-02-16 21:48:20.739 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.CmsController.Page (RailTix)'
+2026-02-16 21:48:20.739 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/profile responded 404 in 66.2689 ms
+2026-02-16 21:48:20.739 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/profile - 404 0 null 68.6992ms
+2026-02-16 21:48:22.898 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 21:48:22.900 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:48:22.900 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 21:48:22.945 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 21:48:22.989 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 128), @__p_2='?' (Size = 128)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[LoginProvider], [a].[Name], [a].[Value]
+FROM [AspNetUserTokens] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[LoginProvider] = @__p_1 AND [a].[Name] = @__p_2
+2026-02-16 21:48:22.990 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Payment.
+2026-02-16 21:48:22.993 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Payment executed in 3.297ms.
+2026-02-16 21:48:22.993 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 92.4229ms
+2026-02-16 21:48:22.993 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:48:22.993 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 200 in 93.1450 ms
+2026-02-16 21:48:22.993 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 200 null text/html; charset=utf-8 95.2535ms
+2026-02-16 21:48:23.032 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 21:48:23.033 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 1.2123ms
+2026-02-16 21:48:52.942 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 21:48:52.943 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:48:52.943 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 21:48:52.945 +13:00 [INF] Microsoft.AspNetCore.Mvc.RedirectToActionResult Executing RedirectResult, redirecting to /Account/Login?returnUrl=%2Faccount%2Fpayment.
+2026-02-16 21:48:52.945 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 2.4239ms
+2026-02-16 21:48:52.945 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:48:52.945 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 302 in 3.0273 ms
+2026-02-16 21:48:52.945 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 302 0 null 3.6152ms
+2026-02-16 21:48:52.948 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/Account/Login?returnUrl=%2Faccount%2Fpayment - null null
+2026-02-16 21:48:52.948 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /Account/Login responded 301 in 0.0592 ms
+2026-02-16 21:48:52.948 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/Account/Login?returnUrl=%2Faccount%2Fpayment - 301 0 null 0.5364ms
+2026-02-16 21:48:52.950 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/login?returnUrl=%2Faccount%2Fpayment - null null
+2026-02-16 21:48:52.950 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Login (RailTix)'
+2026-02-16 21:48:52.951 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Login", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 21:48:52.979 +13:00 [INF] RailTix.Controllers.AccountController GET /Account/Login returnUrl=/account/payment
+2026-02-16 21:48:53.224 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Login.
+2026-02-16 21:48:53.440 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Login executed in 429.8382ms.
+2026-02-16 21:48:53.441 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Login (RailTix) in 489.2537ms
+2026-02-16 21:48:53.441 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Login (RailTix)'
+2026-02-16 21:48:53.441 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/login responded 200 in 491.4682 ms
+2026-02-16 21:48:53.441 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/login?returnUrl=%2Faccount%2Fpayment - 200 null text/html; charset=utf-8 491.8103ms
+2026-02-16 21:49:25.470 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 POST https://localhost:7113/account/payment/connect - application/x-www-form-urlencoded 236
+2026-02-16 21:49:27.523 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.ConnectStripe (RailTix)'
+2026-02-16 21:49:27.526 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "ConnectStripe", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ConnectStripe(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 21:49:27.577 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 21:49:27.619 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 128), @__p_2='?' (Size = 128)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[LoginProvider], [a].[Name], [a].[Value]
+FROM [AspNetUserTokens] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[LoginProvider] = @__p_1 AND [a].[Name] = @__p_2
+2026-02-16 21:49:27.663 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2026-02-16 21:49:27.669 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request POST https://api.stripe.com/v1/accounts
+2026-02-16 21:49:27.670 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request POST https://api.stripe.com/v1/accounts
+2026-02-16 21:49:30.289 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 2617.2946ms - 200
+2026-02-16 21:49:30.290 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 2621.8678ms - 200
+2026-02-16 21:49:30.339 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (45ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 128), @__p_2='?' (Size = 128)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[LoginProvider], [a].[Name], [a].[Value]
+FROM [AspNetUserTokens] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[LoginProvider] = @__p_1 AND [a].[Name] = @__p_2
+2026-02-16 21:49:30.414 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (45ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-02-16 21:49:30.464 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-02-16 21:49:30.667 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (47ms) [Parameters=[@p0='?' (Size = 128), @p1='?' (Size = 128), @p2='?' (Size = 450), @p3='?' (Size = 4000), @p25='?' (Size = 450), @p4='?' (DbType = Int32), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p26='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 256), @p9='?' (DbType = Boolean), @p10='?' (Size = 100), @p11='?' (Size = 100), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (DbType = DateTimeOffset), @p15='?' (Size = 256), @p16='?' (Size = 256), @p17='?' (Size = 4000), @p18='?' (Size = 4000), @p19='?' (DbType = Boolean), @p20='?' (Size = 4000), @p21='?' (Size = 4000), @p22='?' (Size = 4000), @p23='?' (DbType = Boolean), @p24='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserTokens] ([LoginProvider], [Name], [UserId], [Value])
+VALUES (@p0, @p1, @p2, @p3);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p4, [City] = @p5, [ConcurrencyStamp] = @p6, [Country] = @p7, [Email] = @p8, [EmailConfirmed] = @p9, [FirstName] = @p10, [LastName] = @p11, [Locale] = @p12, [LockoutEnabled] = @p13, [LockoutEnd] = @p14, [NormalizedEmail] = @p15, [NormalizedUserName] = @p16, [PasswordHash] = @p17, [PhoneNumber] = @p18, [PhoneNumberConfirmed] = @p19, [PreferredCurrency] = @p20, [SecurityStamp] = @p21, [TimeZoneId] = @p22, [TwoFactorEnabled] = @p23, [UserName] = @p24
+OUTPUT 1
+WHERE [Id] = @p25 AND [ConcurrencyStamp] = @p26;
+2026-02-16 21:49:30.761 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request POST https://api.stripe.com/v1/account_links
+2026-02-16 21:49:30.761 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request POST https://api.stripe.com/v1/account_links
+2026-02-16 21:49:31.279 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 517.6883ms - 200
+2026-02-16 21:49:31.279 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 517.8994ms - 200
+2026-02-16 21:49:31.280 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.RedirectResultExecutor Executing RedirectResult, redirecting to https://connect.stripe.com/setup/e/acct_1T1NUh9dddMCyMED/QOG3rN3OfhDR.
+2026-02-16 21:49:31.281 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.ConnectStripe (RailTix) in 3755.038ms
+2026-02-16 21:49:31.281 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.ConnectStripe (RailTix)'
+2026-02-16 21:49:31.281 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP POST /account/payment/connect responded 302 in 3758.5515 ms
+2026-02-16 21:49:31.281 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 POST https://localhost:7113/account/payment/connect - 302 0 null 5811.1908ms
+2026-02-16 21:50:03.953 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 21:50:03.955 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:50:03.955 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 21:50:04.038 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (82ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 21:50:04.098 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (59ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 128), @__p_2='?' (Size = 128)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[LoginProvider], [a].[Name], [a].[Value]
+FROM [AspNetUserTokens] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[LoginProvider] = @__p_1 AND [a].[Name] = @__p_2
+2026-02-16 21:50:04.100 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request GET https://api.stripe.com/v1/accounts/acct_1T1NUh9dddMCyMED
+2026-02-16 21:50:04.100 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request GET https://api.stripe.com/v1/accounts/acct_1T1NUh9dddMCyMED
+2026-02-16 21:50:04.727 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 627.4192ms - 200
+2026-02-16 21:50:04.727 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 627.6551ms - 200
+2026-02-16 21:50:04.728 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Payment.
+2026-02-16 21:50:04.732 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Payment executed in 3.7213ms.
+2026-02-16 21:50:04.732 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 776.8314ms
+2026-02-16 21:50:04.732 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 21:50:04.732 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 200 in 777.4282 ms
+2026-02-16 21:50:04.735 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 200 null text/html; charset=utf-8 781.9611ms
+2026-02-16 21:50:04.881 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 21:50:04.886 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 5.1472ms
+2026-02-16 22:01:14.406 +13:00 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using 'C:\Users\USER\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-16 22:01:17.357 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (215ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 22:01:17.461 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 22:01:17.503 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 22:01:17.915 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: https://localhost:7113
+2026-02-16 22:01:17.915 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: http://localhost:5176
+2026-02-16 22:01:17.959 +13:00 [INF] Microsoft.Hosting.Lifetime Application started. Press Ctrl+C to shut down.
+2026-02-16 22:01:17.959 +13:00 [INF] Microsoft.Hosting.Lifetime Hosting environment: Development
+2026-02-16 22:01:17.959 +13:00 [INF] Microsoft.Hosting.Lifetime Content root path: X:\websites\rails\Rebuild\RailTix
+2026-02-16 22:01:19.085 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/ - null null
+2026-02-16 22:01:21.300 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-16 22:01:21.311 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.HomeController (RailTix).
+2026-02-16 22:01:21.496 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[CustomUrl], [t].[IsHomepage], [t].[IsPublished], [t].[ParentId], [t].[Path], [t].[Position], [t].[Slug], [t].[Title], [t].[UpdatedAt], [c0].[Id], [c0].[CreatedAt], [c0].[IsEnabled], [c0].[PageId], [c0].[Position], [c0].[SettingsJson], [c0].[Type], [c0].[UpdatedAt]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[CustomUrl], [c].[IsHomepage], [c].[IsPublished], [c].[ParentId], [c].[Path], [c].[Position], [c].[Slug], [c].[Title], [c].[UpdatedAt]
+    FROM [CmsPages] AS [c]
+    WHERE [c].[IsHomepage] = CAST(1 AS bit) AND [c].[IsPublished] = CAST(1 AS bit)
+) AS [t]
+LEFT JOIN [CmsPageComponents] AS [c0] ON [t].[Id] = [c0].[PageId]
+ORDER BY [t].[Id]
+2026-02-16 22:01:33.859 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view ~/Views/Cms/Page.cshtml.
+2026-02-16 22:01:34.529 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:01:34.627 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view ~/Views/Cms/Page.cshtml executed in 13115.1314ms.
+2026-02-16 22:01:34.632 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.HomeController.Index (RailTix) in 13319.8978ms
+2026-02-16 22:01:34.632 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-16 22:01:34.635 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET / responded 200 in 13390.6782 ms
+2026-02-16 22:01:34.645 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/ - 200 null text/html; charset=utf-8 15568.8405ms
+2026-02-16 22:01:34.651 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=uFvnJOBNib_MlK5hn_qQCp6nI3wefNGb24jp9lJE_7o - null null
+2026-02-16 22:01:34.651 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:01:34.652 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:01:34.661 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 8.9472ms
+2026-02-16 22:01:34.667 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware The file /css/site.css was not modified
+2026-02-16 22:01:34.669 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 304 in 17.6987 ms
+2026-02-16 22:01:34.669 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=uFvnJOBNib_MlK5hn_qQCp6nI3wefNGb24jp9lJE_7o - 304 null text/css 18.6417ms
+2026-02-16 22:01:34.707 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 56.5958ms
+2026-02-16 22:02:08.416 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/Account/Manage - null null
+2026-02-16 22:02:08.426 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /Account/Manage responded 301 in 1.0455 ms
+2026-02-16 22:02:08.426 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/Account/Manage - 301 0 null 10.1324ms
+2026-02-16 22:02:08.429 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/manage - null null
+2026-02-16 22:02:08.446 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-16 22:02:08.449 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Manage", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Manage() on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 22:02:08.516 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:02:08.524 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:02:08.525 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:02:08.961 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 434.2895ms - 200
+2026-02-16 22:02:08.962 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 439.9362ms - 200
+2026-02-16 22:02:09.363 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Manage.
+2026-02-16 22:02:09.840 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Manage executed in 873.4764ms.
+2026-02-16 22:02:09.841 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Manage (RailTix) in 1391.4513ms
+2026-02-16 22:02:09.841 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-16 22:02:09.841 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/manage responded 200 in 1410.2145 ms
+2026-02-16 22:02:09.841 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/manage - 200 null text/html; charset=utf-8 1412.9532ms
+2026-02-16 22:02:09.865 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:02:09.870 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:02:09.871 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 5.9805ms
+2026-02-16 22:02:09.898 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 33.886ms
+2026-02-16 22:02:15.524 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 22:02:15.541 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:02:15.548 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 22:02:15.603 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:02:15.604 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:02:15.604 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:02:15.950 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 345.8829ms - 200
+2026-02-16 22:02:15.950 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 346.1142ms - 200
+2026-02-16 22:02:16.300 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Payment.
+2026-02-16 22:02:16.310 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Payment executed in 359.6636ms.
+2026-02-16 22:02:16.311 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 762.0665ms
+2026-02-16 22:02:16.311 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:02:16.311 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 200 in 783.6623 ms
+2026-02-16 22:02:16.311 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 200 null text/html; charset=utf-8 786.9352ms
+2026-02-16 22:02:16.333 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:02:16.333 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:02:16.335 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 2.9354ms
+2026-02-16 22:02:16.344 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 12.0495ms
+2026-02-16 22:04:31.831 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 22:04:33.887 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:04:33.887 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 22:04:33.933 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:04:33.934 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:04:33.934 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:04:34.498 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 564.0901ms - 200
+2026-02-16 22:04:34.498 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 564.3401ms - 200
+2026-02-16 22:04:34.501 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Payment.
+2026-02-16 22:04:34.509 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Payment executed in 10.1212ms.
+2026-02-16 22:04:34.510 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 622.8177ms
+2026-02-16 22:04:34.512 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:04:34.512 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 200 in 625.6505 ms
+2026-02-16 22:04:34.512 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 200 null text/html; charset=utf-8 2681.4594ms
+2026-02-16 22:04:34.536 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:04:34.542 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:04:34.543 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 1.4508ms
+2026-02-16 22:04:34.559 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.8494ms
+2026-02-16 22:05:14.008 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/login?returnUrl=%2Faccount%2Fpayment - null null
+2026-02-16 22:05:14.013 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Login (RailTix)'
+2026-02-16 22:05:14.016 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Login", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 22:05:14.043 +13:00 [INF] RailTix.Controllers.AccountController GET /Account/Login returnUrl=/account/payment
+2026-02-16 22:05:14.421 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Login.
+2026-02-16 22:05:14.635 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Login executed in 513.4726ms.
+2026-02-16 22:05:14.635 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Login (RailTix) in 618.6636ms
+2026-02-16 22:05:14.635 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Login (RailTix)'
+2026-02-16 22:05:14.635 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/login responded 200 in 626.5212 ms
+2026-02-16 22:05:14.635 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/login?returnUrl=%2Faccount%2Fpayment - 200 null text/html; charset=utf-8 627.6516ms
+2026-02-16 22:05:32.596 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-16 22:05:32.596 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.5563ms
+2026-02-16 22:05:32.624 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232732602 - null null
+2026-02-16 22:05:32.638 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 22:05:32.638 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 14.1290 ms
+2026-02-16 22:05:32.638 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232732602 - 200 20337 text/css 14.4086ms
+2026-02-16 22:05:33.183 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-16 22:05:33.184 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.1834ms
+2026-02-16 22:05:33.195 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232733189 - null null
+2026-02-16 22:05:33.198 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 22:05:33.198 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 3.0114 ms
+2026-02-16 22:05:33.198 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232733189 - 200 20337 text/css 3.4227ms
+2026-02-16 22:05:35.477 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232733189&__browserLink_refresh=a3c1c1623a8542a88103d1f281d6b18f - null null
+2026-02-16 22:05:35.506 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 22:05:35.506 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 28.2031 ms
+2026-02-16 22:05:35.506 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232733189&__browserLink_refresh=a3c1c1623a8542a88103d1f281d6b18f - 200 20337 text/css 28.9609ms
+2026-02-16 22:05:35.756 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-16 22:05:35.756 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.5566ms
+2026-02-16 22:05:35.773 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232735765 - null null
+2026-02-16 22:05:35.775 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 22:05:35.776 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.0285 ms
+2026-02-16 22:05:35.776 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232735765 - 200 20337 text/css 2.4941ms
+2026-02-16 22:05:40.562 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-16 22:05:40.562 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.5961ms
+2026-02-16 22:05:40.580 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232740575 - null null
+2026-02-16 22:05:40.582 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 22:05:40.582 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.2468 ms
+2026-02-16 22:05:40.582 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232740575 - 200 20337 text/css 2.8858ms
+2026-02-16 22:05:46.022 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-16 22:05:46.023 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 5.5031ms
+2026-02-16 22:05:46.063 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232746042 - null null
+2026-02-16 22:05:46.066 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 22:05:46.066 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.4474 ms
+2026-02-16 22:05:46.066 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1771232746042 - 200 20337 text/css 3.2238ms
+2026-02-16 22:08:07.278 +13:00 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using 'C:\Users\USER\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-16 22:08:08.824 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (80ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 22:08:08.920 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 22:08:08.968 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (47ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-16 22:08:09.114 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: https://localhost:7113
+2026-02-16 22:08:09.114 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: http://localhost:5176
+2026-02-16 22:08:09.150 +13:00 [INF] Microsoft.Hosting.Lifetime Application started. Press Ctrl+C to shut down.
+2026-02-16 22:08:09.151 +13:00 [INF] Microsoft.Hosting.Lifetime Hosting environment: Development
+2026-02-16 22:08:09.151 +13:00 [INF] Microsoft.Hosting.Lifetime Content root path: X:\websites\rails\Rebuild\RailTix
+2026-02-16 22:08:09.790 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/ - null null
+2026-02-16 22:08:11.964 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-16 22:08:11.974 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.HomeController (RailTix).
+2026-02-16 22:08:12.134 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[CustomUrl], [t].[IsHomepage], [t].[IsPublished], [t].[ParentId], [t].[Path], [t].[Position], [t].[Slug], [t].[Title], [t].[UpdatedAt], [c0].[Id], [c0].[CreatedAt], [c0].[IsEnabled], [c0].[PageId], [c0].[Position], [c0].[SettingsJson], [c0].[Type], [c0].[UpdatedAt]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[CustomUrl], [c].[IsHomepage], [c].[IsPublished], [c].[ParentId], [c].[Path], [c].[Position], [c].[Slug], [c].[Title], [c].[UpdatedAt]
+    FROM [CmsPages] AS [c]
+    WHERE [c].[IsHomepage] = CAST(1 AS bit) AND [c].[IsPublished] = CAST(1 AS bit)
+) AS [t]
+LEFT JOIN [CmsPageComponents] AS [c0] ON [t].[Id] = [c0].[PageId]
+ORDER BY [t].[Id]
+2026-02-16 22:08:14.434 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view ~/Views/Cms/Page.cshtml.
+2026-02-16 22:08:15.099 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:08:15.176 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view ~/Views/Cms/Page.cshtml executed in 3026.6022ms.
+2026-02-16 22:08:15.180 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.HomeController.Index (RailTix) in 3204.5719ms
+2026-02-16 22:08:15.181 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-16 22:08:15.183 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET / responded 200 in 3265.6634 ms
+2026-02-16 22:08:15.192 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=tlRYpGt3vW1jKXDnpRm3JIzueBslFadIl7tCyPoL_lI - null null
+2026-02-16 22:08:15.192 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - null null
+2026-02-16 22:08:15.195 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/images/railtix-logo.png - null null
+2026-02-16 22:08:15.196 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/ - 200 null text/html; charset=utf-8 5407.586ms
+2026-02-16 22:08:15.204 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:08:15.204 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:08:15.222 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/js/modules/location/bootstrap.js'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\js\modules\location\bootstrap.js'
+2026-02-16 22:08:15.222 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /js/modules/location/bootstrap.js responded 200 in 29.3047 ms
+2026-02-16 22:08:15.223 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - 200 1366 text/javascript 30.2935ms
+2026-02-16 22:08:15.223 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 18.7834ms
+2026-02-16 22:08:15.230 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-16 22:08:15.230 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 37.0941 ms
+2026-02-16 22:08:15.231 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=tlRYpGt3vW1jKXDnpRm3JIzueBslFadIl7tCyPoL_lI - 200 20337 text/css 38.501ms
+2026-02-16 22:08:15.240 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/images/railtix-logo.png'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\images\railtix-logo.png'
+2026-02-16 22:08:15.240 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /images/railtix-logo.png responded 200 in 45.2238 ms
+2026-02-16 22:08:15.240 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/images/railtix-logo.png - 200 304303 image/png 45.9948ms
+2026-02-16 22:08:15.262 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 58.7819ms
+2026-02-16 22:08:15.265 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/favicon.ico - null null
+2026-02-16 22:08:15.267 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/favicon.ico'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\favicon.ico'
+2026-02-16 22:08:15.267 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /favicon.ico responded 200 in 1.8483 ms
+2026-02-16 22:08:15.267 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/favicon.ico - 200 5430 image/x-icon 2.555ms
+2026-02-16 22:08:17.149 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/Account/Manage - null null
+2026-02-16 22:08:17.155 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /Account/Manage responded 301 in 1.0644 ms
+2026-02-16 22:08:17.156 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/Account/Manage - 301 0 null 7.0368ms
+2026-02-16 22:08:17.158 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/manage - null null
+2026-02-16 22:08:17.167 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-16 22:08:17.171 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Manage", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Manage() on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 22:08:17.238 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:08:17.244 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:08:17.245 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:08:17.723 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 476.2502ms - 200
+2026-02-16 22:08:17.724 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 480.8178ms - 200
+2026-02-16 22:08:18.151 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Manage.
+2026-02-16 22:08:18.572 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Manage executed in 843.9806ms.
+2026-02-16 22:08:18.572 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Manage (RailTix) in 1400.9634ms
+2026-02-16 22:08:18.572 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-16 22:08:18.572 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/manage responded 200 in 1412.3410 ms
+2026-02-16 22:08:18.573 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/manage - 200 null text/html; charset=utf-8 1415.1ms
+2026-02-16 22:08:18.597 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:08:18.600 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:08:18.604 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 4.2691ms
+2026-02-16 22:08:18.621 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.3444ms
+2026-02-16 22:08:25.638 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 22:08:25.655 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:08:25.663 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 22:08:25.717 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:08:25.718 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:08:25.718 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:08:26.037 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 318.2824ms - 200
+2026-02-16 22:08:26.037 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 318.5061ms - 200
+2026-02-16 22:08:26.369 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Payment.
+2026-02-16 22:08:26.379 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Payment executed in 341.6556ms.
+2026-02-16 22:08:26.379 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 716.032ms
+2026-02-16 22:08:26.379 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:08:26.379 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 200 in 738.1623 ms
+2026-02-16 22:08:26.380 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 200 null text/html; charset=utf-8 741.576ms
+2026-02-16 22:08:26.399 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:08:26.399 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:08:26.402 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 2.0371ms
+2026-02-16 22:08:26.413 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 14.4397ms
+2026-02-16 22:11:45.051 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/payment - null null
+2026-02-16 22:11:47.100 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:11:47.100 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Payment", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Payment(System.String) on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-16 22:11:47.146 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-16 22:11:47.146 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler Start processing HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:11:47.146 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Sending HTTP request GET https://api.stripe.com/v1/account
+2026-02-16 22:11:47.586 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.ClientHandler Received HTTP response headers after 439.0899ms - 200
+2026-02-16 22:11:47.586 +13:00 [INF] System.Net.Http.HttpClient.StripeApi.LogicalHandler End processing HTTP request after 439.3546ms - 200
+2026-02-16 22:11:47.586 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Payment.
+2026-02-16 22:11:47.593 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Payment executed in 6.5919ms.
+2026-02-16 22:11:47.595 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Payment (RailTix) in 493.1858ms
+2026-02-16 22:11:47.595 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Payment (RailTix)'
+2026-02-16 22:11:47.595 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/payment responded 200 in 495.4679 ms
+2026-02-16 22:11:47.595 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/payment - 200 null text/html; charset=utf-8 2544.1704ms
+2026-02-16 22:11:47.609 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-16 22:11:47.609 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 22:11:47.611 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 1.7942ms
+2026-02-16 22:11:47.615 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=tlRYpGt3vW1jKXDnpRm3JIzueBslFadIl7tCyPoL_lI - null null
+2026-02-16 22:11:47.622 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware The file /css/site.css was not modified
+2026-02-16 22:11:47.622 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 304 in 4.6798 ms
+2026-02-16 22:11:47.622 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=tlRYpGt3vW1jKXDnpRm3JIzueBslFadIl7tCyPoL_lI - 304 null text/css 6.7652ms
+2026-02-16 22:11:47.624 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 15.4063ms

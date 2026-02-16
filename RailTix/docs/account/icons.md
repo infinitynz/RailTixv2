@@ -32,6 +32,16 @@ Example (inline):
 - Check-in — `outline/qr-code.svg`
 - Admin Center — `outline/shield-check.svg`
 
+### Header Account Popout Mapping
+- Trigger avatar/user glyph — inline SVG in `Views/Shared/_Layout.cshtml` (`.nav-account__avatar`)
+- Chevron toggle indicator — inline SVG in `Views/Shared/_Layout.cshtml` (`.nav-account__chevron`)
+- Profile & Settings — user outline glyph
+- My Events — calendar outline glyph
+- Create Event — calendar-plus outline glyph
+- Admin Center — shield-check outline glyph
+- Content Management — document/list outline glyph
+- Logout — arrow-right-from-bracket outline glyph
+
 If a listed icon is not present yet, it may be added (see guidelines below) and this document should be updated accordingly.
 
 ### Guidelines for Adding Icons

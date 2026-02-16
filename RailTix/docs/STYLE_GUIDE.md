@@ -39,7 +39,12 @@ Buttons
 
 Navbar and Layout
 - Custom `nav` with `.nav-brand`, `.nav-menu`, `.nav-item`; responsive toggle adds `.is-open` to menu.
-- `.container` centers content with max-width and horizontal padding.
+- Authenticated users use `.nav-account` popout menu (`.nav-account__trigger`, `.nav-account__menu`, `.nav-account__item`).
+- Account menu styling stays dark and neon-consistent, with subtle custom warm/violet accents for the avatar trigger and menu borders.
+- Keep account menu interactions animated with subtle transitions (open/close translate+fade, chevron rotation, icon/row hover feedback).
+- `.container` centers content with max-width `1340px`, width `100%`, and `20px` side padding.
+- Use `.layout-full` + `.layout-full__inner` for full-width components that should not be limited by `.container`.
+- Keep layout composition flex-based (`display: flex`; optional wrapping) rather than grid.
 
 Implementation Notes
 - All SCSS files compile via `compilerconfig.json`. Edit and Save in Visual Studio to compile.

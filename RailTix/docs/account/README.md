@@ -21,6 +21,8 @@ Role inheritance is defined in `../ROLES_AND_PERMISSIONS.md`.
 - Active menu item is visually highlighted; keyboard navigation is supported.
 - Mobile: sidebar collapses behind a menu button; content remains accessible.
 - All `/account/*` routes require authentication.
+- Authenticated header includes an account popout context menu (icon trigger + role-aware links).
+- The account popout keeps `Logout` as the final action at the bottom.
 
 ### Out of Scope (for this iteration)
 - Detailed event management flows (beyond listing a user’s own events).
@@ -30,6 +32,7 @@ Role inheritance is defined in `../ROLES_AND_PERMISSIONS.md`.
 - `navigation.md` — Left sidebar navigation and role-specific items
 - `dashboard.md` — Account dashboard (Admins & Event Managers)
 - `profile.md` — Profile view/edit and password change (all users)
+- `payment.md` — Stripe Connect status/setup and platform fee context (Admins & Event Managers)
 - `routes_and_permissions.md` — Routing, default redirects, auth guards
 - `icons.md` — Icon inventory and contribution guidelines
 
@@ -41,6 +44,7 @@ Role inheritance is defined in `../ROLES_AND_PERMISSIONS.md`.
 3. `/account/profile` shows the user’s information; a cog icon provides access to `/account/profile/edit`.
 4. On save from `/account/profile/edit`, the user is redirected back to `/account/profile`.
 5. Authorization gates prevent unauthorized access outside the user’s role/ownership scope (see `../ROLES_AND_PERMISSIONS.md`).
+6. Event creation is blocked until Stripe Connect setup is complete for Event Managers.
 
 ### References
 - `../ROLES_AND_PERMISSIONS.md`

@@ -1,0 +1,171 @@
+@model RailTix.Models.ViewModels.Account.AccountPaymentViewModel
+@{
+	ViewData["Title"] = "Payment Settings";
+}
+
+<section class="section account-payment">
+	<div class="card account-payment__card">
+		<h1 class="account-dashboard__title">Payment Settings</h1>
+		<p class="account-dashboard__subtitle">
+			@(Model.UsesPlatformStripeAccount
+				? "Review platform Stripe readiness and fee policy for admin-owned event sales."
+				: "Connect Stripe to receive payouts and enable event sales.")
+		</p>
+
+		@if (TempData["StripeSuccess"] is string stripeSuccess && !string.IsNullOrWhiteSpace(stripeSuccess))
+		{
+			<div class="account-payment__notice is-success">@stripeSuccess</div>
+		}
+		@if (TempData["StripeWarning"] is string stripeWarning && !string.IsNullOrWhiteSpace(stripeWarning))
+		{
+			<div class="account-payment__notice is-warning">@stripeWarning</div>
+		}
+		@if (TempData["StripeError"] is string stripeError && !string.IsNullOrWhiteSpace(stripeError))
+		{
+			<div class="account-payment__notice is-error">@stripeError</div>
+		}
+
+		<div class="account-stripe-status">
+			<div class="account-stripe-status__head">
+				<h2>@(Model.UsesPlatformStripeAccount ? "Stripe Platform" : "Stripe Connect")</h2>
+				<span class="account-stripe-status__pill @(Model.StripeStatus.IsSetupComplete ? "is-complete" : "is-incomplete")">
+					@Model.StripeStatus.StateLabel
+				</span>
+			</div>
+
+			<p class="account-stripe-status__copy">
+				@if (Model.UsesPlatformStripeAccount)
+				{
+					if (!Model.StripeStatus.IsStripeConfigured)
+					{
+						<text>Stripe is not configured for this environment yet. Add platform Stripe keys before accepting card payments.</text>
+					}
+					else if (Model.StripeStatus.IsSetupComplete)
+					{
+						<text>The platform Stripe account is ready. Admin-owned events can use the platform account directly.</text>
+					}
+					else
+					{
+						<text>The platform Stripe account is configured but not fully enabled. Complete Stripe requirements for charges and payouts.</text>
+					}
+				}
+				else if (Model.StripeStatus.IsSetupComplete)
+				{
+					<text>Your account is connected. You can create events and receive Stripe payouts.</text>
+				}
+				else if (!Model.StripeStatus.IsStripeConfigured)
+				{
+					<text>Stripe is not configured for this environment yet. Add Stripe test keys in appsettings before connecting.</text>
+				}
+				else if (!Model.StripeStatus.HasStripeAccountId)
+				{
+					<text>No Stripe account linked yet. Start onboarding to connect your payout account.</text>
+				}
+				else
+				{
+					<text>Stripe account linked, but setup is incomplete. Finish onboarding to enable charges and payouts.</text>
+				}
+			</p>
+
+			<div class="account-stripe-status__checks">
+				<span class="account-stripe-status__check @(Model.StripeStatus.ChargesEnabled ? "is-on" : "is-off")">
+					@(Model.StripeStatus.ChargesEnabled ? "Charges Enabled" : "Charges Disabled")
+				</span>
+				<span class="account-stripe-status__check @(Model.StripeStatus.PayoutsEnabled ? "is-on" : "is-off")">
+					@(Model.StripeStatus.PayoutsEnabled ? "Payouts Enabled" : "Payouts Disabled")
+				</span>
+			</div>
+
+			@if (!string.IsNullOrWhiteSpace(Model.StripeStatus.StripeAccountId))
+			{
+				<p class="account-stripe-status__meta">
+					Account ID: <code>@Model.StripeStatus.StripeAccountId</code>
+				</p>
+			}
+			@if (!string.IsNullOrWhiteSpace(Model.StripeStatus.ErrorMessage))
+			{
+				<p class="account-stripe-status__error">@Model.StripeStatus.ErrorMessage</p>
+			}
+			@if (!Model.StripeStatus.IsSetupComplete &&
+				(!string.IsNullOrWhiteSpace(Model.StripeStatus.RequirementsDisabledReason) ||
+				 Model.StripeStatus.CapabilityIssues.Count > 0 ||
+				 Model.StripeStatus.MissingRequirements.Count > 0))
+			{
+				<div class="account-stripe-status__meta">
+					<p><strong>Missing setup items from Stripe:</strong></p>
+					@if (!string.IsNullOrWhiteSpace(Model.StripeStatus.RequirementsDisabledReason))
+					{
+						<p>Disabled reason: <code>@Model.StripeStatus.RequirementsDisabledReason</code></p>
+					}
+					@if (Model.StripeStatus.CapabilityIssues.Count > 0)
+					{
+						<p>Capabilities to activate:</p>
+						<ul>
+							@foreach (var issue in Model.StripeStatus.CapabilityIssues)
+							{
+								<li><code>@issue</code></li>
+							}
+						</ul>
+					}
+					@if (Model.StripeStatus.MissingRequirements.Count > 0)
+					{
+						<p>Required fields still due:</p>
+						<ul>
+							@foreach (var requirement in Model.StripeStatus.MissingRequirements)
+							{
+								<li><code>@requirement</code></li>
+							}
+						</ul>
+					}
+				</div>
+			}
+
+			<div class="account-stripe-status__actions">
+				@if (Model.UsesPlatformStripeAccount)
+				{
+					<a class="btn btn-outline-primary"
+					   href="@(Model.StripeEnvironmentLabel == "Live" ? "https://dashboard.stripe.com/" : "https://dashboard.stripe.com/test/")"
+					   target="_blank"
+					   rel="noopener noreferrer">
+						Open Platform Stripe Dashboard
+					</a>
+				}
+				else if (!Model.StripeStatus.IsSetupComplete)
+				{
+					<form asp-action="ConnectStripe" method="post">
+						@Html.AntiForgeryToken()
+						<input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+						<button type="submit" class="btn btn-primary">
+							@(Model.StripeStatus.HasStripeAccountId ? "Finish Stripe Setup" : "Connect with Stripe")
+						</button>
+					</form>
+				}
+				else
+				{
+					<form asp-action="OpenStripeDashboard" method="post">
+						@Html.AntiForgeryToken()
+						<input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+						<button type="submit" class="btn btn-outline-primary">Open Stripe Dashboard</button>
+					</form>
+				}
+			</div>
+		</div>
+
+		@if (!string.IsNullOrWhiteSpace(Model.ReturnUrl))
+		{
+			<p class="account-payment__meta">After Stripe setup, you can continue to your previous task.</p>
+		}
+
+		@if (Model.IsAdmin)
+		{
+			<div class="account-payment__meta">
+				Platform environment: <strong>@Model.StripeEnvironmentLabel</strong>.
+			</div>
+			<div class="account-payment__meta">
+				Admin default platform fee policy: <strong>@Model.PlatformFeePercent.ToString("0.##")%</strong> application fee on connected-account ticket sales.
+			</div>
+		}
+	</div>
+</section>
+
+

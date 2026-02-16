@@ -149,5 +149,6 @@ CMS routes are resolved after MVC routes to avoid conflicts.
 - Custom URL is absolute and can escape the parent path.
 - Sibling ordering uses integer position with manual drag/drop support.
 - Admin-only access to Content and Reserved Routes screens.
+- EventList `Category` filtering depends on the Event domain exposing categories/tags in v1 data model.
 
 

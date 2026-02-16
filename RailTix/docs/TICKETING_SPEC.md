@@ -62,6 +62,8 @@ Mirror the Hi.Events structure but align with RailTix naming and roles.
   - Offline payments allowed if instructions are set.
 - **Event end rule**: Once the event has ended, ticket sales are disabled.
 - **Event creation**: Title, start/end, timezone, currency, organizer, location.
+  - Mandatory precondition for Event Managers: Stripe Connect setup complete.
+  - If not connected, user is redirected to account payment setup and create is blocked server-side.
 - **Event duplication**: Optional (copy settings, products, questions, capacities).
 - **Event homepage**: Separate from CMS; driven by EventSettings and organizer branding.
 
@@ -159,11 +161,14 @@ Flows:
 - Event Manager completes Connect onboarding.
 - Store `stripe_account_id` and `stripe_connect_setup_complete`.
 - If card payments enabled, event cannot go LIVE until Stripe setup is complete.
+- Event creation itself is blocked for Event Managers until Stripe setup is complete.
+- UI parity target is Hi.Events account/payment flow: Connect -> Finish Setup -> Connected.
 
 Card payments (recommended approach):
 - Destination charge from platform account with `transfer_data.destination` to connected account.
 - `application_fee_amount` for platform fees.
 - Use Stripe Payment Intents and webhooks for confirmation.
+- Default platform fee for connected-account sales is 2% (global policy).
 
 Offline payments:
 - Event-level setting: enable offline payments + instructions.

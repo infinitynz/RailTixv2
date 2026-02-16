@@ -73,11 +73,14 @@
 	<legend>Event List</legend>
 	<div class="form-group">
 		<label asp-for="Source"></label>
-		<input asp-for="Source" class="form-control" />
+		<select asp-for="Source" asp-items="ViewBag.EventListSourceOptions" class="form-control"></select>
+		<span asp-validation-for="Source" class="text-danger"></span>
 	</div>
 	<div class="form-group">
 		<label asp-for="EventIds"></label>
 		<input asp-for="EventIds" class="form-control" />
+		<small class="text-muted">Required when source is manual. Use comma-separated GUID values.</small>
+		<span asp-validation-for="EventIds" class="text-danger"></span>
 	</div>
 	<div class="form-group">
 		<label asp-for="Category"></label>
@@ -90,6 +93,7 @@
 	<div class="form-group">
 		<label asp-for="Limit"></label>
 		<input asp-for="Limit" type="number" class="form-control" />
+		<span asp-validation-for="Limit" class="text-danger"></span>
 	</div>
 </fieldset>
 

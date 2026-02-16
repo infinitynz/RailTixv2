@@ -42,6 +42,7 @@
 
 3.5 Event Manager Dashboard (hi.events-style)
 - Event Setup: event details, images, schedule, venue, capacity, categories/tags.
+- Payment setup prerequisite: Stripe Connect must be completed before event creation is allowed.
 - Ticketing: ticket types, inventory, pricing rules, fees/taxes, promo codes, holds/comp tickets.
 - Orders & Attendees: order list, exports (CSV/Excel), attendees list, resend tickets, refunds (policy-based).
 - Check-in App: device codes, staff roles, live stats.
@@ -73,8 +74,9 @@
 - Internationalization: i18n-ready; timezone-aware dates; locale formatting.
 - Compliance: GDPR-aligned data handling; privacy policy; cookie consent.
 
-### 7) Integrations (TBD / Pluggable)
-- Payments: Stripe (candidate) for card payments and webhooks.
+### 7) Integrations (Required + Pluggable)
+- Payments: Stripe Connect (required) for card payments, payouts, platform fees, and webhooks.
+- Platform fee baseline: global 2% application fee on connected-account event sales (admin-managed policy).
 - Email: SMTP or transactional provider (e.g., SendGrid).
 - Maps: basic map embed or provider SDK for venue display.
 

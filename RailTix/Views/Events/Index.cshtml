@@ -1,52 +1,133 @@
 @model RailTix.Models.ViewModels.Events.EventListViewModel
+@using System
 @{
 	ViewData["Title"] = "My Events";
+	var now = DateTime.Now;
+	var totalEvents = Model.Events.Count;
+	var liveEvents = Model.Events.Count(e => string.Equals(e.Status, "LIVE", StringComparison.OrdinalIgnoreCase));
+	var draftEvents = Model.Events.Count(e => string.Equals(e.Status, "DRAFT", StringComparison.OrdinalIgnoreCase));
+	var upcomingEvents = Model.Events.Count(e => e.StartsAtLocal >= now);
+
+	string StatusClass(string status)
+	{
+		var normalized = (status ?? string.Empty).Trim().ToUpperInvariant();
+		return normalized switch
+		{
+			"LIVE" => "events-landing__status events-landing__status--live",
+			"DRAFT" => "events-landing__status events-landing__status--draft",
+			"PAUSED" => "events-landing__status events-landing__status--paused",
+			"ARCHIVED" => "events-landing__status events-landing__status--archived",
+			_ => "events-landing__status"
+		};
+	}
 }
 
-<section class="section">
-	<div class="d-flex justify-content-between align-items-center mb-3">
-		<div>
-			<h1 class="h3 mb-1">My Events</h1>
-			<p class="text-muted">Create and manage your events.</p>
-		</div>
-		<a class="btn btn-primary" href="/account/events/create">Create event</a>
-	</div>
+@section Styles {
+	<link rel="stylesheet" href="~/css/components/events-landing.css" asp-append-version="true" />
+}
 
-	@if (Model.Events.Count == 0)
-	{
-		<div class="card p-3">
-			<p class="mb-0">You do not have any events yet. Create one to get started.</p>
-		</div>
-	}
-	else
-	{
-		<div class="card p-3">
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Event</th>
-							<th>Status</th>
-							<th>Start</th>
-							<th>End</th>
-							<th>URL</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var item in Model.Events)
+<section class="section events-landing">
+	<div class="layout-full">
+		<div class="layout-full__inner">
+			<div class="events-landing__hero">
+				<div class="events-landing__hero-row">
+					<div class="events-landing__hero-copy">
+						<p class="events-landing__eyebrow">Event Operations</p>
+						<h1 class="events-landing__title">My Events</h1>
+						<p class="events-landing__subtitle">Create, launch, and monitor your events from a single control surface.</p>
+					</div>
+					<div class="events-landing__hero-actions">
+						@if (Model.CanCreateEvents)
 						{
-							<tr>
-								<td>@item.Title</td>
-								<td>@item.Status</td>
-								<td>@item.StartsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
-								<td>@item.EndsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
-								<td><code>/event/@item.Slug</code></td>
-							</tr>
+							<a class="btn btn-primary" href="/account/events/create">Create Event</a>
 						}
-					</tbody>
-				</table>
+						else
+						{
+							<a class="btn btn-outline-primary" href="/account/payment?returnUrl=%2Faccount%2Fevents%2Fcreate">
+								@(Model.IsAdmin ? "Configure Platform Stripe to Create Events" : "Connect Stripe to Create Events")
+							</a>
+						}
+					</div>
+				</div>
+				@if (!Model.CanCreateEvents && !string.IsNullOrWhiteSpace(Model.CreateEventsBlockedReason))
+				{
+					<p class="events-landing__subtitle">@Model.CreateEventsBlockedReason</p>
+				}
+				<div class="events-landing__stats">
+					<div class="events-landing__stat">
+						<span class="events-landing__stat-label">Total</span>
+						<span class="events-landing__stat-value">@totalEvents</span>
+					</div>
+					<div class="events-landing__stat">
+						<span class="events-landing__stat-label">Live</span>
+						<span class="events-landing__stat-value">@liveEvents</span>
+					</div>
+					<div class="events-landing__stat">
+						<span class="events-landing__stat-label">Drafts</span>
+						<span class="events-landing__stat-value">@draftEvents</span>
+					</div>
+					<div class="events-landing__stat">
+						<span class="events-landing__stat-label">Upcoming</span>
+						<span class="events-landing__stat-value">@upcomingEvents</span>
+					</div>
+				</div>
 			</div>
 		</div>
-	}
+	</div>
+
+	<div class="events-landing__content">
+		@if (Model.Events.Count == 0)
+		{
+			<div class="card events-landing__empty">
+				<h2 class="events-landing__empty-title">No events yet</h2>
+				<p class="events-landing__empty-description">Create your first event to start selling and tracking attendance.</p>
+				<div class="events-landing__empty-actions">
+					@if (Model.CanCreateEvents)
+					{
+						<a class="btn btn-primary" href="/account/events/create">Create Event</a>
+					}
+					else
+					{
+						<a class="btn btn-outline-primary" href="/account/payment?returnUrl=%2Faccount%2Fevents%2Fcreate">
+							@(Model.IsAdmin ? "Configure Platform Stripe to Create Events" : "Connect Stripe to Create Events")
+						</a>
+					}
+				</div>
+			</div>
+		}
+		else
+		{
+			<div class="card events-landing__table-shell">
+				<div class="events-landing__table-wrap">
+					<table class="table events-landing__table">
+						<thead>
+							<tr>
+								<th>Event</th>
+								<th>Status</th>
+								<th>Start</th>
+								<th>End</th>
+								<th>Public URL</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Events)
+							{
+								<tr>
+									<td>
+										<div class="events-landing__event-title">@item.Title</div>
+										<div class="events-landing__event-path"><code>/event/@item.Slug</code></div>
+									</td>
+									<td><span class="@StatusClass(item.Status)">@item.Status</span></td>
+									<td class="events-landing__date">@item.StartsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
+									<td class="events-landing__date">@item.EndsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
+									<td><a href="/event/@item.Slug" target="_blank" rel="noopener noreferrer">Open Event</a></td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		}
+	</div>
 </section>
 

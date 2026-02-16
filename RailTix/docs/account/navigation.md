@@ -18,6 +18,7 @@ Order of sections and items (top → bottom). Only items meeting the user’s mi
 
 2) Event Management (Event Manager, Admin)
 - Dashboard — `/account/` — icon: `outline/home.svg`
+- Payment Settings — `/account/payment` — icon: `outline/credit-card.svg`
 - My Events — `/account/events` — icon: `outline/calendar.svg`
 - Reports (future) — `/account/reports` — icon: `outline/chart-bar.svg`
 - Check-in (future) — `/account/checkin` — icon: `outline/qr-code.svg`
@@ -29,6 +30,7 @@ Notes:
 - Do not include “Edit Profile” in the left menu. Access to edit is via a cog icon on the profile view (see `profile.md`).
 - If an item is not yet implemented, it should either be hidden or shown as disabled per product guidance.
 - See `icons.md` for the inline SVG guidance and outline/solid directories.
+- If Stripe setup is incomplete for an Event Manager/Admin seller, show a visual warning state on "Payment Settings" and use this route as the primary CTA target from event creation/publish guards.
 
 ### Contextual Items (Event-Specific)
 When in an event context (e.g., `/account/events/:id/...`), the sidebar may display a contextual sub-section beneath “My Events”:
@@ -45,6 +47,30 @@ This contextual block is only shown while viewing a specific event and honors ow
 - Active State: High-contrast background or left bar accent; icon and label color shift.
 - Hover/Focus: Distinct state with accessible contrast ratios (WCAG AA minimum).
 - Collapsed Mode: Width reduces to show icons only; tooltip on hover for labels.
+
+### Global Header Account Context Menu
+For authenticated users, the top-right navbar account control is an icon-triggered popout menu.
+
+- Trigger: avatar/user icon + display name + chevron.
+- Interaction: click opens/closes; click-outside and `Esc` close; smooth opacity/translate transitions.
+- Visual style: dark RailTix surface with subtle custom warm/violet accenting.
+- `Logout` is rendered as the final row, separated by a divider.
+
+Menu item order (top → bottom), role-aware:
+1) All authenticated users
+- Profile & Settings — `/Account/Manage` (temporary profile/settings entry point)
+2) Event Manager and Admin
+- Payment Settings — `/account/payment`
+- My Events — `/account/events`
+- Create Event — `/account/events/create`
+3) Admin
+- Admin Center — `/account/admin`
+- Content Management — `/account/admin/content/pages`
+4) Final action
+- Logout (POST) — `/Account/Logout`
+
+Implementation note:
+- When dedicated `/account/profile*` routes are shipped, rename "Profile & Settings" and repoint accordingly.
 
 ### Empty/Edge States
 - If a role has access to no items (unlikely), show a friendly message and a link to Profile.

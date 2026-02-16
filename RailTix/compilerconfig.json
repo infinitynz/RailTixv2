@@ -8,5 +8,10 @@
     "outputFile": "wwwroot/css/components/forms.css",
     "inputFile": "wwwroot/css/components/forms.scss",
     "sourceMap": true
+  },
+  {
+    "outputFile": "wwwroot/css/components/events-landing.css",
+    "inputFile": "wwwroot/css/components/events-landing.scss",
+    "sourceMap": true
   }
 ]

@@ -1,10 +1,81 @@
+@model RailTix.Models.ViewModels.Account.AccountManageViewModel
 @{
-    ViewData["Title"] = "My Account";
+	ViewData["Title"] = "Account Dashboard";
 }
 
-<div class="container py-5" style="max-width: 720px;">
-    <h1 class="h3 mb-3">My Account</h1>
-    <p class="text-muted">Account settings will appear here.</p>
-</div>
+<section class="section account-dashboard">
+	<div class="card account-dashboard__card">
+		<h1 class="account-dashboard__title">Account Dashboard</h1>
+		<p class="account-dashboard__subtitle">Manage your account setup and event readiness.</p>
+
+		@if (Model.CanManageEvents && Model.StripeStatus != null)
+		{
+			<div class="account-stripe-status">
+				<div class="account-stripe-status__head">
+					<h2>@(Model.IsAdmin ? "Stripe Platform Status" : "Stripe Status")</h2>
+					<span class="account-stripe-status__pill @(Model.StripeStatus.IsSetupComplete ? "is-complete" : "is-incomplete")">
+						@Model.StripeStatus.StateLabel
+					</span>
+				</div>
+				<p class="account-stripe-status__copy">
+					@if (Model.IsAdmin)
+					{
+						if (!Model.StripeStatus.IsStripeConfigured)
+						{
+							<text>Stripe is not configured for this environment yet. Add platform keys before accepting card payments.</text>
+						}
+						else if (Model.StripeStatus.IsSetupComplete)
+						{
+							<text>The platform Stripe account is configured and ready for admin-managed events.</text>
+						}
+						else
+						{
+							<text>The platform Stripe account needs additional setup to enable charges and payouts.</text>
+						}
+					}
+					else if (Model.StripeStatus.IsSetupComplete)
+					{
+						<text>Your Stripe account is connected and ready for payouts.</text>
+					}
+					else if (!Model.StripeStatus.IsStripeConfigured)
+					{
+						<text>Stripe keys are not configured in this environment. Add test keys to enable onboarding.</text>
+					}
+					else if (!Model.StripeStatus.HasStripeAccountId)
+					{
+						<text>Connect Stripe before creating events and accepting ticket payments.</text>
+					}
+					else
+					{
+						<text>Stripe account linked. Finish onboarding so both charges and payouts are enabled.</text>
+					}
+				</p>
+
+				<div class="account-stripe-status__checks">
+					<span class="account-stripe-status__check @(Model.StripeStatus.ChargesEnabled ? "is-on" : "is-off")">
+						@(Model.StripeStatus.ChargesEnabled ? "Charges Enabled" : "Charges Disabled")
+					</span>
+					<span class="account-stripe-status__check @(Model.StripeStatus.PayoutsEnabled ? "is-on" : "is-off")">
+						@(Model.StripeStatus.PayoutsEnabled ? "Payouts Enabled" : "Payouts Disabled")
+					</span>
+				</div>
+
+				@if (!string.IsNullOrWhiteSpace(Model.StripeStatus.ErrorMessage))
+				{
+					<p class="account-stripe-status__error">@Model.StripeStatus.ErrorMessage</p>
+				}
+
+				<div class="account-stripe-status__actions">
+					<a class="btn btn-primary" href="/account/payment">Payment Settings</a>
+					<a class="btn btn-outline-primary" href="/account/events">My Events</a>
+				</div>
+			</div>
+		}
+		else
+		{
+			<p class="account-dashboard__subtitle">Profile and account settings will appear here.</p>
+		}
+	</div>
+</section>
 
 

@@ -15,9 +15,11 @@
 </div>
 
 @section Styles {
-	<style>
-		/* Keep minimal here; main styles live in site.css */
-	</style>
+	@RenderSection("Styles", required: false)
+}
+
+@section Scripts {
+	@RenderSection("Scripts", required: false)
 }
 
 

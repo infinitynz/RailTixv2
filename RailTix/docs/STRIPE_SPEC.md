@@ -1,6 +1,6 @@
 ## RailTix - Stripe Payments Specification
 
-Status: Draft v0.1  
+Status: Draft v0.2  
 Applies to: Stripe Connect, card payments, refunds, payouts, webhooks
 
 Reference implementation in this repo (Hi.Events):
@@ -12,6 +12,13 @@ Reference implementation in this repo (Hi.Events):
 - `hi.events.full/backend/routes/api.php`
 - `hi.events.full/backend/database/migrations/*stripe*`
 
+Authoritative Stripe documentation (keep synced):
+- Connect onboarding: https://docs.stripe.com/connect/connect-onboarding
+- Express accounts: https://docs.stripe.com/connect/express-accounts
+- Destination charges + application fees: https://docs.stripe.com/connect/destination-charges
+- Connect account capabilities (`charges_enabled`, `payouts_enabled`): https://docs.stripe.com/connect/account-capabilities
+- Webhooks: https://docs.stripe.com/webhooks
+
 ### 1) Goals
 - Accept card payments for tickets with Stripe.
 - Route funds to Event Managers via Stripe Connect.
@@ -22,8 +29,12 @@ Reference implementation in this repo (Hi.Events):
 ### 2) Stripe Connect Model
 - **Admin** is the platform owner and holds the master Stripe account.
 - **Event Manager** connects a Stripe account to receive payouts.
-- Default to **Stripe Connect Express** (unless Standard is chosen later).
-- Payment intent is created against the connected account with an application fee.
+- Use **Stripe Connect Express** (Hi.Events parity) for Event Manager onboarding.
+- Payment intent is created with Connect account context and an application fee for platform revenue share.
+- RailTix account/payment UX should mirror Hi.Events open-source flow:
+  - no account linked: "Connect with Stripe"
+  - account linked but incomplete: "Finish Stripe Setup"
+  - completed: connected status + link to Stripe Dashboard
 
 ### 3) Configuration and Secrets
 - Store keys in Azure Key Vault; load via app settings at runtime.
@@ -106,8 +117,36 @@ Use these tables or equivalent entities in .NET:
 3. Generate Stripe account link (refresh and return URLs).
 4. Store `stripe_account_id` and account type.
 5. Mark setup complete when `charges_enabled` and `payouts_enabled` are true.
-6. Block "card payments" if setup is incomplete.
+6. Block event creation and card payments if setup is incomplete.
 7. Update status on `account.updated` webhook.
+
+Hi.Events API parity target:
+- `POST /accounts/{account_id}/stripe/connect` (create or get connect details; may return `connect_url`)
+- `GET /accounts/{account_id}/stripe/connect_accounts` (status, setup complete, primary account)
+
+### 5.1) Account UI Requirements (Event Manager + Admin)
+Event Manager account/payment page must include:
+- Stripe status panel with three explicit states:
+  - `NotConnected`: CTA "Connect with Stripe"
+  - `Incomplete`: CTA "Finish Stripe Setup"
+  - `Connected`: badge + "Open Stripe Dashboard"
+- Helper copy describing that Stripe Connect is required to receive ticket payout funds.
+- If onboarding returns from Stripe (`is_return`, `is_refresh` query flags), refresh status immediately.
+- Optional docs links: Stripe Connect overview and integration docs.
+
+Admin account/payment page differs from Event Manager:
+- Admin sees global platform Stripe connection status and environment (test/live).
+- Admin manages default platform fee policy (global 2% default).
+- Admin can view reconciliation health, webhook health, and payout summaries.
+- Admin can override fee behavior for admin-owned events if needed (policy toggle).
+
+### 5.2) Event Creation Gate (Mandatory)
+Event Managers must not be able to create events before Stripe Connect setup is complete.
+
+Enforcement requirements:
+- UI: "Create Event" button is disabled/hidden if `stripe_connect_setup_complete != true`, with CTA to `/account/payment`.
+- Route guard: direct access to `/account/events/create` redirects to `/account/payment` with return URL.
+- Server-side guard: event create endpoint returns `403` if Stripe setup is incomplete, regardless of UI state.
 
 ### 6) Payment Intent Creation
 Pre-conditions:
@@ -155,8 +194,12 @@ Default fee rules (Hi.Events parity):
   - No destination transfer required.
 - **Event Manager-owned events** (connected account is the seller):
   - Destination charge with `transfer_data.destination = connected_account_id`.
-  - `application_fee_amount = 2%` of the order total (configurable, but default 2%).
+  - `application_fee_amount = 2%` of the order total (global default).
   - If pass-through is enabled, buyer covers the fee; otherwise it is deducted from payout.
+
+Global 2% clarification:
+- The "global 2% cut" is the platform application fee policy for connected-account sales.
+- This is configured centrally by Admin and applied consistently unless explicitly overridden by policy.
 
 ### 9) Refunds
 - Refunds can be partial or full.
@@ -196,11 +239,21 @@ Event Manager:
 - Connect Stripe button and status indicator.
 - Show "setup complete" or outstanding requirements.
 - Control payment providers (card, offline).
+- "Create Event" is blocked until Stripe setup is complete.
 
 Admin:
+- Connect/verify the global platform Stripe account.
 - Platform fee configuration.
 - Stripe key management (config only, no UI editing in prod).
 - Payout reconciliation logs and errors.
+
+### 12.1) Minimum Event Manager UX (Hi.Events style)
+- In dashboard/checklist areas, show "Connect payment processing" if incomplete.
+- CTA goes to account payment page.
+- Until connected, block:
+  - create event
+  - publish event
+  - card payment activation
 
 ### 13) Security and Compliance
 - Do not store card data; use Stripe.js on the client.
@@ -215,8 +268,30 @@ Admin:
 - Use Azure Redis Cache for webhook idempotency cache.
 - Ensure webhook endpoint is public and has TLS.
 
-### 15) Open Decisions
-- Connect account type: Express vs Standard.
+### 15) Admin Platform Account Runbook (Global 2% Cut)
+Use this when linking the main platform account and enabling the default 2% platform fee.
+
+1. Create or verify the Stripe platform account (test + live).
+2. Enable Stripe Connect for the platform account.
+3. Confirm Connect type is Express for organizer onboarding.
+4. Configure platform keys and webhook secret in environment/Key Vault.
+5. Configure global fee policy:
+   - `default_application_fee_percent = 2.0`
+   - apply to connected-account event sales by default.
+6. Verify onboarding path:
+   - Event Manager opens `/account/payment`
+   - connects Stripe
+   - status becomes complete only when Stripe returns `charges_enabled && payouts_enabled`.
+7. Verify fee behavior with test payment:
+   - Event Manager-owned event: application fee = 2%
+   - Admin-owned event (platform seller mode): application fee default = 0 (policy overrideable).
+8. Verify webhook processing:
+   - `payment_intent.succeeded`, `charge.succeeded`, `account.updated`, `payout.*`
+   - reconciliation records update correctly.
+9. Verify creation guard:
+   - disconnected Event Manager cannot create event.
+
+### 16) Open Decisions
 - Multi-platform Stripe support: single or region-specific.
 - Dispute and chargeback handling policy.
 - Stripe Tax vs internal tax calculations.

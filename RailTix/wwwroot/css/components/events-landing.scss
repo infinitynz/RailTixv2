@@ -1,0 +1,233 @@
+@import "../_tokens";
+
+.events-landing {
+	display: flex;
+	flex-direction: column;
+	gap: 1.2rem;
+}
+
+
+.events-landing__hero {
+	background:
+		radial-gradient(80% 140% at 0% 0%, rgba($rtx-accent-violet, .22), transparent 58%),
+		radial-gradient(95% 180% at 100% 0%, rgba($rtx-green, .12), transparent 62%),
+		linear-gradient(180deg, rgba($rtx-bg-elevated, .95) 0%, rgba($rtx-surface, .95) 100%);
+
+
+	border: 1px solid rgba($rtx-white, .08);
+	border-radius: $rtx-radius-lg;
+	
+	box-shadow: $rtx-shadow-dark-soft;
+	padding: 1rem;
+}
+
+.events-landing__hero-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.events-landing__hero-copy {
+	flex: 1 1 420px;
+}
+
+.events-landing__eyebrow {
+	margin: 0 0 .25rem;
+	color: rgba($rtx-white, .72);
+	font-size: .78rem;
+	letter-spacing: .85px;
+	text-transform: uppercase;
+}
+
+.events-landing__title {
+	margin: 0;
+	color: $rtx-white;
+	font-size: clamp(1.8rem, 1.6rem + 1vw, 2.4rem);
+}
+
+.events-landing__subtitle {
+	margin: .5rem 0 0;
+	color: rgba($rtx-white, .82);
+	max-width: 64ch;
+}
+
+.events-landing__hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .65rem;
+	align-items: center;
+}
+
+.events-landing__hero-actions .btn {
+	margin-top: 0;
+}
+
+.events-landing__stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .75rem;
+	margin-top: 1rem;
+}
+
+.events-landing__stat {
+	flex: 1 1 170px;
+	min-width: 170px;
+	background-color: rgba($rtx-bg, .5);
+	border: 1px solid rgba($rtx-white, .08);
+	border-radius: $rtx-radius-sm;
+	padding: .7rem .82rem;
+	display: flex;
+	flex-direction: column;
+	gap: .15rem;
+}
+
+.events-landing__stat-label {
+	color: rgba($rtx-white, .62);
+	font-size: .76rem;
+	letter-spacing: .6px;
+	text-transform: uppercase;
+}
+
+.events-landing__stat-value {
+	color: $rtx-white;
+	font-size: 1.16rem;
+	font-weight: 650;
+	line-height: 1.15;
+}
+
+.events-landing__content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.events-landing__empty {
+	display: flex;
+	flex-direction: column;
+	gap: .8rem;
+	padding: 1rem;
+}
+
+.events-landing__empty-title {
+	margin: 0;
+	color: $rtx-white;
+	font-size: 1.1rem;
+}
+
+.events-landing__empty-description {
+	margin: 0;
+	color: rgba($rtx-white, .74);
+}
+
+.events-landing__empty-actions {
+	display: flex;
+	gap: .65rem;
+	flex-wrap: wrap;
+}
+
+.events-landing__empty-actions .btn {
+	margin-top: 0;
+}
+
+.events-landing__table-shell {
+	padding: .25rem .8rem .8rem;
+}
+
+.events-landing__table-wrap {
+	overflow-x: auto;
+}
+
+.events-landing__table {
+	min-width: 760px;
+	margin-bottom: 0;
+}
+
+.events-landing__table th {
+	color: rgba($rtx-white, .62);
+	font-size: .76rem;
+	letter-spacing: .62px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.events-landing__table td {
+	vertical-align: middle;
+}
+
+.events-landing__event-title {
+	color: rgba($rtx-white, .95);
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.events-landing__event-path {
+	margin-top: .2rem;
+}
+
+.events-landing__event-path code {
+	display: inline-block;
+	font-size: .78rem;
+	color: rgba($rtx-green, .86);
+	background-color: rgba($rtx-green, .09);
+	border: 1px solid rgba($rtx-green, .24);
+	padding: .12rem .35rem;
+	border-radius: 6px;
+}
+
+.events-landing__date {
+	color: rgba($rtx-white, .86);
+	font-size: .9rem;
+	white-space: nowrap;
+}
+
+.events-landing__status {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: .22rem .58rem;
+	border-radius: 999px;
+	font-size: .72rem;
+	font-weight: 700;
+	letter-spacing: .4px;
+	text-transform: uppercase;
+	border: 1px solid rgba($rtx-white, .24);
+	background-color: rgba($rtx-white, .08);
+	color: rgba($rtx-white, .9);
+}
+
+.events-landing__status--live {
+	color: #bcff96;
+	background-color: rgba($rtx-green, .2);
+	border-color: rgba($rtx-green, .45);
+}
+
+.events-landing__status--draft {
+	color: #ffe6a3;
+	background-color: rgba(255, 193, 7, .15);
+	border-color: rgba(255, 193, 7, .35);
+}
+
+.events-landing__status--paused {
+	color: #fcb4ff;
+	background-color: rgba($rtx-pink, .14);
+	border-color: rgba($rtx-pink, .38);
+}
+
+.events-landing__status--archived {
+	color: rgba($rtx-white, .8);
+	background-color: rgba($rtx-white, .06);
+	border-color: rgba($rtx-white, .2);
+}
+
+@media (max-width: 860px) {
+	.events-landing__hero {
+		padding: .9rem;
+	}
+
+	.events-landing__table {
+		min-width: 680px;
+	}
+}
+

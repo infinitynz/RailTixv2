@@ -11,6 +11,7 @@ using RailTix.Models.Domain;
 using RailTix.Models.ViewModels.Events;
 using RailTix.Services.Cms;
 using RailTix.Services.Location;
+using RailTix.Services.Payments;
 
 namespace RailTix.Controllers
 {
@@ -22,6 +23,7 @@ namespace RailTix.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ICmsUrlService _urlService;
         private readonly ILocationService _locationService;
+        private readonly IStripeConnectService _stripeConnectService;
         private readonly ILogger<EventsController> _logger;
 
         public EventsController(
@@ -29,12 +31,14 @@ namespace RailTix.Controllers
             UserManager<ApplicationUser> userManager,
             ICmsUrlService urlService,
             ILocationService locationService,
+            IStripeConnectService stripeConnectService,
             ILogger<EventsController> logger)
         {
             _db = db;
             _userManager = userManager;
             _urlService = urlService;
             _locationService = locationService;
+            _stripeConnectService = stripeConnectService;
             _logger = logger;
         }
 
@@ -43,6 +47,32 @@ namespace RailTix.Controllers
         {
             var userId = _userManager.GetUserId(User);
             var isAdmin = User.IsInRole("Admin");
+            var currentUser = await _userManager.GetUserAsync(User);
+            var canCreateEvents = false;
+            string? createEventsBlockedReason = null;
+
+            if (isAdmin)
+            {
+                var platformStatus = await _stripeConnectService.GetPlatformStatusAsync(HttpContext.RequestAborted);
+                canCreateEvents = platformStatus.IsSetupComplete;
+                createEventsBlockedReason = canCreateEvents
+                    ? null
+                    : (string.IsNullOrWhiteSpace(platformStatus.ErrorMessage)
+                        ? "Platform Stripe account is not ready. Verify Stripe configuration in Payment Settings."
+                        : platformStatus.ErrorMessage);
+            }
+            else
+            {
+                var stripeStatus = currentUser == null
+                    ? null
+                    : await _stripeConnectService.GetStatusAsync(currentUser, HttpContext.RequestAborted);
+                canCreateEvents = stripeStatus?.IsSetupComplete ?? false;
+                createEventsBlockedReason = canCreateEvents
+                    ? null
+                    : (string.IsNullOrWhiteSpace(stripeStatus?.ErrorMessage)
+                        ? "Connect Stripe in Payment Settings before creating events."
+                        : stripeStatus?.ErrorMessage);
+            }
             var query = _db.Events.AsNoTracking();
             if (!isAdmin && !string.IsNullOrWhiteSpace(userId))
             {
@@ -56,6 +86,8 @@ namespace RailTix.Controllers
             var model = new EventListViewModel
             {
                 IsAdmin = isAdmin,
+                CanCreateEvents = canCreateEvents,
+                CreateEventsBlockedReason = createEventsBlockedReason,
                 Events = events.Select(e => new EventListItemViewModel
                 {
                     Id = e.Id,
@@ -76,6 +108,12 @@ namespace RailTix.Controllers
         public async Task<IActionResult> Create()
         {
             var user = await _userManager.GetUserAsync(User);
+            var stripeGuardResult = await EnsureStripeReadyForEventCreationAsync(user);
+            if (stripeGuardResult != null)
+            {
+                return stripeGuardResult;
+            }
+
             var now = DateTime.Now;
             var defaultStart = now.AddDays(7).Date.AddHours(19);
             var defaultEnd = defaultStart.AddHours(3);
@@ -116,6 +154,12 @@ namespace RailTix.Controllers
             if (user == null)
             {
                 return Unauthorized();
+            }
+
+            var stripeGuardResult = await EnsureStripeReadyForEventCreationAsync(user);
+            if (stripeGuardResult != null)
+            {
+                return stripeGuardResult;
             }
 
             ValidateDates(model);
@@ -175,6 +219,43 @@ namespace RailTix.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<IActionResult?> EnsureStripeReadyForEventCreationAsync(ApplicationUser? user)
+        {
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            if (User.IsInRole("Admin"))
+            {
+                var platformStatus = await _stripeConnectService.GetPlatformStatusAsync(HttpContext.RequestAborted);
+                if (platformStatus.IsSetupComplete)
+                {
+                    return null;
+                }
+
+                TempData["StripeError"] = string.IsNullOrWhiteSpace(platformStatus.ErrorMessage)
+                    ? "Platform Stripe account is not ready. Verify Stripe configuration in Payment Settings before creating events."
+                    : platformStatus.ErrorMessage;
+
+                var adminReturnUrl = Url.Action(nameof(Create), "Events");
+                return RedirectToAction("Payment", "Account", new { returnUrl = adminReturnUrl });
+            }
+
+            var stripeStatus = await _stripeConnectService.GetStatusAsync(user, HttpContext.RequestAborted);
+            if (stripeStatus.IsSetupComplete)
+            {
+                return null;
+            }
+
+            TempData["StripeError"] = string.IsNullOrWhiteSpace(stripeStatus.ErrorMessage)
+                ? "Connect Stripe and complete onboarding before creating events."
+                : stripeStatus.ErrorMessage;
+
+            var returnUrl = Url.Action(nameof(Create), "Events");
+            return RedirectToAction("Payment", "Account", new { returnUrl });
         }
 
         private void ValidateDates(EventEditViewModel model)

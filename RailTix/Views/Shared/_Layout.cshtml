@@ -24,16 +24,92 @@
 						<div id="navMain" class="nav-menu">
 							@if (User?.Identity?.IsAuthenticated ?? false)
 							{
- 								
- 									var _u = await UserManager.GetUserAsync(User);
- 									var _displayName = _u?.FirstName ?? User.Identity!.Name ?? "Account";
- 							
- 								<a class="nav-item" asp-controller="Account" asp-action="Manage">@_displayName</a>
-								<div class="nav-item">
-									<form asp-controller="Account" asp-action="Logout" method="post">
-										<button type="submit" class="btn btn-link">Logout</button>
-										@Html.AntiForgeryToken()
-									</form>
+								var _u = await UserManager.GetUserAsync(User);
+								var _displayName = _u?.FirstName ?? User.Identity!.Name ?? "Account";
+								var _isAdmin = User.IsInRole("Admin");
+								var _isEventManager = User.IsInRole("EventManager");
+								var _canManageEvents = _isAdmin || _isEventManager;
+
+								<div class="nav-account" data-account-menu>
+									<button type="button"
+											class="nav-account__trigger"
+											data-account-menu-trigger
+											aria-haspopup="menu"
+											aria-expanded="false"
+											aria-controls="accountMenu">
+										<span class="nav-account__avatar" aria-hidden="true">
+											<svg viewBox="0 0 24 24" focusable="false" xmlns="http://www.w3.org/2000/svg">
+												<path d="M12 11.25C14.0711 11.25 15.75 9.57107 15.75 7.5C15.75 5.42893 14.0711 3.75 12 3.75C9.92893 3.75 8.25 5.42893 8.25 7.5C8.25 9.57107 9.92893 11.25 12 11.25Z" fill="currentColor"></path>
+												<path d="M4.5 20.2498C4.5 16.9361 7.18629 14.2498 10.5 14.2498H13.5C16.8137 14.2498 19.5 16.9361 19.5 20.2498V20.2498H4.5Z" fill="currentColor"></path>
+											</svg>
+										</span>
+										<span class="nav-account__name">@_displayName</span>
+										<svg class="nav-account__chevron" aria-hidden="true" focusable="false" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+											<path d="M5 7.5L10 12.5L15 7.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+
+									<div id="accountMenu" class="nav-account__menu" role="menu" aria-label="Account menu">
+										<a class="nav-account__item" asp-controller="Account" asp-action="Manage" role="menuitem">
+											<svg class="nav-account__item-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M12 11.25C14.0711 11.25 15.75 9.57107 15.75 7.5C15.75 5.42893 14.0711 3.75 12 3.75C9.92893 3.75 8.25 5.42893 8.25 7.5C8.25 9.57107 9.92893 11.25 12 11.25Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+												<path d="M4.5 20.2498C4.5 16.9361 7.18629 14.2498 10.5 14.2498H13.5C16.8137 14.2498 19.5 16.9361 19.5 20.2498V20.2498" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+											</svg>
+											<span>Profile &amp; Settings</span>
+										</a>
+
+										@if (_canManageEvents)
+										{
+											<a class="nav-account__item" href="/account/payment" role="menuitem">
+												<svg class="nav-account__item-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path d="M3 7.5C3 6.25736 4.00736 5.25 5.25 5.25H18.75C19.9926 5.25 21 6.25736 21 7.5V16.5C21 17.7426 19.9926 18.75 18.75 18.75H5.25C4.00736 18.75 3 17.7426 3 16.5V7.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M3 9.75H21M16.5 14.25H18.75" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+												<span>Payment Settings</span>
+											</a>
+											<a class="nav-account__item" href="/account/events" role="menuitem">
+												<svg class="nav-account__item-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path d="M7.5 3V6M16.5 3V6M4.5 9.75H19.5M6 21H18C19.2426 21 20.25 19.9926 20.25 18.75V7.5C20.25 6.25736 19.2426 5.25 18 5.25H6C4.75736 5.25 3.75 6.25736 3.75 7.5V18.75C3.75 19.9926 4.75736 21 6 21Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+												<span>My Events</span>
+											</a>
+											<a class="nav-account__item" href="/account/events/create" role="menuitem">
+												<svg class="nav-account__item-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path d="M12 5.25V18.75M5.25 12H18.75" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M6 21H18C19.2426 21 20.25 19.9926 20.25 18.75V7.5C20.25 6.25736 19.2426 5.25 18 5.25H6C4.75736 5.25 3.75 6.25736 3.75 7.5V18.75C3.75 19.9926 4.75736 21 6 21Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+												<span>Create Event</span>
+											</a>
+										}
+
+										@if (_isAdmin)
+										{
+											<a class="nav-account__item" href="/account/admin" role="menuitem">
+												<svg class="nav-account__item-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9 12L11.25 14.25L15 9.75M12 3C10.067 4.83097 7.45401 6 4.5 6C4.45289 6 4.40585 5.9997 4.35889 5.9991C4.00348 7.08032 3.75 8.40274 3.75 9.75C3.75 15.1738 7.35869 19.6919 12 21C16.6413 19.6919 20.25 15.1738 20.25 9.75C20.25 8.40274 19.9965 7.08032 19.6411 5.9991C19.5942 5.9997 19.5471 6 19.5 6C16.546 6 13.933 4.83097 12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+												<span>Admin Center</span>
+											</a>
+											<a class="nav-account__item" href="/account/admin/content/pages" role="menuitem">
+												<svg class="nav-account__item-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path d="M4.5 5.25C4.5 4.42157 5.17157 3.75 6 3.75H18C18.8284 3.75 19.5 4.42157 19.5 5.25V18.75C19.5 19.5784 18.8284 20.25 18 20.25H6C5.17157 20.25 4.5 19.5784 4.5 18.75V5.25Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M8.25 8.25H15.75M8.25 12H15.75M8.25 15.75H12.75" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+												<span>Content Management</span>
+											</a>
+										}
+
+										<div class="nav-account__divider" role="separator"></div>
+										<form asp-controller="Account" asp-action="Logout" method="post" class="nav-account__logout-form" role="none">
+											@Html.AntiForgeryToken()
+											<button type="submit" class="nav-account__item nav-account__item--logout" role="menuitem">
+												<svg class="nav-account__item-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path d="M15.75 8.25L19.5 12M19.5 12L15.75 15.75M19.5 12H9.75M10.5 5.25H6C5.17157 5.25 4.5 5.92157 4.5 6.75V17.25C4.5 18.0784 5.17157 18.75 6 18.75H10.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+												<span>Logout</span>
+											</button>
+										</form>
+									</div>
 								</div>
 							}
 							else
@@ -66,6 +142,40 @@
 					menu.classList.toggle('is-open');
 				});
 			}
+
+			const accountMenuRoot = document.querySelector('[data-account-menu]');
+			const accountMenuTrigger = accountMenuRoot?.querySelector('[data-account-menu-trigger]');
+			const accountMenu = accountMenuRoot?.querySelector('.nav-account__menu');
+
+			if (accountMenuRoot && accountMenuTrigger && accountMenu) {
+				const setMenuState = function (isOpen) {
+					accountMenuRoot.classList.toggle('is-open', isOpen);
+					accountMenuTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+				};
+
+				accountMenuTrigger.addEventListener('click', function (event) {
+					event.preventDefault();
+					event.stopPropagation();
+					setMenuState(!accountMenuRoot.classList.contains('is-open'));
+				});
+
+				accountMenu.addEventListener('click', function (event) {
+					event.stopPropagation();
+				});
+
+				document.addEventListener('click', function (event) {
+					if (!accountMenuRoot.contains(event.target)) {
+						setMenuState(false);
+					}
+				});
+
+				document.addEventListener('keydown', function (event) {
+					if (event.key === 'Escape') {
+						setMenuState(false);
+					}
+				});
+			}
+
 			window.RailTixContext = { isAuthenticated: @(User?.Identity?.IsAuthenticated ?? false ? "true" : "false") };
 		})();
 	</script>

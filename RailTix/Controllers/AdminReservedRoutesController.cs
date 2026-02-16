@@ -72,6 +72,11 @@ namespace RailTix.Controllers
                 ModelState.AddModelError(nameof(model.Segment), "That segment already exists.");
             }
 
+            if (model.IsActive && !string.IsNullOrWhiteSpace(segment) && await IsSegmentUsedByCmsPathsAsync(segment))
+            {
+                ModelState.AddModelError(nameof(model.Segment), "That segment is already used by existing CMS page URLs.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -136,6 +141,13 @@ namespace RailTix.Controllers
                 ModelState.AddModelError(nameof(model.Segment), "That segment already exists.");
             }
 
+            var activeSegmentChanged = model.IsActive &&
+                                       (!route.IsActive || !string.Equals(route.Segment, segment, StringComparison.OrdinalIgnoreCase));
+            if (activeSegmentChanged && await IsSegmentUsedByCmsPathsAsync(segment))
+            {
+                ModelState.AddModelError(nameof(model.Segment), "That segment is already used by existing CMS page URLs.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -187,6 +199,14 @@ namespace RailTix.Controllers
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
                 return false;
             }
+        }
+
+        private async Task<bool> IsSegmentUsedByCmsPathsAsync(string segment)
+        {
+            var prefix = "/" + segment;
+            return await _db.CmsPages
+                .AsNoTracking()
+                .AnyAsync(p => p.Path == prefix || EF.Functions.Like(p.Path, prefix + "/%"));
         }
     }
 }

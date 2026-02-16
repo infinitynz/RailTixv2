@@ -10,6 +10,7 @@ using RailTix.Services.Email;
 using RailTix.Services.Recaptcha;
 using RailTix.Services.Location;
 using RailTix.Services.Geo;
+using RailTix.Services.Payments;
 using RailTix.Middleware;
 using Serilog;
 using System.IO;
@@ -70,14 +71,20 @@ builder.Services.Configure<PasswordHasherOptions>(o =>
 
 builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("Smtp"));
 builder.Services.Configure<GoogleRecaptchaOptions>(builder.Configuration.GetSection("Recaptcha"));
+builder.Services.Configure<StripeOptions>(builder.Configuration.GetSection("Stripe"));
 builder.Services.AddTransient<IEmailSender, SmtpEmailSender>();
 builder.Services.AddHttpClient<IGoogleRecaptchaService, GoogleRecaptchaService>();
 builder.Services.AddSingleton<ILocationService, LocationService>();
 builder.Services.AddHttpClient<IGeoIpService, GeoIpService>();
+builder.Services.AddHttpClient("StripeApi", client =>
+{
+    client.BaseAddress = new Uri("https://api.stripe.com/");
+});
 builder.Services.AddScoped<ILocationProvider, LocationProvider>();
 builder.Services.AddScoped<ICmsUrlService, CmsUrlService>();
 builder.Services.AddScoped<ICmsReservedRouteService, CmsReservedRouteService>();
 builder.Services.AddScoped<CmsPageRenderer>();
+builder.Services.AddScoped<IStripeConnectService, StripeConnectService>();
 
 var app = builder.Build();
 

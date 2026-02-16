@@ -19,6 +19,8 @@ All `/account/*` routes require authentication.
   - PATCH/PUT → Update profile and/or password; on success redirect to `/account/profile`.
 - `/account/` (Dashboard)  
   - GET → Dashboard view (Admins and Event Managers only).
+- `/account/payment`
+  - GET → Stripe Connect/payment setup and status (Admins and Event Managers only).
 
 Future (stubs; role-gated as appropriate)
 - `/account/events` — list of owned events
@@ -30,6 +32,7 @@ Future (stubs; role-gated as appropriate)
 ### Permissions (Minimum Role)
 - `/account/profile*` → Site User
 - `/account/` (Dashboard) → Event Manager
+- `/account/payment*` → Event Manager
 - `/account/events*` → Event Manager
 - `/account/reports*` → Event Manager
 - `/account/checkin*` → Event Manager
@@ -46,6 +49,10 @@ See `../ROLES_AND_PERMISSIONS.md` for inheritance and detailed capabilities.
 - If a user without the minimum role accesses a restricted route:
   - Prefer a friendly 403 page with a link to an accessible destination (e.g., Profile).
   - If currently rendered inside `/account/*`, also render the sidebar so navigation remains consistent.
+- Stripe gate:
+  - Event Managers (and Admins acting as event sellers) must complete Stripe Connect before event creation.
+  - Accessing `/account/events/create` without Stripe setup should redirect to `/account/payment` with return URL context.
+  - Server-side create endpoints must enforce the same rule (`403` or policy failure) even if UI checks are bypassed.
 
 ### Audit & Security Considerations
 - Sensitive actions (password change) must be logged/audited as per platform policy.

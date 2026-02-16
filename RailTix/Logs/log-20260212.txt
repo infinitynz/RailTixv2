@@ -1,0 +1,764 @@
+2026-02-12 22:14:48.115 +13:00 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using 'C:\Users\USER\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-12 22:15:21.026 +13:00 [ERR] Microsoft.EntityFrameworkCore.Database.Connection An error occurred using the connection to database 'RailTix-Dev' on server 'tcp:railtix.database.windows.net,1433'.
+2026-02-12 22:15:21.080 +13:00 [ERR] Microsoft.EntityFrameworkCore.Query An exception occurred while iterating over the results of a query for context type 'RailTix.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=302; handshake=467; [Login] initialization=25; authentication=8; [Post-Login] complete=28399; 
+ ---> System.ComponentModel.Win32Exception (258): The wait operation timed out.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ThrowExceptionAndWarning(Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:9d683a42-9983-4fb7-b9fd-f33d19bdb414
+Error Number:-2,State:0,Class:11
+Microsoft.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed during the post-login phase.  The connection could have timed out while waiting for server to complete the login process and respond; Or it could have timed out while attempting to create multiple active connections.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=302; handshake=467; [Login] initialization=25; authentication=8; [Post-Login] complete=28399; 
+ ---> System.ComponentModel.Win32Exception (258): The wait operation timed out.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ThrowExceptionAndWarning(Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at Microsoft.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:9d683a42-9983-4fb7-b9fd-f33d19bdb414
+Error Number:-2,State:0,Class:11
+2026-02-12 22:15:31.390 +13:00 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using 'C:\Users\USER\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-12 22:15:33.749 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (182ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:15:33.879 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (45ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:15:33.920 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (40ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:15:34.534 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: https://localhost:7113
+2026-02-12 22:15:34.534 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: http://localhost:5176
+2026-02-12 22:15:34.598 +13:00 [INF] Microsoft.Hosting.Lifetime Application started. Press Ctrl+C to shut down.
+2026-02-12 22:15:34.599 +13:00 [INF] Microsoft.Hosting.Lifetime Hosting environment: Development
+2026-02-12 22:15:34.599 +13:00 [INF] Microsoft.Hosting.Lifetime Content root path: X:\websites\rails\Rebuild\RailTix
+2026-02-12 22:15:35.437 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/ - null null
+2026-02-12 22:15:37.889 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (49ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:15:38.028 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2026-02-12 22:15:38.102 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (50ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2026-02-12 22:15:38.146 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:15:38.196 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2026-02-12 22:15:38.238 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:15:38.281 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2026-02-12 22:15:38.292 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-12 22:15:38.313 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.HomeController (RailTix).
+2026-02-12 22:15:38.450 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[CustomUrl], [t].[IsHomepage], [t].[IsPublished], [t].[ParentId], [t].[Path], [t].[Position], [t].[Slug], [t].[Title], [t].[UpdatedAt], [c0].[Id], [c0].[CreatedAt], [c0].[IsEnabled], [c0].[PageId], [c0].[Position], [c0].[SettingsJson], [c0].[Type], [c0].[UpdatedAt]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[CustomUrl], [c].[IsHomepage], [c].[IsPublished], [c].[ParentId], [c].[Path], [c].[Position], [c].[Slug], [c].[Title], [c].[UpdatedAt]
+    FROM [CmsPages] AS [c]
+    WHERE [c].[IsHomepage] = CAST(1 AS bit) AND [c].[IsPublished] = CAST(1 AS bit)
+) AS [t]
+LEFT JOIN [CmsPageComponents] AS [c0] ON [t].[Id] = [c0].[PageId]
+ORDER BY [t].[Id]
+2026-02-12 22:15:56.579 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view ~/Views/Cms/Page.cshtml.
+2026-02-12 22:15:57.504 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view ~/Views/Cms/Page.cshtml executed in 19029.0069ms.
+2026-02-12 22:15:57.507 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.HomeController.Index (RailTix) in 19193.3148ms
+2026-02-12 22:15:57.507 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-12 22:15:57.512 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET / responded 200 in 19868.9439 ms
+2026-02-12 22:15:57.527 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/ - 200 null text/html; charset=utf-8 22097.9659ms
+2026-02-12 22:15:57.557 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:15:57.563 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=M1doIiGylfng42DulSfdUwdwMKsMGyJTbbaPFmUqiG8 - null null
+2026-02-12 22:15:57.563 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:15:57.588 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware The file /css/site.css was not modified
+2026-02-12 22:15:57.594 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 38.0133ms
+2026-02-12 22:15:57.595 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 304 in 32.3266 ms
+2026-02-12 22:15:57.596 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=M1doIiGylfng42DulSfdUwdwMKsMGyJTbbaPFmUqiG8 - 304 null text/css 33.0758ms
+2026-02-12 22:15:57.656 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 93.2242ms
+2026-02-12 22:16:06.379 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/ - null null
+2026-02-12 22:16:06.382 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-12 22:16:06.383 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.HomeController (RailTix).
+2026-02-12 22:16:06.444 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[CustomUrl], [t].[IsHomepage], [t].[IsPublished], [t].[ParentId], [t].[Path], [t].[Position], [t].[Slug], [t].[Title], [t].[UpdatedAt], [c0].[Id], [c0].[CreatedAt], [c0].[IsEnabled], [c0].[PageId], [c0].[Position], [c0].[SettingsJson], [c0].[Type], [c0].[UpdatedAt]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[CustomUrl], [c].[IsHomepage], [c].[IsPublished], [c].[ParentId], [c].[Path], [c].[Position], [c].[Slug], [c].[Title], [c].[UpdatedAt]
+    FROM [CmsPages] AS [c]
+    WHERE [c].[IsHomepage] = CAST(1 AS bit) AND [c].[IsPublished] = CAST(1 AS bit)
+) AS [t]
+LEFT JOIN [CmsPageComponents] AS [c0] ON [t].[Id] = [c0].[PageId]
+ORDER BY [t].[Id]
+2026-02-12 22:16:06.445 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view ~/Views/Cms/Page.cshtml.
+2026-02-12 22:16:06.454 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view ~/Views/Cms/Page.cshtml executed in 8.7578ms.
+2026-02-12 22:16:06.454 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.HomeController.Index (RailTix) in 71.1944ms
+2026-02-12 22:16:06.454 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-12 22:16:06.454 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET / responded 200 in 74.1219 ms
+2026-02-12 22:16:06.454 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/ - 200 null text/html; charset=utf-8 75.4107ms
+2026-02-12 22:23:06.347 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=M1doIiGylfng42DulSfdUwdwMKsMGyJTbbaPFmUqiG8&__browserLink_refresh=6300f6cbf40a4da095dfdf086193269f - null null
+2026-02-12 22:23:06.377 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:23:06.378 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 29.9306 ms
+2026-02-12 22:23:06.378 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=M1doIiGylfng42DulSfdUwdwMKsMGyJTbbaPFmUqiG8&__browserLink_refresh=6300f6cbf40a4da095dfdf086193269f - 200 15222 text/css 30.4029ms
+2026-02-12 22:23:06.803 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:23:06.803 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 1.0551ms
+2026-02-12 22:23:06.843 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888186814 - null null
+2026-02-12 22:23:06.847 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:23:06.847 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 3.8316 ms
+2026-02-12 22:23:06.847 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888186814 - 200 15222 text/css 4.2582ms
+2026-02-12 22:24:46.079 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888186814&__browserLink_refresh=356ca2c576d148dda17d1296bde48a44 - null null
+2026-02-12 22:24:46.091 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:24:46.092 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 12.1397 ms
+2026-02-12 22:24:46.092 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888186814&__browserLink_refresh=356ca2c576d148dda17d1296bde48a44 - 200 15222 text/css 13.2841ms
+2026-02-12 22:24:46.181 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:24:46.181 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.3904ms
+2026-02-12 22:24:46.218 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888286191 - null null
+2026-02-12 22:24:46.221 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:24:46.221 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.5672 ms
+2026-02-12 22:24:46.221 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888286191 - 200 15222 text/css 3.3613ms
+2026-02-12 22:25:51.430 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/Account/Manage - null null
+2026-02-12 22:25:53.478 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /Account/Manage responded 301 in 4.0117 ms
+2026-02-12 22:25:53.479 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/Account/Manage - 301 0 null 2048.6817ms
+2026-02-12 22:25:53.485 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/manage - null null
+2026-02-12 22:25:53.504 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:25:53.534 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Manage", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Manage() on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-12 22:25:54.199 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Manage.
+2026-02-12 22:25:55.705 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:25:55.733 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Manage executed in 2173.3094ms.
+2026-02-12 22:25:55.735 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Manage (RailTix) in 2201.1201ms
+2026-02-12 22:25:55.735 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:25:55.735 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/manage responded 200 in 2246.9601 ms
+2026-02-12 22:25:55.736 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/manage - 200 null text/html; charset=utf-8 2252.4973ms
+2026-02-12 22:25:55.785 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=TONU9LMo0A1-_iCNVikanbhVykV-YhEJY1wKCjbnU9M - null null
+2026-02-12 22:25:55.788 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:25:55.788 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 3.0719 ms
+2026-02-12 22:25:55.788 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=TONU9LMo0A1-_iCNVikanbhVykV-YhEJY1wKCjbnU9M - 200 15222 text/css 3.435ms
+2026-02-12 22:25:55.795 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:25:55.795 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:25:55.806 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/images/railtix-logo.png - null null
+2026-02-12 22:25:55.806 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - null null
+2026-02-12 22:25:55.823 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 28.1015ms
+2026-02-12 22:25:55.841 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/js/modules/location/bootstrap.js'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\js\modules\location\bootstrap.js'
+2026-02-12 22:25:55.842 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /js/modules/location/bootstrap.js responded 200 in 32.8247 ms
+2026-02-12 22:25:55.842 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - 200 1366 text/javascript 46.5916ms
+2026-02-12 22:25:55.863 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 68.726ms
+2026-02-12 22:25:55.902 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/images/railtix-logo.png'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\images\railtix-logo.png'
+2026-02-12 22:25:55.902 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /images/railtix-logo.png responded 200 in 96.2351 ms
+2026-02-12 22:25:55.902 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/images/railtix-logo.png - 200 304303 image/png 96.5548ms
+2026-02-12 22:25:55.910 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/favicon.ico - null null
+2026-02-12 22:25:55.912 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/favicon.ico'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\favicon.ico'
+2026-02-12 22:25:55.913 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /favicon.ico responded 200 in 1.9249 ms
+2026-02-12 22:25:55.913 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/favicon.ico - 200 5430 image/x-icon 2.5433ms
+2026-02-12 22:26:55.596 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=TONU9LMo0A1-_iCNVikanbhVykV-YhEJY1wKCjbnU9M&__browserLink_refresh=e3600b7676754ca0ae1436e07cca3c4d - null null
+2026-02-12 22:26:55.606 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:26:55.606 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 9.8368 ms
+2026-02-12 22:26:55.607 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=TONU9LMo0A1-_iCNVikanbhVykV-YhEJY1wKCjbnU9M&__browserLink_refresh=e3600b7676754ca0ae1436e07cca3c4d - 200 15232 text/css 11.7649ms
+2026-02-12 22:26:55.720 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:26:55.720 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.8813ms
+2026-02-12 22:26:55.767 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888415738 - null null
+2026-02-12 22:26:55.773 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:26:55.773 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 6.2160 ms
+2026-02-12 22:26:55.774 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888415738 - 200 15232 text/css 6.8271ms
+2026-02-12 22:27:24.557 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888415738&__browserLink_refresh=832758d5fd8c4e96beef8a770963b345 - null null
+2026-02-12 22:27:24.615 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:27:24.615 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 57.8241 ms
+2026-02-12 22:27:24.615 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888415738&__browserLink_refresh=832758d5fd8c4e96beef8a770963b345 - 200 15232 text/css 58.2133ms
+2026-02-12 22:27:24.692 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:27:24.692 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.3161ms
+2026-02-12 22:27:24.806 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888444707 - null null
+2026-02-12 22:27:24.823 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:27:24.827 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 16.0950 ms
+2026-02-12 22:27:24.828 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888444707 - 200 15232 text/css 24.0562ms
+2026-02-12 22:27:38.243 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/manage - null null
+2026-02-12 22:27:40.308 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:27:40.309 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Manage", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Manage() on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-12 22:27:40.309 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Manage.
+2026-02-12 22:27:40.355 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:27:40.357 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Manage executed in 48.0495ms.
+2026-02-12 22:27:40.358 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Manage (RailTix) in 49.0047ms
+2026-02-12 22:27:40.358 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:27:40.358 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/manage responded 200 in 65.4845 ms
+2026-02-12 22:27:40.358 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/manage - 200 null text/html; charset=utf-8 2115.2379ms
+2026-02-12 22:27:40.401 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=sKK7zWxG-bErvMb89FlRkX9bc4y4AmZpOuEYcZGtZL0 - null null
+2026-02-12 22:27:40.403 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:27:40.403 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.2430 ms
+2026-02-12 22:27:40.404 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=sKK7zWxG-bErvMb89FlRkX9bc4y4AmZpOuEYcZGtZL0 - 200 16008 text/css 3.1287ms
+2026-02-12 22:27:40.404 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - null null
+2026-02-12 22:27:40.406 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:27:40.412 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/js/modules/location/bootstrap.js'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\js\modules\location\bootstrap.js'
+2026-02-12 22:27:40.412 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /js/modules/location/bootstrap.js responded 200 in 7.7449 ms
+2026-02-12 22:27:40.416 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/images/railtix-logo.png - null null
+2026-02-12 22:27:40.416 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:27:40.418 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - 200 1366 text/javascript 13.924ms
+2026-02-12 22:27:40.427 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 11.0817ms
+2026-02-12 22:27:40.458 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/images/railtix-logo.png'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\images\railtix-logo.png'
+2026-02-12 22:27:40.458 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /images/railtix-logo.png responded 200 in 39.6438 ms
+2026-02-12 22:27:40.458 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/images/railtix-logo.png - 200 304303 image/png 41.6542ms
+2026-02-12 22:27:40.460 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 55.002ms
+2026-02-12 22:27:40.995 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/favicon.ico - null null
+2026-02-12 22:27:40.997 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/favicon.ico'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\favicon.ico'
+2026-02-12 22:27:40.997 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /favicon.ico responded 200 in 1.8161 ms
+2026-02-12 22:27:40.997 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/favicon.ico - 200 5430 image/x-icon 2.3189ms
+2026-02-12 22:27:59.579 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=sKK7zWxG-bErvMb89FlRkX9bc4y4AmZpOuEYcZGtZL0&__browserLink_refresh=6cda157fe0134db58ef46e78645e9d72 - null null
+2026-02-12 22:27:59.634 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:27:59.634 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 54.6660 ms
+2026-02-12 22:27:59.635 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=sKK7zWxG-bErvMb89FlRkX9bc4y4AmZpOuEYcZGtZL0&__browserLink_refresh=6cda157fe0134db58ef46e78645e9d72 - 200 16008 text/css 55.2884ms
+2026-02-12 22:27:59.917 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:27:59.918 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.7301ms
+2026-02-12 22:27:59.981 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888479938 - null null
+2026-02-12 22:27:59.987 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:27:59.988 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 6.5134 ms
+2026-02-12 22:27:59.988 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888479938 - 200 16008 text/css 7.1447ms
+2026-02-12 22:28:00.900 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:28:00.900 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.4495ms
+2026-02-12 22:28:00.938 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888480910 - null null
+2026-02-12 22:28:00.939 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:28:00.940 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 1.9226 ms
+2026-02-12 22:28:00.940 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888480910 - 200 16008 text/css 2.409ms
+2026-02-12 22:28:30.438 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888480910&__browserLink_refresh=6ba2fa9f59fb4994b45231dd01258899 - null null
+2026-02-12 22:28:30.459 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:28:30.460 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 22.0594 ms
+2026-02-12 22:28:30.460 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888480910&__browserLink_refresh=6ba2fa9f59fb4994b45231dd01258899 - 200 16053 text/css 22.8416ms
+2026-02-12 22:28:30.875 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:28:30.875 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.7749ms
+2026-02-12 22:28:31.049 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:28:31.049 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.5616ms
+2026-02-12 22:28:31.058 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888511042 - null null
+2026-02-12 22:28:31.064 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:28:31.064 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 5.2858 ms
+2026-02-12 22:28:31.064 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888511042 - 200 16053 text/css 5.9485ms
+2026-02-12 22:28:31.093 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888511075 - null null
+2026-02-12 22:28:31.095 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:28:31.096 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.4934 ms
+2026-02-12 22:28:31.096 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888511075 - 200 16053 text/css 2.9704ms
+2026-02-12 22:28:56.508 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/Account/Manage - null null
+2026-02-12 22:28:58.557 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /Account/Manage responded 301 in 0.0892 ms
+2026-02-12 22:28:58.577 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/Account/Manage - 301 0 null 2068.9784ms
+2026-02-12 22:28:58.580 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/manage - null null
+2026-02-12 22:28:58.583 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:28:58.583 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Manage", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Manage() on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-12 22:28:58.585 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Manage.
+2026-02-12 22:28:58.665 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (78ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:28:58.669 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Manage executed in 84.017ms.
+2026-02-12 22:28:58.669 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Manage (RailTix) in 85.867ms
+2026-02-12 22:28:58.669 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:28:58.673 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/manage responded 200 in 89.4794 ms
+2026-02-12 22:28:58.674 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/manage - 200 null text/html; charset=utf-8 93.1963ms
+2026-02-12 22:28:58.714 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=cYbOp7mUfo0-uXutniLvMFa0Z7-BETb695mcZJM12xI - null null
+2026-02-12 22:28:58.718 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - null null
+2026-02-12 22:28:58.719 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:28:58.724 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 8.3807 ms
+2026-02-12 22:28:58.724 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=cYbOp7mUfo0-uXutniLvMFa0Z7-BETb695mcZJM12xI - 200 16053 text/css 9.9114ms
+2026-02-12 22:28:58.724 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:28:58.724 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:28:58.728 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 3.8774ms
+2026-02-12 22:28:58.729 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/images/railtix-logo.png - null null
+2026-02-12 22:28:58.732 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/js/modules/location/bootstrap.js'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\js\modules\location\bootstrap.js'
+2026-02-12 22:28:58.732 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /js/modules/location/bootstrap.js responded 200 in 13.0832 ms
+2026-02-12 22:28:58.732 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - 200 1366 text/javascript 15.8222ms
+2026-02-12 22:28:58.780 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/images/railtix-logo.png'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\images\railtix-logo.png'
+2026-02-12 22:28:58.780 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /images/railtix-logo.png responded 200 in 51.4561 ms
+2026-02-12 22:28:58.781 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/images/railtix-logo.png - 200 304303 image/png 51.9337ms
+2026-02-12 22:28:58.787 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 62.2121ms
+2026-02-12 22:28:58.810 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/favicon.ico - null null
+2026-02-12 22:28:58.813 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/favicon.ico'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\favicon.ico'
+2026-02-12 22:28:58.814 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /favicon.ico responded 200 in 3.1167 ms
+2026-02-12 22:28:58.814 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/favicon.ico - 200 5430 image/x-icon 3.8385ms
+2026-02-12 22:29:42.430 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=cYbOp7mUfo0-uXutniLvMFa0Z7-BETb695mcZJM12xI&__browserLink_refresh=72e139c718764132b082f90cfc1d8972 - null null
+2026-02-12 22:29:42.475 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:29:42.475 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 44.6991 ms
+2026-02-12 22:29:42.475 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=cYbOp7mUfo0-uXutniLvMFa0Z7-BETb695mcZJM12xI&__browserLink_refresh=72e139c718764132b082f90cfc1d8972 - 200 15921 text/css 46.7195ms
+2026-02-12 22:29:42.750 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:29:42.750 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.3353ms
+2026-02-12 22:29:42.771 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:29:42.772 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.2306ms
+2026-02-12 22:29:42.805 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888582772 - null null
+2026-02-12 22:29:42.807 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:29:42.807 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.0170 ms
+2026-02-12 22:29:42.807 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888582772 - 200 15921 text/css 2.3172ms
+2026-02-12 22:32:27.732 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888582772&__browserLink_refresh=4e4614ab18524d0b96ae60f16cdbb26c - null null
+2026-02-12 22:32:27.775 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:32:27.775 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 42.7662 ms
+2026-02-12 22:32:27.775 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888582772&__browserLink_refresh=4e4614ab18524d0b96ae60f16cdbb26c - 200 15886 text/css 43.4696ms
+2026-02-12 22:32:28.065 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:32:28.065 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.4444ms
+2026-02-12 22:32:28.079 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:32:28.080 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 1.5971ms
+2026-02-12 22:32:28.106 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748077 - null null
+2026-02-12 22:32:28.112 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:32:28.112 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 6.0166 ms
+2026-02-12 22:32:28.113 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748077 - 200 15886 text/css 6.472ms
+2026-02-12 22:32:28.165 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748118 - null null
+2026-02-12 22:32:28.168 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:32:28.168 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 3.2855 ms
+2026-02-12 22:32:28.168 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748118 - 200 15886 text/css 3.8883ms
+2026-02-12 22:32:28.238 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748077 - null null
+2026-02-12 22:32:28.241 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:32:28.241 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 1.9185 ms
+2026-02-12 22:32:28.241 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748077 - 200 15886 text/css 2.9137ms
+2026-02-12 22:33:27.312 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748118&__browserLink_refresh=8f1e95f24150450baf7fdb622e237804 - null null
+2026-02-12 22:33:27.350 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:27.350 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 35.0221 ms
+2026-02-12 22:33:27.351 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888748118&__browserLink_refresh=8f1e95f24150450baf7fdb622e237804 - 200 15874 text/css 38.6855ms
+2026-02-12 22:33:27.580 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:33:27.580 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.5789ms
+2026-02-12 22:33:27.594 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:33:27.594 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.2094ms
+2026-02-12 22:33:27.628 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807593 - null null
+2026-02-12 22:33:27.635 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:27.635 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 6.3457 ms
+2026-02-12 22:33:27.635 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807593 - 200 15874 text/css 7.2026ms
+2026-02-12 22:33:27.684 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807648 - null null
+2026-02-12 22:33:27.685 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:27.686 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 1.8257 ms
+2026-02-12 22:33:27.686 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807648 - 200 15874 text/css 2.448ms
+2026-02-12 22:33:27.754 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807593 - null null
+2026-02-12 22:33:27.756 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:27.756 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 1.8181 ms
+2026-02-12 22:33:27.756 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807593 - 200 15874 text/css 2.0503ms
+2026-02-12 22:33:30.871 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807648&__browserLink_refresh=4a520b7074a04eae831b9a8d1a15bec9 - null null
+2026-02-12 22:33:30.898 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:30.899 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 27.5019 ms
+2026-02-12 22:33:30.899 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888807648&__browserLink_refresh=4a520b7074a04eae831b9a8d1a15bec9 - 200 15886 text/css 28.249ms
+2026-02-12 22:33:31.189 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:33:31.189 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.5642ms
+2026-02-12 22:33:31.200 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:33:31.200 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.7377ms
+2026-02-12 22:33:31.224 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811200 - null null
+2026-02-12 22:33:31.227 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:31.228 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 3.0397 ms
+2026-02-12 22:33:31.228 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811200 - 200 15886 text/css 3.6394ms
+2026-02-12 22:33:31.263 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811238 - null null
+2026-02-12 22:33:31.265 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:31.293 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 29.5461 ms
+2026-02-12 22:33:31.293 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811238 - 200 15886 text/css 30.1408ms
+2026-02-12 22:33:31.301 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811200 - null null
+2026-02-12 22:33:31.307 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:33:31.307 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 6.2356 ms
+2026-02-12 22:33:31.308 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811200 - 200 15886 text/css 7.4739ms
+2026-02-12 22:34:16.609 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811238&__browserLink_refresh=bc9e1b0913a44834ae855fa1665f5112 - null null
+2026-02-12 22:34:16.640 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:34:16.641 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 30.9947 ms
+2026-02-12 22:34:16.641 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888811238&__browserLink_refresh=bc9e1b0913a44834ae855fa1665f5112 - 200 15873 text/css 31.4589ms
+2026-02-12 22:34:16.921 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:34:16.923 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 2.2394ms
+2026-02-12 22:34:16.937 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:34:16.937 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.74ms
+2026-02-12 22:34:16.973 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888856935 - null null
+2026-02-12 22:34:16.976 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:34:16.976 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.2312 ms
+2026-02-12 22:34:16.976 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888856935 - 200 15873 text/css 4.3061ms
+2026-02-12 22:34:17.013 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888856986 - null null
+2026-02-12 22:34:17.015 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:34:17.016 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 1.8688 ms
+2026-02-12 22:34:17.016 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770888856986 - 200 15873 text/css 2.5066ms
+2026-02-12 22:36:01.414 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/events - null null
+2026-02-12 22:36:03.472 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:36:03.477 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.EventsController (RailTix).
+2026-02-12 22:36:03.844 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[AddressLine1], [e].[AddressLine2], [e].[City], [e].[Country], [e].[CreatedAt], [e].[CreatedByUserId], [e].[CurrencyCode], [e].[Description], [e].[EndsAtLocal], [e].[OrganizerName], [e].[PostalCode], [e].[Region], [e].[Slug], [e].[StartsAtLocal], [e].[Status], [e].[TimeZoneId], [e].[Title], [e].[UpdatedAt], [e].[VenueName]
+FROM [Events] AS [e]
+ORDER BY [e].[CreatedAt] DESC
+2026-02-12 22:36:04.581 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Index.
+2026-02-12 22:36:04.634 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:36:04.638 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Index executed in 792.6335ms.
+2026-02-12 22:36:04.638 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.EventsController.Index (RailTix) in 1161.3119ms
+2026-02-12 22:36:04.639 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:36:04.639 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/events responded 200 in 1181.0144 ms
+2026-02-12 22:36:04.639 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/events - 200 null text/html; charset=utf-8 3224.6729ms
+2026-02-12 22:36:04.697 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=BEDJaLRpMSQn_B9c6_ely7giYT_XwD0oINOXpc20Pbg - null null
+2026-02-12 22:36:04.699 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - null null
+2026-02-12 22:36:04.700 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:36:04.701 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:36:04.701 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 3.7080 ms
+2026-02-12 22:36:04.701 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=BEDJaLRpMSQn_B9c6_ely7giYT_XwD0oINOXpc20Pbg - 200 15873 text/css 4.4273ms
+2026-02-12 22:36:04.702 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/js/modules/location/bootstrap.js'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\js\modules\location\bootstrap.js'
+2026-02-12 22:36:04.702 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /js/modules/location/bootstrap.js responded 200 in 1.9058 ms
+2026-02-12 22:36:04.705 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - 200 1366 text/javascript 5.6499ms
+2026-02-12 22:36:04.705 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:36:04.706 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 2.1173ms
+2026-02-12 22:36:04.711 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/images/railtix-logo.png - null null
+2026-02-12 22:36:04.755 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 55.6055ms
+2026-02-12 22:36:04.789 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/images/railtix-logo.png'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\images\railtix-logo.png'
+2026-02-12 22:36:04.789 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /images/railtix-logo.png responded 200 in 77.7425 ms
+2026-02-12 22:36:04.790 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/images/railtix-logo.png - 200 304303 image/png 78.2637ms
+2026-02-12 22:36:04.817 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/favicon.ico - null null
+2026-02-12 22:36:04.819 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/favicon.ico'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\favicon.ico'
+2026-02-12 22:36:04.819 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /favicon.ico responded 200 in 1.9948 ms
+2026-02-12 22:36:04.819 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/favicon.ico - 200 5430 image/x-icon 2.3301ms
+2026-02-12 22:44:34.743 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=BEDJaLRpMSQn_B9c6_ely7giYT_XwD0oINOXpc20Pbg&__browserLink_refresh=d537b71840c14699bfa21cbee47f27b8 - null null
+2026-02-12 22:44:34.767 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:44:34.768 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 24.3920 ms
+2026-02-12 22:44:34.768 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=BEDJaLRpMSQn_B9c6_ely7giYT_XwD0oINOXpc20Pbg&__browserLink_refresh=d537b71840c14699bfa21cbee47f27b8 - 200 16382 text/css 25.0775ms
+2026-02-12 22:44:35.059 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:44:35.059 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.4312ms
+2026-02-12 22:44:35.076 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:44:35.077 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.3482ms
+2026-02-12 22:44:35.107 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770889475076 - null null
+2026-02-12 22:44:35.110 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:44:35.110 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.1161 ms
+2026-02-12 22:44:35.110 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770889475076 - 200 16382 text/css 2.4553ms
+2026-02-12 22:44:40.758 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:44:40.759 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.58ms
+2026-02-12 22:44:40.797 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770889480769 - null null
+2026-02-12 22:44:40.800 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:44:40.801 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 3.4240 ms
+2026-02-12 22:44:40.801 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770889480769 - 200 16382 text/css 4.305ms
+2026-02-12 22:44:41.228 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - null null
+2026-02-12 22:44:41.228 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/clear-browser-cache - 200 0 null 0.3534ms
+2026-02-12 22:44:41.265 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770889481237 - null null
+2026-02-12 22:44:41.268 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:44:41.268 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 2.3303 ms
+2026-02-12 22:44:41.268 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?nonce=1770889481237 - 200 16382 text/css 3.6358ms
+2026-02-12 22:44:49.272 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/events - null null
+2026-02-12 22:44:51.318 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:44:51.318 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.EventsController (RailTix).
+2026-02-12 22:44:51.677 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[AddressLine1], [e].[AddressLine2], [e].[City], [e].[Country], [e].[CreatedAt], [e].[CreatedByUserId], [e].[CurrencyCode], [e].[Description], [e].[EndsAtLocal], [e].[OrganizerName], [e].[PostalCode], [e].[Region], [e].[Slug], [e].[StartsAtLocal], [e].[Status], [e].[TimeZoneId], [e].[Title], [e].[UpdatedAt], [e].[VenueName]
+FROM [Events] AS [e]
+ORDER BY [e].[CreatedAt] DESC
+2026-02-12 22:44:52.123 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Index.
+2026-02-12 22:44:52.178 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (47ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:44:52.209 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.EventsController.Index (RailTix) in 890.5462ms
+2026-02-12 22:44:52.210 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:44:52.515 +13:00 [ERR] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/events responded 500 in 1200.3783 ms
+System.InvalidOperationException: The following sections have been defined but have not been rendered by the page at '/Views/Shared/_AccountLayout.cshtml': 'Styles'. To ignore an unrendered section call IgnoreSection("sectionName").
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPage.EnsureRenderedBodyOrSections()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at RailTix.Middleware.CmsUrlNormalizationMiddleware.InvokeAsync(HttpContext context, ICmsUrlService urlService) in X:\websites\rails\Rebuild\RailTix\Middleware\CmsUrlNormalizationMiddleware.cs:line 37
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-12 22:44:52.551 +13:00 [ERR] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The following sections have been defined but have not been rendered by the page at '/Views/Shared/_AccountLayout.cshtml': 'Styles'. To ignore an unrendered section call IgnoreSection("sectionName").
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPage.EnsureRenderedBodyOrSections()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at RailTix.Middleware.CmsUrlNormalizationMiddleware.InvokeAsync(HttpContext context, ICmsUrlService urlService) in X:\websites\rails\Rebuild\RailTix\Middleware\CmsUrlNormalizationMiddleware.cs:line 37
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-02-12 22:44:52.620 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/events - 500 null text/html; charset=utf-8 3347.7054ms
+2026-02-12 22:44:52.687 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:44:52.687 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:44:52.688 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 1.1895ms
+2026-02-12 22:44:52.728 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 40.5033ms
+2026-02-12 22:44:52.739 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/favicon.ico - null null
+2026-02-12 22:44:52.743 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/favicon.ico'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\favicon.ico'
+2026-02-12 22:44:52.743 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /favicon.ico responded 200 in 2.9854 ms
+2026-02-12 22:44:52.744 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/favicon.ico - 200 5430 image/x-icon 4.8352ms
+2026-02-12 22:45:12.703 +13:00 [INF] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager User profile is available. Using 'C:\Users\USER\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-12 22:45:14.957 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (102ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:45:15.088 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:45:15.132 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:45:15.417 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: https://localhost:7113
+2026-02-12 22:45:15.417 +13:00 [INF] Microsoft.Hosting.Lifetime Now listening on: http://localhost:5176
+2026-02-12 22:45:15.497 +13:00 [INF] Microsoft.Hosting.Lifetime Application started. Press Ctrl+C to shut down.
+2026-02-12 22:45:15.498 +13:00 [INF] Microsoft.Hosting.Lifetime Hosting environment: Development
+2026-02-12 22:45:15.498 +13:00 [INF] Microsoft.Hosting.Lifetime Content root path: X:\websites\rails\Rebuild\RailTix
+2026-02-12 22:45:16.511 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/ - null null
+2026-02-12 22:45:18.762 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-12 22:45:18.777 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.HomeController (RailTix).
+2026-02-12 22:45:19.032 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[CustomUrl], [t].[IsHomepage], [t].[IsPublished], [t].[ParentId], [t].[Path], [t].[Position], [t].[Slug], [t].[Title], [t].[UpdatedAt], [c0].[Id], [c0].[CreatedAt], [c0].[IsEnabled], [c0].[PageId], [c0].[Position], [c0].[SettingsJson], [c0].[Type], [c0].[UpdatedAt]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[CustomUrl], [c].[IsHomepage], [c].[IsPublished], [c].[ParentId], [c].[Path], [c].[Position], [c].[Slug], [c].[Title], [c].[UpdatedAt]
+    FROM [CmsPages] AS [c]
+    WHERE [c].[IsHomepage] = CAST(1 AS bit) AND [c].[IsPublished] = CAST(1 AS bit)
+) AS [t]
+LEFT JOIN [CmsPageComponents] AS [c0] ON [t].[Id] = [c0].[PageId]
+ORDER BY [t].[Id]
+2026-02-12 22:45:24.026 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view ~/Views/Cms/Page.cshtml.
+2026-02-12 22:45:25.199 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (46ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:45:25.314 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view ~/Views/Cms/Page.cshtml executed in 6262.575ms.
+2026-02-12 22:45:25.317 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.HomeController.Index (RailTix) in 6539.2226ms
+2026-02-12 22:45:25.317 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.HomeController.Index (RailTix)'
+2026-02-12 22:45:25.320 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET / responded 200 in 6639.0906 ms
+2026-02-12 22:45:25.328 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/ - 200 null text/html; charset=utf-8 8826.5457ms
+2026-02-12 22:45:25.431 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - null null
+2026-02-12 22:45:25.431 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=_Ld1WiLTCNH-t36Um0ZVfyZV2Fb8Fy7N77w1yWiBvHQ - null null
+2026-02-12 22:45:25.444 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:45:25.447 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/images/railtix-logo.png - null null
+2026-02-12 22:45:25.452 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:45:25.472 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/js/modules/location/bootstrap.js'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\js\modules\location\bootstrap.js'
+2026-02-12 22:45:25.473 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /js/modules/location/bootstrap.js responded 200 in 41.7556 ms
+2026-02-12 22:45:25.474 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/js/modules/location/bootstrap.js?v=GQiAPIQ8a2xwX3ggaxub8QaU7aKdk94GHIXjAMZ3UPA - 200 1366 text/javascript 43.1648ms
+2026-02-12 22:45:25.475 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 30.8324ms
+2026-02-12 22:45:25.488 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/site.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\site.css'
+2026-02-12 22:45:25.488 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 200 in 56.9727 ms
+2026-02-12 22:45:25.489 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=_Ld1WiLTCNH-t36Um0ZVfyZV2Fb8Fy7N77w1yWiBvHQ - 200 16382 text/css 57.881ms
+2026-02-12 22:45:25.500 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/images/railtix-logo.png'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\images\railtix-logo.png'
+2026-02-12 22:45:25.500 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /images/railtix-logo.png responded 200 in 52.8306 ms
+2026-02-12 22:45:25.501 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/images/railtix-logo.png - 200 304303 image/png 53.7434ms
+2026-02-12 22:45:25.592 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 140.1224ms
+2026-02-12 22:47:30.345 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/Account/Manage - null null
+2026-02-12 22:47:32.396 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /Account/Manage responded 301 in 1.6822 ms
+2026-02-12 22:47:32.397 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/Account/Manage - 301 0 null 2051.7791ms
+2026-02-12 22:47:32.400 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/manage - null null
+2026-02-12 22:47:32.480 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:47:32.547 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2026-02-12 22:47:32.613 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2026-02-12 22:47:32.655 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (40ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:47:32.709 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (48ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2026-02-12 22:47:32.751 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-02-12 22:47:32.793 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2026-02-12 22:47:32.797 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:47:32.820 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Manage", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Manage() on controller RailTix.Controllers.AccountController (RailTix).
+2026-02-12 22:47:33.469 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Manage.
+2026-02-12 22:47:34.662 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Manage executed in 1825.4501ms.
+2026-02-12 22:47:34.663 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.AccountController.Manage (RailTix) in 1842.4598ms
+2026-02-12 22:47:34.664 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.AccountController.Manage (RailTix)'
+2026-02-12 22:47:34.664 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/manage responded 200 in 2260.2139 ms
+2026-02-12 22:47:34.664 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/manage - 200 null text/html; charset=utf-8 2265.0616ms
+2026-02-12 22:47:34.695 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:47:34.697 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:47:34.704 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 5.4483ms
+2026-02-12 22:47:34.705 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=_Ld1WiLTCNH-t36Um0ZVfyZV2Fb8Fy7N77w1yWiBvHQ - null null
+2026-02-12 22:47:34.708 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware The file /css/site.css was not modified
+2026-02-12 22:47:34.708 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 304 in 3.4503 ms
+2026-02-12 22:47:34.708 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=_Ld1WiLTCNH-t36Um0ZVfyZV2Fb8Fy7N77w1yWiBvHQ - 304 null text/css 4.167ms
+2026-02-12 22:47:34.736 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 40.3212ms
+2026-02-12 22:47:43.803 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/events - null null
+2026-02-12 22:47:43.833 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:47:43.836 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.EventsController (RailTix).
+2026-02-12 22:47:43.887 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[AddressLine1], [e].[AddressLine2], [e].[City], [e].[Country], [e].[CreatedAt], [e].[CreatedByUserId], [e].[CurrencyCode], [e].[Description], [e].[EndsAtLocal], [e].[OrganizerName], [e].[PostalCode], [e].[Region], [e].[Slug], [e].[StartsAtLocal], [e].[Status], [e].[TimeZoneId], [e].[Title], [e].[UpdatedAt], [e].[VenueName]
+FROM [Events] AS [e]
+ORDER BY [e].[CreatedAt] DESC
+2026-02-12 22:47:44.317 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Index.
+2026-02-12 22:47:44.370 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:47:44.375 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.EventsController.Index (RailTix) in 538.6534ms
+2026-02-12 22:47:44.375 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:47:44.692 +13:00 [ERR] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/events responded 500 in 886.4154 ms
+System.InvalidOperationException: The following sections have been defined but have not been rendered by the page at '/Views/Shared/_AccountLayout.cshtml': 'Styles'. To ignore an unrendered section call IgnoreSection("sectionName").
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPage.EnsureRenderedBodyOrSections()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at RailTix.Middleware.CmsUrlNormalizationMiddleware.InvokeAsync(HttpContext context, ICmsUrlService urlService) in X:\websites\rails\Rebuild\RailTix\Middleware\CmsUrlNormalizationMiddleware.cs:line 37
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-12 22:47:44.722 +13:00 [ERR] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The following sections have been defined but have not been rendered by the page at '/Views/Shared/_AccountLayout.cshtml': 'Styles'. To ignore an unrendered section call IgnoreSection("sectionName").
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPage.EnsureRenderedBodyOrSections()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at RailTix.Middleware.CmsUrlNormalizationMiddleware.InvokeAsync(HttpContext context, ICmsUrlService urlService) in X:\websites\rails\Rebuild\RailTix\Middleware\CmsUrlNormalizationMiddleware.cs:line 37
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-02-12 22:47:44.774 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/events - 500 null text/html; charset=utf-8 970.8757ms
+2026-02-12 22:47:44.796 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:47:44.798 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:47:44.800 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 1.7623ms
+2026-02-12 22:47:44.816 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 20.3153ms
+2026-02-12 22:53:47.644 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/account/events - null null
+2026-02-12 22:53:49.689 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executing endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:53:49.689 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller RailTix.Controllers.EventsController (RailTix).
+2026-02-12 22:53:50.059 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[AddressLine1], [e].[AddressLine2], [e].[City], [e].[Country], [e].[CreatedAt], [e].[CreatedByUserId], [e].[CurrencyCode], [e].[Description], [e].[EndsAtLocal], [e].[OrganizerName], [e].[PostalCode], [e].[Region], [e].[Slug], [e].[StartsAtLocal], [e].[Status], [e].[TimeZoneId], [e].[Title], [e].[UpdatedAt], [e].[VenueName]
+FROM [Events] AS [e]
+ORDER BY [e].[CreatedAt] DESC
+2026-02-12 22:53:50.060 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executing ViewResult, running view Index.
+2026-02-12 22:53:50.239 +13:00 [INF] Microsoft.EntityFrameworkCore.Database.Command Executed DbCommand (43ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[City], [a].[ConcurrencyStamp], [a].[Country], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[Locale], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[PreferredCurrency], [a].[SecurityStamp], [a].[TimeZoneId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-02-12 22:53:50.247 +13:00 [INF] Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor Executed ViewResult - view Index executed in 187.3488ms.
+2026-02-12 22:53:50.247 +13:00 [INF] Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker Executed action RailTix.Controllers.EventsController.Index (RailTix) in 557.2587ms
+2026-02-12 22:53:50.247 +13:00 [INF] Microsoft.AspNetCore.Routing.EndpointMiddleware Executed endpoint 'RailTix.Controllers.EventsController.Index (RailTix)'
+2026-02-12 22:53:50.247 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /account/events responded 200 in 561.0786 ms
+2026-02-12 22:53:50.248 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/account/events - 200 null text/html; charset=utf-8 2604.2022ms
+2026-02-12 22:53:50.496 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/components/events-landing.css?v=BgxmmK5q0UoM0G6jpx1JAN02Fybub6PmA_1a_bk-9VU - null null
+2026-02-12 22:53:50.622 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_vs/browserLink - null null
+2026-02-12 22:53:50.622 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 22:53:50.623 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request starting HTTP/2 GET https://localhost:7113/css/site.css?v=_Ld1WiLTCNH-t36Um0ZVfyZV2Fb8Fy7N77w1yWiBvHQ - null null
+2026-02-12 22:53:50.626 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 3.4719ms
+2026-02-12 22:53:50.628 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware The file /css/site.css was not modified
+2026-02-12 22:53:50.628 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/site.css responded 304 in 4.0538 ms
+2026-02-12 22:53:50.628 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/site.css?v=_Ld1WiLTCNH-t36Um0ZVfyZV2Fb8Fy7N77w1yWiBvHQ - 304 null text/css 4.3014ms
+2026-02-12 22:53:50.664 +13:00 [INF] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware Sending file. Request path: '/css/components/events-landing.css'. Physical path: 'X:\websites\rails\Rebuild\RailTix\wwwroot\css\components\events-landing.css'
+2026-02-12 22:53:50.664 +13:00 [INF] Serilog.AspNetCore.RequestLoggingMiddleware HTTP GET /css/components/events-landing.css responded 200 in 167.5667 ms
+2026-02-12 22:53:50.666 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/css/components/events-landing.css?v=BgxmmK5q0UoM0G6jpx1JAN02Fybub6PmA_1a_bk-9VU - 200 5643 text/css 169.3767ms
+2026-02-12 22:53:50.907 +13:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics Request finished HTTP/2 GET https://localhost:7113/_vs/browserLink - 200 null text/javascript; charset=UTF-8 285.1374ms
