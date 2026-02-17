@@ -8,17 +8,24 @@
 }
 
 <section class="section">
-	<h1 class="h3 mb-3">Create Event</h1>
+	<div class="form-shell form-shell--wide">
+		<div class="form-shell__header">
+			<h1 class="form-shell__title">Create Event</h1>
+			<p class="form-shell__subtitle">Set up event details, schedule, and venue information before publishing.</p>
+		</div>
 
-	<form method="post">
-		@Html.AntiForgeryToken()
-		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<form method="post" class="form-shell__body">
+			@Html.AntiForgeryToken()
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-		@await Html.PartialAsync("_EventForm", Model)
+			@await Html.PartialAsync("_EventForm", Model)
 
-		<button type="submit" class="btn btn-primary">Create event</button>
-		<a href="/account/events" class="btn btn-outline-primary" style="margin-left: 0.5rem;">Cancel</a>
-	</form>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Create Event</button>
+				<a href="/account/events" class="btn btn-outline-danger">Cancel</a>
+			</div>
+		</form>
+	</div>
 </section>
 
 @section Scripts {

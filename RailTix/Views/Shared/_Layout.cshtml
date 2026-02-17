@@ -179,6 +179,7 @@
 			window.RailTixContext = { isAuthenticated: @(User?.Identity?.IsAuthenticated ?? false ? "true" : "false") };
 		})();
 	</script>
+	<script src="~/js/modules/forms/dateValidation.js" asp-append-version="true"></script>
 	<script src="~/js/modules/location/bootstrap.js" asp-append-version="true"></script>
 	<script>
 		window.RailTixLocation && window.RailTixLocation.init({

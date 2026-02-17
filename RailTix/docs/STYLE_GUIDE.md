@@ -3,7 +3,7 @@ RailTix UI Style Guide
 Overview
 - The visual identity is dark, sleek, and a little rebellious while remaining professional and clean.
 - Primary highlight is green (#5fff00). Negative/secondary accent is pink (#ff00d8). 
-- Interactions use subtle brightness shifts, soft shadows, and smooth transitions.
+- Interactions favor flatter surfaces with subtle depth (desktop OS-style) and smooth transitions.
 
 Typography
 - Headings: Bebas Neue (display). Body: Inter (300–800). Linked in `_Layout.cshtml`.
@@ -27,15 +27,33 @@ Loading Pattern
 Color and Interaction
 - Backgrounds: very dark gray canvas; white cards for form dialogs.
 - Highlights: green (#5fff00) for positive/primary; pink (#ff00d8) for errors/cancel.
-- Smooth transitions for interactive elements (color, background, border, brightness).
+- Keep gradients minimal; prefer solid fills plus light border/shadow depth.
+- Smooth transitions for interactive elements (color, background, border, brightness, shadow).
+- Avoid `transform`-based hover motion (no `translate/scale/rotate` on `:hover`) so controls do not shift position.
 
 Forms
-- Wrap complex forms in `.form-dialog` for a white card UI.
+- Use reusable form wrappers from `components/forms.scss`:
+  - `.form-shell` for dark in-app forms (default for account/admin/event forms)
+  - `.form-dialog` for focused auth-style forms where a light card is appropriate
 - Controls: use `.form-control`, `.form-select`, `.form-check-input`; buttons `.btn` + variants.
 - Validation: `.text-danger`/`.field-validation-error` styled in `components/forms.scss`.
+- For larger forms, use `.form-shell__header`, `.form-section`, and `.form-actions` to keep structure consistent site-wide.
+- In `.form-actions`, treat cancel/back as a negative action using `.btn-outline-danger` (not `.btn-outline-primary`).
 
 Buttons
 - `.btn` base with hover/active; `.btn-primary` (green), `.btn-outline-primary`, `.btn-danger` (pink).
+- Keep corners subtle (`$rtx-radius-sm`/`$rtx-radius-md`) rather than pill-shaped for primary actions.
+- Use a flatter 3D look (border contrast + soft inset/outset shadow) instead of heavy gradients.
+
+Tables
+- Use shared table styles from `site.scss` for all tabular data.
+- Recommended structure:
+  - `.table-shell` wrapper for surface/border/shadow.
+  - `.table-shell__header` for title + actions.
+  - `.table-wrap` for horizontal overflow safety.
+  - `.table` for row/cell styling.
+- For row actions, use `.table-actions`, `.table-actions__link`, and `.table-actions__link--danger` for destructive actions.
+- Keep table headers compact, uppercase, and muted; keep body rows readable with subtle hover and zebra states.
 
 Navbar and Layout
 - Custom `nav` with `.nav-brand`, `.nav-menu`, `.nav-item`; responsive toggle adds `.is-open` to menu.

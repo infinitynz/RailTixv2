@@ -167,6 +167,40 @@
   border-radius: 6px;
 }
 
+.events-landing__url-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.38rem;
+  min-width: 220px;
+}
+
+.events-landing__url-open {
+  font-weight: 600;
+}
+
+.events-landing__url-current {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.events-landing__url-current code {
+  font-size: 0.78rem;
+  color: rgba(95, 255, 0, 0.88);
+  background-color: rgba(95, 255, 0, 0.08);
+  border: 1px solid rgba(95, 255, 0, 0.24);
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+}
+
+.events-landing__slug-btn {
+  margin-top: 0;
+  padding: 0.32rem 0.62rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
 .events-landing__date {
   color: rgba(255, 255, 255, 0.86);
   font-size: 0.9rem;
@@ -212,6 +246,97 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.events-landing__slug-dialog {
+  width: min(620px, 100% - 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  background: rgba(15, 15, 16, 0.98);
+  color: #d7dadd;
+  padding: 0;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.events-landing__slug-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.events-landing__slug-dialog-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem;
+}
+
+.events-landing__slug-dialog-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.events-landing__slug-dialog-title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.events-landing__slug-dialog-copy {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.9rem;
+  max-width: 72ch;
+}
+
+.events-landing__slug-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.events-landing__slug-preview {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.86rem;
+}
+
+.events-landing__slug-preview code {
+  font-size: 0.82rem;
+}
+
+.events-landing__slug-status {
+  margin: 0.2rem 0 0;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.86rem;
+}
+
+.events-landing__slug-status.is-info {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.86);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.events-landing__slug-status.is-success {
+  background: rgba(95, 255, 0, 0.14);
+  color: #bcff96;
+  border-color: rgba(95, 255, 0, 0.38);
+}
+
+.events-landing__slug-status.is-error {
+  background: rgba(255, 0, 216, 0.14);
+  color: #ffc8f5;
+  border-color: rgba(255, 0, 216, 0.36);
+}
+
+.events-landing__slug-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 860px) {
   .events-landing__hero {
     padding: 0.9rem;
@@ -219,6 +344,9 @@
   .events-landing__table {
     min-width: 680px;
   }
+  .events-landing__slug-dialog-inner {
+    padding: 0.85rem;
+  }
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/components/events-landing.scss%22,%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/_tokens.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAEA;EACC;EACA;EACA;;;AAID;EACC,YACC;EAKD;EACA,eCIe;EDFf,YCKsB;EDJtB;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA,OCnCW;EDoCX;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA,eCvDe;EDwDf;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC,OCnFW;EDoFX;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;EACA,OCxGW;EDyGX;;;AAGD;EACC;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;IACC;;EAGD;IACC%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/components/events-landing.scss%22,%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/_tokens.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAEA;EACC;EACA;EACA;;;AAKD;EACC,YAEC;EAOD;EACA;EAEA,YCCsB;EDAtB;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA,OCvCW;EDwCX;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA,eC3De;ED4Df;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC,OCvFW;EDwFX;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;EACA,OC5GW;ED6GX;;;AAGD;EACC;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA,eClPe;EDmPf;EACA,OClQU;EDmQV;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA,OC3RW;;;AD8RZ;EACC;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;EACA;EACA,eC3Se;ED4Sf;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;;;AAGD;EACC;IACC;;EAGD;IACC;;EAGD;IACC%22%7D */

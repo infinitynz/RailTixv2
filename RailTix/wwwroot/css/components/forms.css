@@ -1,32 +1,49 @@
-﻿.form-control, .form-select, .form-check-input, textarea.form-control {
+﻿.form-control, .form-select, textarea.form-control {
   transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
   will-change: color, background-color, border-color, filter, box-shadow, transform;
-  background-color: #121212;
+  background-color: rgba(18, 18, 18, 0.98);
   color: #d7dadd;
-  border: 1px solid transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  display: block;
+  width: 100%;
   padding: 8px 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
-.form-control:focus, .form-select:focus, .form-check-input:focus, textarea.form-control:focus {
+.form-control:focus, .form-select:focus, textarea.form-control:focus {
   background-color: #121212;
   color: #d7dadd;
-  border-color: #5fff00;
-  box-shadow: none;
+  border-color: rgba(95, 255, 0, 0.78);
+  box-shadow: 0 0 0 0.15rem rgba(95, 255, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
-.form-control::placeholder, .form-select::placeholder, .form-check-input::placeholder, textarea.form-control::placeholder {
+.form-control::placeholder, .form-select::placeholder, textarea.form-control::placeholder {
   color: #a7abb1;
 }
 
 form .row {
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 form .row .col-md-6 {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 260px;
   width: calc(50% - 10px);
 }
 
+@media (max-width: 760px) {
+  form .row .col-md-6 {
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 0;
+  }
+}
 .form-label {
   display: block;
   margin-bottom: 0.5rem;
   color: #d7dadd;
+  font-weight: 600;
+  letter-spacing: 0.12px;
 }
 
 .form-check-label {
@@ -129,6 +146,91 @@ form .row .col-md-6 {
   background-color: #5fff00;
   border-color: #5fff00;
 }
+.form-shell {
+  background-color: rgba(18, 18, 18, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 20px rgba(0, 0, 0, 0.36);
+}
+@media (min-width: 768px) {
+  .form-shell {
+    padding: 1.15rem 1.25rem;
+  }
+}
+
+.form-shell--wide {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.form-shell__header {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.form-shell__title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 1.42rem + 0.5vw, 2rem);
+  line-height: 1.1;
+}
+
+.form-shell__subtitle {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 70ch;
+}
+
+.form-shell__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.form-section {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background-color: rgba(14, 15, 16, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.form-section__title {
+  margin: 0 0 0.7rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.86rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 700;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 0.1rem;
+}
+
+.form-actions .btn {
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.5rem 0.95rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.1;
+  text-decoration: none;
+}
+.form-actions .btn:hover, .form-actions .btn:focus-visible, .form-actions .btn:active {
+  text-decoration: none;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -288,4 +390,4 @@ form .form-select.input-validation-error {
   border-color: #222;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/components/forms.scss%22,%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/_tokens.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAGA;EC+BC;EACA;ED9BA;EAGA;EACA;EACA;;AAEA;EAMC,kBCbgB;EDchB,OCXS;EDYT,cCNU;EDOV;;AAGD;EACC,OChBe;;;ADoBhB;EACC;;AAEA;EACC;;;AAIH;EACC;EACA;EACA,OChCU;;;ADmCX;EACC,OCpCU;;;ADuCX;EACC,kBClCW;EDmCX,cCnCW;;;ADuCZ;AAAA;AAAA;EAGC;EACA,OCzCU;ED0CV;EACA;;;AAID;EACC;EACA,OCjDU;EDkDV;EACA;;;AAID;EACC;EACA;;AAEA;EACC;EACA;EACA;EACA;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA,QChFe;EDiFf;EACA;EACA;EACA;;AAGD;EACC,QCnFU;EDoFV;;;AAKF;EACC,kBC9FW;ED+FX;EACA,eCrFe;EDsFf,YClFuB;EDmFvB;;AAEA;EAPD;IAQE;;;AAGD;EACC;EACA;EACA;;AAGD;EACC;EACA;;AAGD;EACC;EACA;EACA;EACA,eC1Gc;ED2Gd;EACA;;AAEA;EACC;EACA;;AAGD;EACC;;AAIF;EACC;;AAEA;EACC,cCrIS;EDsIT;;AAGD;EACC,kBC1IS;ED2IT,cC3IS;;ADkJZ;EACC;;;AAID;AAAA;EAEC;EACA;EACA;EACA;EACA;EACA;;;AAGD;AAAA;AAAA;EAGC;;;AAGD;EACC;EACA;EACA,OChLU;EDiLV;EACA,eCnKe;;;ADuKhB;EACC;EACA;;;AAED;EACC;EACA;;;AAOD;EACC;EACA;EACA,eCvLe;EDwLf;EACA,OCvMgB;;ADyMhB;EACC;EACA;EACA,OC7MS;;ADgNV;EACC;EACA;EACA;;AAEA;EACC;EACA;EACA;;AAEA;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA,kBCjOa;EDkOb;;AAGD;EAAO,OCtOC;;ADuOR;EAAe,kBCjON;EDiOoC;;AAC7C;EAAgB,kBChOR;;;ADwOX;EACC;EACA;EACA;;;AAGD;AAAA;EAEC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;;AAMA;EACC;EACA;EAEA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAMD;EACC;EACA;;;AAKF;EACC;;AAEA;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA,kBC5SU;ED6SV;EACA;;AAGD;EACC,cClTU;EDmTV;;AAGD;EACC;;;AAKF;EACC;EACA;EACA,cC/TW;;;ADmUZ;EACC,kBC7UiB;ED8UjB,cC5UY%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/components/forms.scss%22,%22file:///X:/websites/rails/Rebuild/RailTix/wwwroot/css/_tokens.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAGA;EC+BC;EACA;ED9BA;EAEA,OCCU;EDAV;EACA,eCce;EDXf;EACA;EACA;EACA;;AAGA;EACC,kBCdgB;EDehB,OCZS;EDaT;EACA;;AAGD;EACC,OCjBe;;;ADqBhB;EACC;EACA;EACA;;AAEA;EACC;EACA;EACA;;;AAKH;EACC;IACC;IACA;IACA;;;AAGF;EACC;EACA;EACA,OC7CU;ED8CV;EACA;;;AAGD;EACC,OCnDU;;;ADsDX;EACC,kBCjDW;EDkDX,cClDW;;;ADsDZ;AAAA;AAAA;EAGC;EACA,OCxDU;EDyDV;EACA;;;AAID;EACC;EACA,OChEU;EDiEV;EACA;;;AAID;EACC;EACA;;AAEA;EACC;EACA;EACA;EACA;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA,QC/Fe;EDgGf;EACA;EACA;EACA;;AAGD;EACC,QClGU;EDmGV;;;AAKF;EACC,kBC7GW;ED8GX;EACA,eCpGe;EDqGf,YCjGuB;EDkGvB;;AAEA;EAPD;IAQE;;;AAGD;EACC;EACA;EACA;;AAGD;EACC;EACA;;AAGD;EACC;EACA;EACA;EACA,eCzHc;ED0Hd;EACA;;AAEA;EACC;EACA;;AAGD;EACC;;AAIF;EACC;;AAEA;EACC,cCpJS;EDqJT;;AAGD;EACC,kBCzJS;ED0JT,cC1JS;;ADoKZ;EACC;EACA;EACA,eC/Je;EDgKf;EACA;;AAEA;EAPD;IAQE;;;;AAIF;EACC;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA,OCjMW;EDkMX;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA;;;AAGD;EACC;EACA;EACA,eCxMe;EDyMf;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EAGC;;;AAIF;EACC;;;AAID;AAAA;EAEC;EACA;EACA;EACA;EACA;EACA;;;AAGD;AAAA;AAAA;EAGC;;;AAGD;EACC;EACA;EACA,OCzRU;ED0RV;EACA,eC5Qe;;;ADgRhB;EACC;EACA;;;AAED;EACC;EACA;;;AAOD;EACC;EACA;EACA,eChSe;EDiSf;EACA,OChTgB;;ADkThB;EACC;EACA;EACA,OCtTS;;ADyTV;EACC;EACA;EACA;;AAEA;EACC;EACA;EACA;;AAEA;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA,kBC1Ua;ED2Ub;;AAGD;EAAO,OC/UC;;ADgVR;EAAe,kBC1UN;ED0UoC;;AAC7C;EAAgB,kBCzUR;;;ADiVX;EACC;EACA;EACA;;;AAGD;AAAA;EAEC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;;AAMA;EACC;EACA;EAEA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAMD;EACC;EACA;;;AAKF;EACC;;AAEA;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA,kBCrZU;EDsZV;EACA;;AAGD;EACC,cC3ZU;ED4ZV;;AAGD;EACC;;;AAKF;EACC;EACA;EACA,cCxaW;;;AD4aZ;EACC,kBCtbiB;EDubjB,cCrbY%22%7D */

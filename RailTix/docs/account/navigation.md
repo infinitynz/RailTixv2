@@ -32,15 +32,25 @@ Notes:
 - See `icons.md` for the inline SVG guidance and outline/solid directories.
 - If Stripe setup is incomplete for an Event Manager/Admin seller, show a visual warning state on "Payment Settings" and use this route as the primary CTA target from event creation/publish guards.
 
-### Contextual Items (Event-Specific)
-When in an event context (e.g., `/account/events/:id/...`), the sidebar may display a contextual sub-section beneath “My Events”:
-- Overview — `/account/events/:id`
+### Contextual Items (Event-Specific / Hi.Events Parity Target)
+When in an event context (e.g., `/account/events/:id/...`), the sidebar should display a dedicated event operations sub-section beneath “My Events”:
+- Dashboard — `/account/events/:id` (or `/account/events/:id/dashboard`)
 - Tickets — `/account/events/:id/tickets`
-- Promo Codes — `/account/events/:id/promos`
 - Attendees — `/account/events/:id/attendees`
-- Reports — `/account/events/:id/reports`
+- Orders — `/account/events/:id/orders`
+- Questions — `/account/events/:id/questions`
+- Messages — `/account/events/:id/messages`
+- Capacity — `/account/events/:id/capacity`
+- Check-in Lists — `/account/events/:id/check-in-lists`
+- Homepage Design — `/account/events/:id/homepage-design`
+- Widget Embed — `/account/events/:id/widget-embed`
 
-This contextual block is only shown while viewing a specific event and honors ownership/role checks.
+Optional/adjacent items (phase-dependent):
+- Promo Codes — `/account/events/:id/promos`
+- Reports — `/account/events/:id/reports`
+- Event Settings — `/account/events/:id/settings`
+
+This contextual block is shown only while viewing a specific event and must honor ownership/role checks.
 
 ### Visual/Interaction Details
 - Icon + Label Pairing: Icon at 20–24px; label baseline-aligned; adequate spacing for readability.
@@ -75,5 +85,6 @@ Implementation note:
 ### Empty/Edge States
 - If a role has access to no items (unlikely), show a friendly message and a link to Profile.
 - If the user loses a role mid-session, remove items on the next render and handle current-page access gracefully (redirect if necessary).
+- If user can access account pages but not a target event, show a friendly 403 and keep global account navigation visible.
 
 

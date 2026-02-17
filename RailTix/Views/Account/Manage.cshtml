@@ -5,8 +5,10 @@
 
 <section class="section account-dashboard">
 	<div class="card account-dashboard__card">
-		<h1 class="account-dashboard__title">Account Dashboard</h1>
-		<p class="account-dashboard__subtitle">Manage your account setup and event readiness.</p>
+		<div class="account-dashboard__header">
+			<h1 class="account-dashboard__title">Account Dashboard</h1>
+			<p class="account-dashboard__subtitle">Manage your account setup and event readiness.</p>
+		</div>
 
 		@if (Model.CanManageEvents && Model.StripeStatus != null)
 		{
@@ -67,7 +69,14 @@
 
 				<div class="account-stripe-status__actions">
 					<a class="btn btn-primary" href="/account/payment">Payment Settings</a>
-					<a class="btn btn-outline-primary" href="/account/events">My Events</a>
+					@if (Model.HasAnyEvents)
+					{
+						<a class="btn btn-outline-primary" href="/account/events">My Events</a>
+					}
+					else
+					{
+						<a class="btn btn-outline-primary" href="/account/events/create">Create Event</a>
+					}
 				</div>
 			</div>
 		}

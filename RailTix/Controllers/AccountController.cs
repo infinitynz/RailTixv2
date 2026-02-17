@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using RailTix.Data;
 using RailTix.Models.Domain;
 using RailTix.Models.Options;
 using RailTix.Services.Recaptcha;
@@ -23,6 +25,7 @@ namespace RailTix.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -35,6 +38,7 @@ namespace RailTix.Controllers
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
+            ApplicationDbContext db,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
@@ -46,6 +50,7 @@ namespace RailTix.Controllers
             IOptions<StripeOptions> stripeOptions,
             ILogger<AccountController> logger)
         {
+            _db = db;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -626,6 +631,9 @@ namespace RailTix.Controllers
 
             if (model.CanManageEvents)
             {
+                model.HasAnyEvents = await _db.Events
+                    .AsNoTracking()
+                    .AnyAsync(e => e.CreatedByUserId == user.Id, HttpContext.RequestAborted);
                 model.StripeStatus = await BuildStripeStatusViewModelAsync(user, ShouldUsePlatformStripeAccount());
             }
 

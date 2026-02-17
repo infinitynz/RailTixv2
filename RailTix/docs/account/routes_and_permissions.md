@@ -25,6 +25,17 @@ All `/account/*` routes require authentication.
 Future (stubs; role-gated as appropriate)
 - `/account/events` — list of owned events
 - `/account/events/new` — create event
+- `/account/events/:id` — event dashboard landing (redirect/default to dashboard tab)
+- `/account/events/:id/dashboard` — event dashboard overview
+- `/account/events/:id/tickets` — ticket/product management
+- `/account/events/:id/attendees` — attendee management
+- `/account/events/:id/orders` — order management
+- `/account/events/:id/questions` — checkout questions
+- `/account/events/:id/messages` — messaging center
+- `/account/events/:id/capacity` — capacity controls
+- `/account/events/:id/check-in-lists` — check-in lists and operations
+- `/account/events/:id/homepage-design` — event homepage designer
+- `/account/events/:id/widget-embed` — widget embed tools/config
 - `/account/reports` — aggregated reports
 - `/account/checkin` — check-in tools
 - `/account/admin` — admin center
@@ -34,6 +45,7 @@ Future (stubs; role-gated as appropriate)
 - `/account/` (Dashboard) → Event Manager
 - `/account/payment*` → Event Manager
 - `/account/events*` → Event Manager
+- `/account/events/:id*` → Event Manager + ownership/resource policy
 - `/account/reports*` → Event Manager
 - `/account/checkin*` → Event Manager
 - `/account/admin*` → Admin
@@ -49,6 +61,7 @@ See `../ROLES_AND_PERMISSIONS.md` for inheritance and detailed capabilities.
 - If a user without the minimum role accesses a restricted route:
   - Prefer a friendly 403 page with a link to an accessible destination (e.g., Profile).
   - If currently rendered inside `/account/*`, also render the sidebar so navigation remains consistent.
+- If a user has the right role but does not own the event resource, return friendly 403 and keep account navigation visible.
 - Stripe gate:
   - Event Managers (and Admins acting as event sellers) must complete Stripe Connect before event creation.
   - Accessing `/account/events/create` without Stripe setup should redirect to `/account/payment` with return URL context.

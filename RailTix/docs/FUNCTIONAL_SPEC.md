@@ -41,12 +41,15 @@
 - Security: signed QR tokens, short expiration, anti-replay, idempotent deduction.
 
 3.5 Event Manager Dashboard (hi.events-style)
+- Account dashboard should show active events first and provide quick links into each event’s dashboard.
 - Event Setup: event details, images, schedule, venue, capacity, categories/tags.
 - Payment setup prerequisite: Stripe Connect must be completed before event creation is allowed.
 - Ticketing: ticket types, inventory, pricing rules, fees/taxes, promo codes, holds/comp tickets.
 - Orders & Attendees: order list, exports (CSV/Excel), attendees list, resend tickets, refunds (policy-based).
 - Check-in App: device codes, staff roles, live stats.
 - Reports: sales by ticket type/date/channel, attendance metrics.
+- Per-event dashboard navigation should mirror Hi.Events structure and include:
+  - Dashboard, Tickets, Attendees, Orders, Questions, Messages, Capacity, Check-in Lists, Homepage Design, Widget Embed.
 
 3.6 CMS (Lightweight)
 - Pages: create content pages with URL, SEO settings, publish schedule.

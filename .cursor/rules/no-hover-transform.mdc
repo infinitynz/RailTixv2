@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+description: Keep hover states visually stable by avoiding transform-based motion.
+---
+# No Hover Transform Rule
+
+Use this as a UI consistency rule for interactive styling in [site.scss](mdc:RailTix/wwwroot/css/site.scss) and component SCSS files.
+
+- Do not use `transform` in `:hover` / `&:hover` styles for controls like `.btn`, links, nav items, cards, or form elements.
+- Prefer non-layout-shifting feedback on hover: color, background, border, opacity, filter, or shadow changes.
+- `transform` may be used for non-hover state transitions (for example menu open/close states or explicit icon toggles).

@@ -20,10 +20,29 @@
 			_ => "events-landing__status"
 		};
 	}
+
+	string FriendlyDateTime(DateTime value)
+	{
+		return value
+			.ToString("dd MMM yyyy hh:mm tt")
+			.Replace("AM", "a.m.", StringComparison.Ordinal)
+			.Replace("PM", "p.m.", StringComparison.Ordinal);
+	}
+
+	string FriendlyTimeZone(string? timeZoneId)
+	{
+		if (string.IsNullOrWhiteSpace(timeZoneId))
+		{
+			return "Local time";
+		}
+
+		return timeZoneId.Replace("_", " ", StringComparison.Ordinal).Replace("/", " / ", StringComparison.Ordinal);
+	}
 }
 
 @section Styles {
 	<link rel="stylesheet" href="~/css/components/events-landing.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/components/forms.css" asp-append-version="true" />
 }
 
 <section class="section events-landing">
@@ -98,7 +117,7 @@
 		else
 		{
 			<div class="card events-landing__table-shell">
-				<div class="events-landing__table-wrap">
+				<div class="events-landing__table-wrap table-wrap">
 					<table class="table events-landing__table">
 						<thead>
 							<tr>
@@ -115,12 +134,27 @@
 								<tr>
 									<td>
 										<div class="events-landing__event-title">@item.Title</div>
-										<div class="events-landing__event-path"><code>/event/@item.Slug</code></div>
 									</td>
 									<td><span class="@StatusClass(item.Status)">@item.Status</span></td>
-									<td class="events-landing__date">@item.StartsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
-									<td class="events-landing__date">@item.EndsAtLocal.ToString("yyyy-MM-dd HH:mm") @item.TimeZoneId</td>
-									<td><a href="/event/@item.Slug" target="_blank" rel="noopener noreferrer">Open Event</a></td>
+									<td class="events-landing__date">@FriendlyDateTime(item.StartsAtLocal) (@FriendlyTimeZone(item.TimeZoneId))</td>
+									<td class="events-landing__date">@FriendlyDateTime(item.EndsAtLocal) (@FriendlyTimeZone(item.TimeZoneId))</td>
+									<td class="events-landing__url-cell">
+										<a class="events-landing__url-open"
+										   data-open-link-for="@item.Id"
+										   href="/event/@item.Slug"
+										   target="_blank"
+										   rel="noopener noreferrer">Open Event</a>
+										<p class="events-landing__url-current">
+											Current URL: <code data-slug-code-for="@item.Id">/event/@item.Slug</code>
+										</p>
+										<button type="button"
+												class="btn btn-outline-primary events-landing__slug-btn"
+												data-event-id="@item.Id"
+												data-current-slug="@item.Slug"
+												data-event-title="@item.Title">
+											Change URL
+										</button>
+									</td>
 								</tr>
 							}
 						</tbody>
@@ -129,5 +163,227 @@
 			</div>
 		}
 	</div>
+
+	<form id="event-slug-antiforgery-form" method="post">
+		@Html.AntiForgeryToken()
+	</form>
+
+	<dialog id="event-slug-dialog" class="events-landing__slug-dialog">
+		<div class="events-landing__slug-dialog-inner">
+			<div class="events-landing__slug-dialog-header">
+				<h2 id="event-slug-dialog-title" class="events-landing__slug-dialog-title">Change Event URL</h2>
+				<p class="events-landing__slug-dialog-copy">
+					How it works: enter a URL slug for your event. We normalize it to safe lowercase text
+					(letters, numbers, and dashes), validate availability, then save it.
+				</p>
+			</div>
+
+			<form id="event-slug-form" class="events-landing__slug-form">
+				<input type="hidden" id="event-slug-event-id" name="EventId" />
+
+				<div class="mb-3">
+					<label class="form-label" for="event-slug-input">Event URL slug</label>
+					<input id="event-slug-input"
+						   name="Slug"
+						   class="form-control"
+						   maxlength="200"
+						   autocomplete="off"
+						   spellcheck="false"
+						   placeholder="e.g. summer-fest-2026" />
+				</div>
+
+				<p class="events-landing__slug-preview">
+					Preview: <code id="event-slug-preview-code">/event/</code>
+				</p>
+				<p id="event-slug-status" class="events-landing__slug-status" hidden></p>
+
+				<div class="events-landing__slug-actions">
+					<button type="submit" id="event-slug-save-btn" class="btn btn-primary">Validate &amp; Save</button>
+					<button type="button" id="event-slug-cancel-btn" class="btn btn-outline-danger">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</dialog>
 </section>
+
+@section Scripts {
+	<script>
+		(function () {
+			const dialog = document.getElementById('event-slug-dialog');
+			if (!dialog || typeof dialog.showModal !== 'function') {
+				return;
+			}
+
+			const antiForgeryInput = document.querySelector('#event-slug-antiforgery-form input[name="__RequestVerificationToken"]');
+			if (!antiForgeryInput) {
+				return;
+			}
+
+			const validateUrl = '@Url.Action("ValidateSlug", "Events")';
+			const updateUrl = '@Url.Action("UpdateSlug", "Events")';
+			const dialogTitle = document.getElementById('event-slug-dialog-title');
+			const form = document.getElementById('event-slug-form');
+			const eventIdInput = document.getElementById('event-slug-event-id');
+			const slugInput = document.getElementById('event-slug-input');
+			const previewCode = document.getElementById('event-slug-preview-code');
+			const status = document.getElementById('event-slug-status');
+			const saveButton = document.getElementById('event-slug-save-btn');
+			const cancelButton = document.getElementById('event-slug-cancel-btn');
+			const openButtons = Array.from(document.querySelectorAll('.events-landing__slug-btn'));
+
+			if (!form || !eventIdInput || !slugInput || !previewCode || !status || !saveButton || !cancelButton || openButtons.length === 0) {
+				return;
+			}
+
+			const antiForgeryToken = antiForgeryInput.value;
+
+			function setStatus(message, type) {
+				if (!message) {
+					status.hidden = true;
+					status.textContent = '';
+					status.classList.remove('is-error', 'is-success', 'is-info');
+					return;
+				}
+
+				status.hidden = false;
+				status.textContent = message;
+				status.classList.remove('is-error', 'is-success', 'is-info');
+				status.classList.add(type || 'is-info');
+			}
+
+			function updatePreview() {
+				const candidate = (slugInput.value || '').trim();
+				previewCode.textContent = '/event/' + candidate;
+			}
+
+			function setBusyState(isBusy) {
+				saveButton.disabled = isBusy;
+				cancelButton.disabled = isBusy;
+				slugInput.readOnly = isBusy;
+			}
+
+			async function postSlugRequest(url, eventId, slug) {
+				const payload = new URLSearchParams();
+				payload.append('__RequestVerificationToken', antiForgeryToken);
+				payload.append('EventId', eventId);
+				payload.append('Slug', slug);
+
+				const response = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+						'X-Requested-With': 'XMLHttpRequest'
+					},
+					body: payload.toString()
+				});
+
+				let data = {};
+				try {
+					data = await response.json();
+				} catch (_) {
+					// no-op; handled by fallback message
+				}
+
+				return { ok: response.ok, data: data };
+			}
+
+			function updateRowSlug(eventId, slug) {
+				const code = document.querySelector('[data-slug-code-for="' + eventId + '"]');
+				if (code) {
+					code.textContent = '/event/' + slug;
+				}
+
+				const openLink = document.querySelector('[data-open-link-for="' + eventId + '"]');
+				if (openLink) {
+					openLink.setAttribute('href', '/event/' + slug);
+				}
+
+				openButtons
+					.filter(function (button) { return button.dataset.eventId === eventId; })
+					.forEach(function (button) { button.dataset.currentSlug = slug; });
+			}
+
+			function openDialog(button) {
+				const eventId = button.dataset.eventId || '';
+				const currentSlug = button.dataset.currentSlug || '';
+				const eventTitle = button.dataset.eventTitle || 'event';
+
+				eventIdInput.value = eventId;
+				slugInput.value = currentSlug;
+				updatePreview();
+				setStatus('', '');
+				dialogTitle.textContent = 'Change Event URL - ' + eventTitle;
+				dialog.showModal();
+				slugInput.focus();
+				slugInput.select();
+			}
+
+			openButtons.forEach(function (button) {
+				button.addEventListener('click', function () {
+					openDialog(button);
+				});
+			});
+
+			cancelButton.addEventListener('click', function () {
+				dialog.close();
+			});
+
+			dialog.addEventListener('cancel', function () {
+				setStatus('', '');
+			});
+
+			slugInput.addEventListener('input', function () {
+				updatePreview();
+				setStatus('', '');
+			});
+
+			form.addEventListener('submit', async function (e) {
+				e.preventDefault();
+				setBusyState(true);
+				setStatus('Validating URL...', 'is-info');
+
+				const eventId = eventIdInput.value;
+				const proposedSlug = (slugInput.value || '').trim();
+
+				try {
+					const validation = await postSlugRequest(validateUrl, eventId, proposedSlug);
+					if (!validation.ok || !validation.data || validation.data.ok !== true) {
+						if (validation.data && validation.data.normalizedSlug) {
+							slugInput.value = validation.data.normalizedSlug;
+							updatePreview();
+						}
+
+						setStatus((validation.data && validation.data.message) || 'URL validation failed.', 'is-error');
+						setBusyState(false);
+						return;
+					}
+
+					const normalizedSlug = validation.data.normalizedSlug || proposedSlug;
+					slugInput.value = normalizedSlug;
+					updatePreview();
+					setStatus('Saving URL...', 'is-info');
+
+					const saveResult = await postSlugRequest(updateUrl, eventId, normalizedSlug);
+					if (!saveResult.ok || !saveResult.data || saveResult.data.ok !== true) {
+						setStatus((saveResult.data && saveResult.data.message) || 'Unable to save URL.', 'is-error');
+						setBusyState(false);
+						return;
+					}
+
+					const savedSlug = saveResult.data.slug || normalizedSlug;
+					updateRowSlug(eventId, savedSlug);
+					setStatus((saveResult.data && saveResult.data.message) || 'Event URL updated.', 'is-success');
+
+					window.setTimeout(function () {
+						dialog.close();
+					}, 450);
+				} catch (_) {
+					setStatus('Unexpected error while updating URL.', 'is-error');
+				} finally {
+					setBusyState(false);
+				}
+			});
+		})();
+	</script>
+}
 

@@ -1,97 +1,114 @@
 @model RailTix.Models.ViewModels.Events.EventEditViewModel
 
-<div class="row">
-	<div class="col-md-6 form-group mb-3">
+<div class="form-section">
+	<h2 class="form-section__title">Basic Details</h2>
+
+	<div class="form-group mb-3">
 		<label asp-for="Title" class="form-label"></label>
 		<input asp-for="Title" class="form-control" />
 		<span asp-validation-for="Title" class="text-danger"></span>
 	</div>
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="Slug" class="form-label"></label>
-		<input asp-for="Slug" class="form-control" placeholder="leave blank to auto-generate" />
-		<span asp-validation-for="Slug" class="text-danger"></span>
+
+	<div class="form-group mb-3">
+		<label asp-for="Description" class="form-label"></label>
+		<textarea asp-for="Description" class="form-control" rows="4"></textarea>
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+
+	<div class="form-group mb-3">
+		<label asp-for="OrganizerName" class="form-label"></label>
+		<input asp-for="OrganizerName" class="form-control" />
+		<span asp-validation-for="OrganizerName" class="text-danger"></span>
 	</div>
 </div>
 
-<div class="form-group mb-3">
-	<label asp-for="Description" class="form-label"></label>
-	<textarea asp-for="Description" class="form-control" rows="4"></textarea>
-	<span asp-validation-for="Description" class="text-danger"></span>
-</div>
+<div class="form-section">
+	<h2 class="form-section__title">Schedule</h2>
 
-<div class="row">
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="StartsAtLocal" class="form-label"></label>
-		<input asp-for="StartsAtLocal" class="form-control" type="datetime-local" />
-		<span asp-validation-for="StartsAtLocal" class="text-danger"></span>
+	<div class="row">
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="StartsAtLocal" class="form-label"></label>
+			<input asp-for="StartsAtLocal"
+				   class="form-control"
+				   type="datetime-local"
+				   data-date-not-past="true"
+				   data-date-not-past-message="Start date/time must be in the future." />
+			<p class="form-field-note">Choose a future start date and time.</p>
+			<span asp-validation-for="StartsAtLocal" class="text-danger"></span>
+		</div>
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="EndsAtLocal" class="form-label"></label>
+			<input asp-for="EndsAtLocal"
+				   class="form-control"
+				   type="datetime-local"
+				   data-date-not-past="true"
+				   data-date-not-past-message="End date/time must be in the future."
+				   data-date-after="#StartsAtLocal"
+				   data-date-after-message="End date/time must be after the start date/time." />
+			<p class="form-field-note">End date/time must be later than the start date/time.</p>
+			<span asp-validation-for="EndsAtLocal" class="text-danger"></span>
+		</div>
 	</div>
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="EndsAtLocal" class="form-label"></label>
-		<input asp-for="EndsAtLocal" class="form-control" type="datetime-local" />
-		<span asp-validation-for="EndsAtLocal" class="text-danger"></span>
-	</div>
-</div>
 
-<div class="row">
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="TimeZoneId" class="form-label"></label>
-		<input asp-for="TimeZoneId" class="form-control" />
-		<span asp-validation-for="TimeZoneId" class="text-danger"></span>
-	</div>
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="CurrencyCode" class="form-label"></label>
-		<input asp-for="CurrencyCode" class="form-control" maxlength="3" />
-		<span asp-validation-for="CurrencyCode" class="text-danger"></span>
-	</div>
-</div>
-
-<div class="form-group mb-3">
-	<label asp-for="OrganizerName" class="form-label"></label>
-	<input asp-for="OrganizerName" class="form-control" />
-	<span asp-validation-for="OrganizerName" class="text-danger"></span>
-</div>
-
-<div class="form-group mb-3">
-	<label asp-for="VenueName" class="form-label"></label>
-	<input asp-for="VenueName" class="form-control" />
-	<span asp-validation-for="VenueName" class="text-danger"></span>
-</div>
-
-<div class="form-group mb-3">
-	<label asp-for="AddressLine1" class="form-label"></label>
-	<input asp-for="AddressLine1" class="form-control" />
-	<span asp-validation-for="AddressLine1" class="text-danger"></span>
-</div>
-
-<div class="form-group mb-3">
-	<label asp-for="AddressLine2" class="form-label"></label>
-	<input asp-for="AddressLine2" class="form-control" />
-	<span asp-validation-for="AddressLine2" class="text-danger"></span>
-</div>
-
-<div class="row">
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="City" class="form-label"></label>
-		<input asp-for="City" class="form-control" />
-		<span asp-validation-for="City" class="text-danger"></span>
-	</div>
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="Region" class="form-label"></label>
-		<input asp-for="Region" class="form-control" />
-		<span asp-validation-for="Region" class="text-danger"></span>
+	<div class="row">
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="TimeZoneId" class="form-label"></label>
+			<input asp-for="TimeZoneId" class="form-control" />
+			<span asp-validation-for="TimeZoneId" class="text-danger"></span>
+		</div>
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="CurrencyCode" class="form-label"></label>
+			<input asp-for="CurrencyCode" class="form-control" maxlength="3" />
+			<span asp-validation-for="CurrencyCode" class="text-danger"></span>
+		</div>
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="Country" class="form-label"></label>
-		<input asp-for="Country" class="form-control" />
-		<span asp-validation-for="Country" class="text-danger"></span>
+<div class="form-section">
+	<h2 class="form-section__title">Venue and Location</h2>
+
+	<div class="form-group mb-3">
+		<label asp-for="VenueName" class="form-label"></label>
+		<input asp-for="VenueName" class="form-control" />
+		<span asp-validation-for="VenueName" class="text-danger"></span>
 	</div>
-	<div class="col-md-6 form-group mb-3">
-		<label asp-for="PostalCode" class="form-label"></label>
-		<input asp-for="PostalCode" class="form-control" />
-		<span asp-validation-for="PostalCode" class="text-danger"></span>
+
+	<div class="form-group mb-3">
+		<label asp-for="AddressLine1" class="form-label"></label>
+		<input asp-for="AddressLine1" class="form-control" />
+		<span asp-validation-for="AddressLine1" class="text-danger"></span>
+	</div>
+
+	<div class="form-group mb-3">
+		<label asp-for="AddressLine2" class="form-label"></label>
+		<input asp-for="AddressLine2" class="form-control" />
+		<span asp-validation-for="AddressLine2" class="text-danger"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="City" class="form-label"></label>
+			<input asp-for="City" class="form-control" />
+			<span asp-validation-for="City" class="text-danger"></span>
+		</div>
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="Region" class="form-label"></label>
+			<input asp-for="Region" class="form-control" />
+			<span asp-validation-for="Region" class="text-danger"></span>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="Country" class="form-label"></label>
+			<input asp-for="Country" class="form-control" />
+			<span asp-validation-for="Country" class="text-danger"></span>
+		</div>
+		<div class="col-md-6 form-group mb-3">
+			<label asp-for="PostalCode" class="form-label"></label>
+			<input asp-for="PostalCode" class="form-control" />
+			<span asp-validation-for="PostalCode" class="text-danger"></span>
+		</div>
 	</div>
 </div>
 

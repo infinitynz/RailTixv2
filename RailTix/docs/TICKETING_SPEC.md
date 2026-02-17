@@ -18,7 +18,7 @@ Reference implementation in this repo (Hi.Events):
 - Integrate with RailTix roles and business logic (Admin is platform owner; Event Managers sell on the platform).
 - Provide a clean, secure checkout flow with inventory locking, Stripe Connect payouts, QR tickets, and check-in.
 - English-only UI; timezone-aware but no multi-language content.
-- No embeddable widgets.
+- Event operations IA should mirror Hi.Events, including Homepage Design and Widget Embed modules (implementation may be phased).
 - CMS is separate and should not drive event landing pages.
 
 ### 2) Roles, Tenancy, and Ownership
@@ -223,8 +223,23 @@ Additional Stripe details:
 - Admin dashboards aggregate across all events.
 - Exports: orders, attendees, question answers, promo codes (CSV/XLSX).
 
+Event dashboard navigation contract (Hi.Events parity target):
+- Dashboard — `/account/events/:id` or `/account/events/:id/dashboard`
+- Tickets — `/account/events/:id/tickets`
+- Attendees — `/account/events/:id/attendees`
+- Orders — `/account/events/:id/orders`
+- Questions — `/account/events/:id/questions`
+- Messages — `/account/events/:id/messages`
+- Capacity — `/account/events/:id/capacity`
+- Check-in Lists — `/account/events/:id/check-in-lists`
+- Homepage Design — `/account/events/:id/homepage-design`
+- Widget Embed — `/account/events/:id/widget-embed`
+
+Account dashboard quick-access requirement:
+- If user owns events, show active events first and provide direct “Open Event Dashboard” links.
+- Active means `LIVE` and not ended; if none are active, show most recently updated owned events.
+
 ### 17) Exclusions (Not in v1)
-- Embeddable widgets.
 - Multi-language UI.
 - Affiliates.
 - External webhooks (non-Stripe).

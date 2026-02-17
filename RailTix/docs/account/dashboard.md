@@ -15,13 +15,25 @@ Route: `/account/`
   - Upcoming events (next 30–60 days)
   - Recent sales (future)
   - Approvals & flags (Admin only; future)
-- My Events List
-  - Table or cards of events the user owns
-  - Key details: title, status (draft/published), start date, sales (future)
-  - Row actions: Manage, View, (future: Duplicate, Archive)
+- Active Events Quick Access
+  - If user has events, show a prioritized list of active events at the top of the dashboard.
+  - Active means event is `LIVE` and not ended; if there are no active events, show the most recently updated owned events instead.
+  - Each row/card includes: title, status, next start date, timezone, and a primary action: “Open Event Dashboard”.
+  - “Open Event Dashboard” navigates to `/account/events/:id` (or canonical event dashboard route).
+  - Default ordering:
+    1) Active events sorted by nearest upcoming start.
+    2) Fallback events sorted by latest update.
+- My Events List (secondary)
+  - Table/cards of owned events remains available for full browsing and management.
+  - Key details: title, status, start date, sales (future).
+  - Row actions: Open Event Dashboard, View Public Event, (future: Duplicate, Archive).
 - Quick Actions
   - Create New Event — navigates to `/account/events/new` (future)
   - View All Events — navigates to `/account/events`
+
+### Event Dashboard Handoff
+- Dashboard quick links must open the per-event dashboard, not the generic event list.
+- Per-event management modules are specified in `event_dashboard.md` and mirrored in `navigation.md`.
 
 ### Empty State
 - If the user has no events:

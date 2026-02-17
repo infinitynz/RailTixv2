@@ -25,12 +25,13 @@ Role inheritance is defined in `../ROLES_AND_PERMISSIONS.md`.
 - The account popout keeps `Logout` as the final action at the bottom.
 
 ### Out of Scope (for this iteration)
-- Detailed event management flows (beyond listing a user’s own events).
+- Full implementation of all event dashboard modules (routes and IA are specified now, delivery can be phased).
 - Admin center content beyond basic navigation.
 
 ### Sub-specs
 - `navigation.md` — Left sidebar navigation and role-specific items
 - `dashboard.md` — Account dashboard (Admins & Event Managers)
+- `event_dashboard.md` — Per-event operations dashboard and module navigation (Hi.Events parity target)
 - `profile.md` — Profile view/edit and password change (all users)
 - `payment.md` — Stripe Connect status/setup and platform fee context (Admins & Event Managers)
 - `routes_and_permissions.md` — Routing, default redirects, auth guards

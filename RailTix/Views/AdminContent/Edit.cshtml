@@ -23,42 +23,51 @@
 
 <hr />
 
-<section>
-	<h2>Components</h2>
-	<a class="button" href="/account/admin/content/pages/@Model.Id/components/create">Add Component</a>
+<section class="table-shell">
+	<div class="table-shell__header">
+		<h2 class="table-shell__title">Components</h2>
+		<a class="btn btn-primary" href="/account/admin/content/pages/@Model.Id/components/create">Add Component</a>
+	</div>
 	@if (Model.Components.Count == 0)
 	{
 		<p>No components yet.</p>
 	}
 	else
 	{
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Type</th>
-					<th>Position</th>
-					<th>Status</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var component in Model.Components)
-				{
+		<div class="table-wrap">
+			<table class="table">
+				<thead>
 					<tr>
-						<td>@component.Type</td>
-						<td>@component.Position</td>
-						<td>@(component.IsEnabled ? "Enabled" : "Disabled")</td>
-						<td>
-							<a href="/account/admin/content/pages/@Model.Id/components/@component.Id/edit">Edit</a>
-							<form method="post" action="/account/admin/content/pages/@Model.Id/components/@component.Id/delete" style="display:inline;" onsubmit="return confirm('Delete this component?');">
-								@Html.AntiForgeryToken()
-								<button type="submit" class="link-button">Delete</button>
-							</form>
-						</td>
+						<th>Type</th>
+						<th>Position</th>
+						<th>Status</th>
+						<th></th>
 					</tr>
-				}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					@foreach (var component in Model.Components)
+					{
+						<tr>
+							<td>@component.Type</td>
+							<td>@component.Position</td>
+							<td>@(component.IsEnabled ? "Enabled" : "Disabled")</td>
+							<td>
+								<div class="table-actions">
+									<a class="table-actions__link" href="/account/admin/content/pages/@Model.Id/components/@component.Id/edit">Edit</a>
+									<form method="post"
+										  action="/account/admin/content/pages/@Model.Id/components/@component.Id/delete"
+										  class="table-actions__form"
+										  onsubmit="return confirm('Delete this component?');">
+										@Html.AntiForgeryToken()
+										<button type="submit" class="table-actions__link table-actions__link--danger">Delete</button>
+									</form>
+								</div>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
 	}
 </section>
 

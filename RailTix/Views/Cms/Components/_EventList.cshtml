@@ -1,4 +1,14 @@
 @model RailTix.Models.ViewModels.Cms.CmsEventListComponentViewModel
+@using System
+@{
+	string FriendlyDateTime(DateTime value)
+	{
+		return value
+			.ToString("dd MMM yyyy hh:mm tt")
+			.Replace("AM", "a.m.", StringComparison.Ordinal)
+			.Replace("PM", "p.m.", StringComparison.Ordinal);
+	}
+}
 
 <section class="cms-event-list">
 	<h3>Events</h3>
@@ -14,7 +24,7 @@
 				<li class="cms-event-list__item">
 					<strong>@item.Title</strong>
 					<div class="cms-event-list__meta">
-						<span>@item.StartsAtLocal.ToString("ddd, dd MMM yyyy h:mm tt")</span>
+						<span>@FriendlyDateTime(item.StartsAtLocal)</span>
 						@if (!string.IsNullOrWhiteSpace(item.VenueName))
 						{
 							<span> - @item.VenueName</span>

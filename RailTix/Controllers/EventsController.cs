@@ -163,17 +163,16 @@ namespace RailTix.Controllers
             }
 
             ValidateDates(model);
-            var baseSlug = _urlService.NormalizeSegment(string.IsNullOrWhiteSpace(model.Slug) ? model.Title : model.Slug);
+            var baseSlug = _urlService.NormalizeSegment(model.Title);
             if (string.IsNullOrWhiteSpace(baseSlug))
             {
-                ModelState.AddModelError(nameof(model.Slug), "Please provide a valid slug.");
+                ModelState.AddModelError(nameof(model.Title), "Please provide a valid event title.");
             }
 
             var slug = await EnsureUniqueSlugAsync(baseSlug);
 
             if (!ModelState.IsValid)
             {
-                model.Slug = baseSlug;
                 return View(model);
             }
 
@@ -221,6 +220,101 @@ namespace RailTix.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost("slug/validate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ValidateSlug(EventSlugRequest request)
+        {
+            if (request == null || request.EventId == Guid.Empty)
+            {
+                return BadRequest(new { ok = false, message = "Invalid event reference." });
+            }
+
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return Unauthorized(new { ok = false, message = "You must be signed in." });
+            }
+
+            var targetEvent = await FindEditableEventAsync(
+                request.EventId,
+                userId,
+                User.IsInRole("Admin"),
+                HttpContext.RequestAborted);
+
+            if (targetEvent == null)
+            {
+                return NotFound(new { ok = false, message = "Event not found." });
+            }
+
+            var validation = await ValidateEventSlugAsync(targetEvent.Id, request.Slug, HttpContext.RequestAborted);
+            return Json(new
+            {
+                ok = validation.IsValid,
+                isAvailable = validation.IsAvailable,
+                normalizedSlug = validation.NormalizedSlug,
+                message = validation.Message
+            });
+        }
+
+        [HttpPost("slug/update")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateSlug(EventSlugRequest request)
+        {
+            if (request == null || request.EventId == Guid.Empty)
+            {
+                return BadRequest(new { ok = false, message = "Invalid event reference." });
+            }
+
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return Unauthorized(new { ok = false, message = "You must be signed in." });
+            }
+
+            var targetEvent = await FindEditableEventAsync(
+                request.EventId,
+                userId,
+                User.IsInRole("Admin"),
+                HttpContext.RequestAborted);
+
+            if (targetEvent == null)
+            {
+                return NotFound(new { ok = false, message = "Event not found." });
+            }
+
+            var validation = await ValidateEventSlugAsync(targetEvent.Id, request.Slug, HttpContext.RequestAborted);
+            if (!validation.IsValid)
+            {
+                return BadRequest(new
+                {
+                    ok = false,
+                    isAvailable = validation.IsAvailable,
+                    normalizedSlug = validation.NormalizedSlug,
+                    message = validation.Message
+                });
+            }
+
+            targetEvent.Slug = validation.NormalizedSlug;
+            targetEvent.UpdatedAt = DateTime.UtcNow;
+
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogWarning(ex, "Slug update failed for event {EventId}", targetEvent.Id);
+                return Conflict(new { ok = false, message = "Unable to update URL right now. Please try again." });
+            }
+
+            return Json(new
+            {
+                ok = true,
+                slug = targetEvent.Slug,
+                message = "Event URL updated."
+            });
+        }
+
         private async Task<IActionResult?> EnsureStripeReadyForEventCreationAsync(ApplicationUser? user)
         {
             if (user == null)
@@ -258,6 +352,65 @@ namespace RailTix.Controllers
             return RedirectToAction("Payment", "Account", new { returnUrl });
         }
 
+        private async Task<Event?> FindEditableEventAsync(
+            Guid eventId,
+            string userId,
+            bool isAdmin,
+            System.Threading.CancellationToken cancellationToken)
+        {
+            var query = _db.Events.Where(e => e.Id == eventId);
+            if (!isAdmin)
+            {
+                query = query.Where(e => e.CreatedByUserId == userId);
+            }
+
+            return await query.FirstOrDefaultAsync(cancellationToken);
+        }
+
+        private async Task<SlugValidationResult> ValidateEventSlugAsync(
+            Guid eventId,
+            string? requestedSlug,
+            System.Threading.CancellationToken cancellationToken)
+        {
+            const int maxSlugLength = 200;
+            var raw = (requestedSlug ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(raw))
+            {
+                return SlugValidationResult.Invalid("Enter a URL slug to continue.");
+            }
+
+            if (raw.Length > maxSlugLength)
+            {
+                return SlugValidationResult.Invalid("URL slug is too long.");
+            }
+
+            var normalized = _urlService.NormalizeSegment(raw);
+            if (normalized.Length > maxSlugLength)
+            {
+                normalized = normalized.Substring(0, maxSlugLength).Trim('-');
+            }
+
+            if (string.IsNullOrWhiteSpace(normalized))
+            {
+                return SlugValidationResult.Invalid("URL slug contains unsupported characters.");
+            }
+
+            var isTaken = await _db.Events
+                .AsNoTracking()
+                .AnyAsync(e => e.Id != eventId && e.Slug == normalized, cancellationToken);
+
+            if (isTaken)
+            {
+                return SlugValidationResult.Invalid("That URL is already taken.");
+            }
+
+            var changed = !string.Equals(raw, normalized, StringComparison.Ordinal);
+            var message = changed
+                ? $"URL is available. It will be saved as '{normalized}'."
+                : "URL is available.";
+            return SlugValidationResult.Available(normalized, message);
+        }
+
         private void ValidateDates(EventEditViewModel model)
         {
             if (!model.StartsAtLocal.HasValue || !model.EndsAtLocal.HasValue)
@@ -265,7 +418,21 @@ namespace RailTix.Controllers
                 return;
             }
 
-            if (model.EndsAtLocal.Value <= model.StartsAtLocal.Value)
+            var now = DateTime.Now;
+            var startsAt = model.StartsAtLocal.Value;
+            var endsAt = model.EndsAtLocal.Value;
+
+            if (startsAt < now)
+            {
+                ModelState.AddModelError(nameof(model.StartsAtLocal), "Start date/time must be in the future.");
+            }
+
+            if (endsAt < now)
+            {
+                ModelState.AddModelError(nameof(model.EndsAtLocal), "End date/time must be in the future.");
+            }
+
+            if (endsAt <= startsAt)
             {
                 ModelState.AddModelError(nameof(model.EndsAtLocal), "End date/time must be after the start date/time.");
             }
@@ -297,6 +464,34 @@ namespace RailTix.Controllers
 
             var name = $"{user.FirstName} {user.LastName}".Trim();
             return string.IsNullOrWhiteSpace(name) ? user.Email : name;
+        }
+
+        public sealed class EventSlugRequest
+        {
+            public Guid EventId { get; set; }
+            public string? Slug { get; set; }
+        }
+
+        private sealed class SlugValidationResult
+        {
+            private SlugValidationResult(bool isValid, bool isAvailable, string normalizedSlug, string message)
+            {
+                IsValid = isValid;
+                IsAvailable = isAvailable;
+                NormalizedSlug = normalizedSlug;
+                Message = message;
+            }
+
+            public bool IsValid { get; }
+            public bool IsAvailable { get; }
+            public string NormalizedSlug { get; }
+            public string Message { get; }
+
+            public static SlugValidationResult Available(string normalizedSlug, string message)
+                => new SlugValidationResult(true, true, normalizedSlug, message);
+
+            public static SlugValidationResult Invalid(string message)
+                => new SlugValidationResult(false, false, string.Empty, message);
         }
     }
 }

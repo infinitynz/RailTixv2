@@ -7,11 +7,15 @@
 }
 
 
+
 .events-landing__hero {
 	background:
+
 		radial-gradient(80% 140% at 0% 0%, rgba($rtx-accent-violet, .22), transparent 58%),
 		radial-gradient(95% 180% at 100% 0%, rgba($rtx-green, .12), transparent 62%),
+
 		linear-gradient(180deg, rgba($rtx-bg-elevated, .95) 0%, rgba($rtx-surface, .95) 100%);
+
 
 
 	border: 1px solid rgba($rtx-white, .08);
@@ -176,6 +180,40 @@
 	border-radius: 6px;
 }
 
+.events-landing__url-cell {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: .38rem;
+	min-width: 220px;
+}
+
+.events-landing__url-open {
+	font-weight: 600;
+}
+
+.events-landing__url-current {
+	margin: 0;
+	font-size: .8rem;
+	color: rgba($rtx-white, .76);
+}
+
+.events-landing__url-current code {
+	font-size: .78rem;
+	color: rgba($rtx-green, .88);
+	background-color: rgba($rtx-green, .08);
+	border: 1px solid rgba($rtx-green, .24);
+	padding: .1rem .35rem;
+	border-radius: 6px;
+}
+
+.events-landing__slug-btn {
+	margin-top: 0;
+	padding: .32rem .62rem;
+	font-size: .78rem;
+	font-weight: 600;
+}
+
 .events-landing__date {
 	color: rgba($rtx-white, .86);
 	font-size: .9rem;
@@ -221,6 +259,97 @@
 	border-color: rgba($rtx-white, .2);
 }
 
+.events-landing__slug-dialog {
+	width: min(620px, calc(100% - 2rem));
+	border: 1px solid rgba($rtx-white, .16);
+	border-radius: $rtx-radius-md;
+	background: rgba($rtx-surface, .98);
+	color: $rtx-text;
+	padding: 0;
+	box-shadow: 0 18px 40px rgba(0, 0, 0, .52), inset 0 1px 0 rgba($rtx-white, .06);
+}
+
+.events-landing__slug-dialog::backdrop {
+	background: rgba(0, 0, 0, .62);
+}
+
+.events-landing__slug-dialog-inner {
+	display: flex;
+	flex-direction: column;
+	gap: .85rem;
+	padding: 1rem;
+}
+
+.events-landing__slug-dialog-header {
+	display: flex;
+	flex-direction: column;
+	gap: .35rem;
+	padding-bottom: .6rem;
+	border-bottom: 1px solid rgba($rtx-white, .08);
+}
+
+.events-landing__slug-dialog-title {
+	margin: 0;
+	font-size: 1.25rem;
+	color: $rtx-white;
+}
+
+.events-landing__slug-dialog-copy {
+	margin: 0;
+	color: rgba($rtx-white, .78);
+	font-size: .9rem;
+	max-width: 72ch;
+}
+
+.events-landing__slug-form {
+	display: flex;
+	flex-direction: column;
+	gap: .2rem;
+}
+
+.events-landing__slug-preview {
+	margin: 0;
+	color: rgba($rtx-white, .78);
+	font-size: .86rem;
+}
+
+.events-landing__slug-preview code {
+	font-size: .82rem;
+}
+
+.events-landing__slug-status {
+	margin: .2rem 0 0;
+	padding: .5rem .6rem;
+	border-radius: $rtx-radius-sm;
+	border: 1px solid rgba($rtx-white, .2);
+	font-size: .86rem;
+}
+
+.events-landing__slug-status.is-info {
+	background: rgba($rtx-white, .07);
+	color: rgba($rtx-white, .86);
+	border-color: rgba($rtx-white, .14);
+}
+
+.events-landing__slug-status.is-success {
+	background: rgba($rtx-green, .14);
+	color: #bcff96;
+	border-color: rgba($rtx-green, .38);
+}
+
+.events-landing__slug-status.is-error {
+	background: rgba($rtx-pink, .14);
+	color: #ffc8f5;
+	border-color: rgba($rtx-pink, .36);
+}
+
+.events-landing__slug-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .55rem;
+	margin-top: .5rem;
+}
+
 @media (max-width: 860px) {
 	.events-landing__hero {
 		padding: .9rem;
@@ -228,6 +357,10 @@
 
 	.events-landing__table {
 		min-width: 680px;
+	}
+
+	.events-landing__slug-dialog-inner {
+		padding: .85rem;
 	}
 }
 
